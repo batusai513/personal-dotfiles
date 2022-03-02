@@ -1,0 +1,56 @@
+
+import:
+	- ~/personal-dotfiles/alacritty/tokio-night-dark.yml
+
+window:
+  padding:
+    x: 2
+    y: 2
+  class:
+    instance: Alacritty
+    general: Alacritty
+
+scrolling:
+  history: 10000
+  multiplier: 3
+
+font:
+  # linux
+  normal:
+    family: 'JetBrainsMono NF'
+    style: Regular
+  italic:
+    family: 'JetBrainsMono NF'
+    style: Italic
+  medium:
+    family: 'JetBrainsMono NF'
+    style: Medium
+  bold:
+    family: 'JetBrainsMono NF'
+    style: Bold
+
+  #macOS
+  # normal:
+  #   family: 'JetBrainsMono Nerd Font'
+  #   style: Regular
+  # italic:
+  #   family: 'JetBrainsMono Nerd Font'
+  #   style: Italic
+  # medium:
+  #   family: 'JetBrainsMono Nerd Font'
+  #   style: Medium
+  # bold:
+  #   family: 'JetBrainsMono Nerd Font'
+  #   style: Bold
+
+size: 13
+  draw_bold_text_with_bright_colors: true
+
+key_bindings:
+   - { key: Right, mods: Alt, chars: "\x1BF" }
+   - { key: Left,  mods: Alt, chars: "\x1BB" }
+   - { key: Return, mods: Super|Shift, action: SpawnNewInstance }
+
+#ubuntu WSL
+# shell:
+  # program: "C:\\Windows\\System32\\wsl.exe ~"
