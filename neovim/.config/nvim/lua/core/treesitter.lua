@@ -16,6 +16,7 @@ treesitter_configs.setup {
     'scss',
     'tsx',
     'typescript',
+    'ruby',
   },
   sync_install = false,
   highlight = {
