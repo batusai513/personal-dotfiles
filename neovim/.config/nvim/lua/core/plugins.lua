@@ -128,6 +128,13 @@ return packer.startup(function(use)
 
   --terminal
   use "akinsho/toggleterm.nvim"
+  --tmux
+  use ({
+    "aserowy/tmux.nvim",
+    config = function ()
+      require"core.tmux".init()
+    end
+  })
 
   --base colorscheme
   use 'folke/tokyonight.nvim'
