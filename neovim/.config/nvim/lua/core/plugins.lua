@@ -46,103 +46,172 @@ return packer.startup(function(use)
   use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
 
   --UI
-  use({
-    'CosmicNvim/cosmic-ui',
-    requires = { 'MunifTanjim/nui.nvim', 'nvim-lua/plenary.nvim' },
+  use {
+    "CosmicNvim/cosmic-ui",
+    requires = {
+      "MunifTanjim/nui.nvim",
+      "nvim-lua/plenary.nvim",
+    },
     config = function()
-      require('cosmic-ui').setup()
+      require("cosmic-ui").setup()
     end,
-  })
+  }
 
   --completions plugins
-  use "hrsh7th/nvim-cmp" -- base plugin
-  use "hrsh7th/cmp-nvim-lsp"
-  use "hrsh7th/cmp-buffer"
-  use "hrsh7th/cmp-path"
-  use "hrsh7th/cmp-cmdline"
-  use "hrsh7th/cmp-nvim-lsp-signature-help"
-  use "saadparwaiz1/cmp_luasnip"
-
-  --snippets
-  use "L3MON4D3/LuaSnip"
-  use "rafamadriz/friendly-snippets"
+  use {
+    "hrsh7th/nvim-cmp",
+    config = function()
+      require "core.cmp"
+    end,
+    requires = {
+      { "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" },
+      { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
+      { "hrsh7th/cmp-path", after = "nvim-cmp" },
+      { "hrsh7th/cmp-cmdline", after = "nvim-cmp" },
+      { "hrsh7th/cmp-nvim-lsp-signature-help", after = "nvim-cmp" },
+      { "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
+      --snippets
+      {
+        "L3MON4D3/LuaSnip",
+        requires = {
+          { "rafamadriz/friendly-snippets" },
+        },
+      },
+    },
+  }
 
   --Language server protocol
-  use "neovim/nvim-lspconfig"
-  use "williamboman/nvim-lsp-installer"
-  use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
+  use {
+    "neovim/nvim-lspconfig",
+    config = function()
+      require "core.lsp"
+    end,
+    requires = {
+      { "b0o/SchemaStore.nvim" },
+      { "williamboman/nvim-lsp-installer" },
+      {
+        "jose-elias-alvarez/null-ls.nvim",
+        config = function()
+          require "core.lsp.null-ls"
+        end,
+        after = "nvim-lspconfig",
+      },
+    },
+  }
 
   --syntax highlighting
   use {
     "nvim-treesitter/nvim-treesitter",
-    run = ":TSUpdate"
+    run = ":TSUpdate",
+    requires = {
+      "JoosepAlviste/nvim-ts-context-commentstring",
+    },
+    config = function()
+      require "core.treesitter"
+    end,
   }
+
   use "p00f/nvim-ts-rainbow"
-
-
-  use "windwp/nvim-autopairs"
+  use {
+    "windwp/nvim-autopairs",
+    config = function()
+      require "core.autopairs"
+    end,
+    after = "nvim-cmp",
+  }
 
   --comments
-  use "numToStr/Comment.nvim"
-  use "JoosepAlviste/nvim-ts-context-commentstring"
+  use {
+    "numToStr/Comment.nvim",
+    requires = {
+      "JoosepAlviste/nvim-ts-context-commentstring",
+    },
+    config = function()
+      require "core.comment"
+    end,
+  }
+
   use {
     "folke/todo-comments.nvim",
     requires = "nvim-lua/plenary.nvim",
+    config = function()
+      require "core.todo-comments"
+    end,
   }
 
+  --Github things
   use {
-    'lewis6991/gitsigns.nvim',
+    "lewis6991/gitsigns.nvim",
     requires = {
-      'nvim-lua/plenary.nvim'
+      "nvim-lua/plenary.nvim",
     },
-  -- tag = 'release' -- To use the latest release
+    config = function()
+      require "core.gitsigns"
+    end,
+    -- tag = 'release' -- To use the latest release
   }
 
   --buffer management
-  use "akinsho/bufferline.nvim"
+  use {
+    "akinsho/bufferline.nvim",
+    config = function()
+      require "core.bufferline"
+    end,
+  }
 
   --tree file viewer
   use {
-    'kyazdani42/nvim-tree.lua',
+    "kyazdani42/nvim-tree.lua",
     requires = {
-      'kyazdani42/nvim-web-devicons', -- optional, for file icon
+      "kyazdani42/nvim-web-devicons", -- optional, for file icon
     },
+    config = function()
+      require "core.nvim-tree"
+    end,
   }
   -- file navigation
 
-  use({
-    'nvim-telescope/telescope.nvim',
+  use {
+    "nvim-telescope/telescope.nvim",
     requires = {
-      'nvim-lua/popup.nvim',
-      'nvim-lua/plenary.nvim',
+      "nvim-lua/popup.nvim",
+      "nvim-lua/plenary.nvim",
       {
-        'nvim-telescope/telescope-fzf-native.nvim',
-        run = 'make',
+        "nvim-telescope/telescope-fzf-native.nvim",
+        run = "make",
       },
     },
+    event = "BufWinEnter",
     config = function()
-      require('core.telescope').init()
-      -- require('core.telescope')
+      require("core.telescope").init()
     end,
-    event = 'BufWinEnter',
-    -- disable = vim.tbl_contains(user_config.disable_builtin_plugins, 'telescope'),
-  })
+  }
 
   --neovim optimisations
-  use 'lewis6991/impatient.nvim'
+  use {
+    "lewis6991/impatient.nvim",
+    config = function()
+      require "core.impatient"
+    end,
+  }
 
   --terminal
-  use "akinsho/toggleterm.nvim"
+  use {
+    "akinsho/toggleterm.nvim",
+    config = function()
+      require "core.toggleterm"
+    end,
+  }
   --tmux
-  use ({
+  use {
     "aserowy/tmux.nvim",
-    config = function ()
-      require"core.tmux".init()
-    end
-  })
+    config = function()
+      require("core.tmux").init()
+    end,
+  }
 
   --base colorscheme
-  use 'folke/tokyonight.nvim'
+  use "folke/tokyonight.nvim"
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
