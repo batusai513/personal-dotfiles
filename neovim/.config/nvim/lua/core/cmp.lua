@@ -1,10 +1,14 @@
-local icons = require("core.theme.icons")
+local icons = require "core.theme.icons"
 
-local cmp = prequire("cmp")
-if not cmp then return end
+local cmp = prequire "cmp"
+if not cmp then
+  return
+end
 
-local luasnip = prequire("luasnip")
-if not luasnip then return end
+local luasnip = prequire "luasnip"
+if not luasnip then
+  return
+end
 
 require("luasnip/loaders/from_vscode").lazy_load()
 
@@ -25,7 +29,7 @@ cmp.setup {
   },
   mapping = {
     ["<C-k>"] = cmp.mapping.select_prev_item(),
-		["<C-j>"] = cmp.mapping.select_next_item(),
+    ["<C-j>"] = cmp.mapping.select_next_item(),
     ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
     ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
     ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),

@@ -1,9 +1,11 @@
 local M = {}
-local tmux = prequire("tmux")
-if not tmux then return end
+local tmux = prequire "tmux"
+if not tmux then
+  return
+end
 
 function M.init()
-  require("tmux").setup({
+  require("tmux").setup {
     -- overwrite default configuration
     -- here, e.g. to enable default bindings
     -- copy_sync = {
@@ -12,14 +14,14 @@ function M.init()
     --     enable = true,
     -- },
     navigation = {
-        -- enables default keybindings (C-hjkl) for normal mode
-        enable_default_keybindings = true,
+      -- enables default keybindings (C-hjkl) for normal mode
+      enable_default_keybindings = true,
     },
     resize = {
-        -- enables default keybindings (A-hjkl) for normal mode
-        enable_default_keybindings = true,
-    }
-})
+      -- enables default keybindings (A-hjkl) for normal mode
+      enable_default_keybindings = true,
+    },
+  }
 end
 
 return M

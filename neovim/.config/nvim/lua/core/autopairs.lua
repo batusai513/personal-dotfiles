@@ -1,5 +1,7 @@
-local npairs = prequire("nvim-autopairs")
-if not npairs then return end
+local npairs = prequire "nvim-autopairs"
+if not npairs then
+  return
+end
 
 npairs.setup {
   check_ts = true,

@@ -17,12 +17,10 @@ local function create_floating_file(location, opts)
   -- location may be LocationLink or Location
   local uri = location.targetUri or location.uri
   if uri == nil then
-
     return
   end
   local bufnr = vim.uri_to_bufnr(uri)
   if not vim.api.nvim_buf_is_loaded(bufnr) then
-
     vim.fn.bufload(bufnr)
   end
 
@@ -40,13 +38,10 @@ local function create_floating_file(location, opts)
   -- Don't make it minimal as it is meant to be fully featured
   opts["style"] = nil
 
-
   vim.api.nvim_buf_set_option(bufnr, "bufhidden", "wipe")
-
 
   local winnr = vim.api.nvim_open_win(bufnr, false, opts)
   vim.api.nvim_win_set_option(winnr, "winblend", 0)
-
 
   vim.api.nvim_win_set_cursor(winnr, { range.start.line + 1, range.start.character })
   vim.api.nvim_buf_set_var(bufnr, "lsp_floating_window", winnr)
@@ -72,14 +67,12 @@ local function preview_location_callback(result)
   if vim.tbl_islist(result) then
     M.prev_result = result[1]
     M.floating_buf, M.floating_win = create_floating_file(result[1], opts)
-
   else
     M.prev_result = result
 
     M.floating_buf, M.floating_win = create_floating_file(result, opts)
   end
 end
-
 
 local function preview_location_callback_new_signature(_, result)
   return preview_location_callback(result)
@@ -92,9 +85,7 @@ function M.open_file()
   if not filepath then
     print "peek: Unable to open the file!"
     return
-
   end
-
 
   -- Close the floating window
   pcall(vim.api.nvim_win_close, M.floating_win, true)
@@ -109,7 +100,6 @@ function M.open_file()
 end
 
 function M.set_cursor_to_prev_pos(winnr)
-
   -- Get position of the thing to peek at
   local location = M.prev_result
   local range = location.targetRange or location.range
@@ -120,7 +110,6 @@ function M.set_cursor_to_prev_pos(winnr)
   -- Set the cursor at the correct position in the floating window
   vim.api.nvim_win_set_cursor(winnr, cursor_pos)
 end
-
 
 function M.Peek(what)
   -- If a window already exists, focus it at the right position!

@@ -1,5 +1,7 @@
-local null_ls = prequire("null-ls")
-if not null_ls then return end
+local null_ls = prequire "null-ls"
+if not null_ls then
+  return
+end
 
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
 local formatting = null_ls.builtins.formatting
@@ -12,7 +14,7 @@ null_ls.setup {
   debug = true,
   sources = {
     formatting.prettier.with {
-      prefer_local = 'node_modules/.bin'
+      prefer_local = "node_modules/.bin",
     },
     -- diagnostics.eslint_d.with {
     --   prefer_local = 'node_modules/.bin'
@@ -22,5 +24,5 @@ null_ls.setup {
     -- },
     formatting.stylua,
     code_actions.gitsigns,
-  }
+  },
 }

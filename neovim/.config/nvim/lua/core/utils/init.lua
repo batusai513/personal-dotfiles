@@ -1,7 +1,7 @@
 local M = {}
 
 function M.merge(...)
-  return vim.tbl_deep_extend('force', ...)
+  return vim.tbl_deep_extend("force", ...)
 end
 
 function M.map(mode, lhs, rhs, opts)

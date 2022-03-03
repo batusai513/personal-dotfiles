@@ -1,5 +1,7 @@
-local bufferline = prequire("bufferline")
-if not bufferline then return end
+local bufferline = prequire "bufferline"
+if not bufferline then
+  return
+end
 
 bufferline.setup {
   options = {

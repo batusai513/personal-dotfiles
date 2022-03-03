@@ -26,7 +26,7 @@ function M.init()
       style = "minimal",
       border = "rounded",
       source = "always",
-      header = { icons.debug .. ' Diagnostics:', 'Normal'},
+      header = { icons.debug .. " Diagnostics:", "Normal" },
       prefix = "",
     },
     virtual_text = false,
@@ -36,4 +36,3 @@ function M.init()
 end
 
 return M
-

@@ -1,3 +1,3 @@
 return {
-  format = false
+  format = false,
 }

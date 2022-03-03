@@ -1,22 +1,24 @@
-local treesitter_configs = prequire("nvim-treesitter.configs")
+local treesitter_configs = prequire "nvim-treesitter.configs"
 
-if not treesitter_configs then return end
+if not treesitter_configs then
+  return
+end
 
 treesitter_configs.setup {
   ensure_installed = {
-    'css',
-    'html',
-    'javascript',
-    'jsdoc',
-    'json',
-    'lua',
-    'markdown',
-    'php',
-    'python',
-    'scss',
-    'tsx',
-    'typescript',
-    'ruby',
+    "css",
+    "html",
+    "javascript",
+    "jsdoc",
+    "json",
+    "lua",
+    "markdown",
+    "php",
+    "python",
+    "scss",
+    "tsx",
+    "typescript",
+    "ruby",
   },
   sync_install = false,
   highlight = {
@@ -41,5 +43,5 @@ treesitter_configs.setup {
   rainbow = {
     enable = true,
     extended_mode = true,
-  }
+  },
 }

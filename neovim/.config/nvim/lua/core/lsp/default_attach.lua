@@ -1,4 +1,3 @@
-
 local M = {}
 
 local function lsp_highlight_document(client)
@@ -20,9 +19,21 @@ end
 local function lsp_keymaps(bufnr)
   local opts = { noremap = true, silent = true }
   --diagnostics
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "[d", '<cmd>lua vim.diagnostic.goto_prev({ float = { border = "rounded" }})<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "]d", '<cmd>lua vim.diagnostic.goto_next({ float = { border = "rounded" }})<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "gl", '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(
+    bufnr,
+    "n",
+    "[d",
+    '<cmd>lua vim.diagnostic.goto_prev({ float = { border = "rounded" }})<CR>',
+    opts
+  )
+  vim.api.nvim_buf_set_keymap(
+    bufnr,
+    "n",
+    "]d",
+    '<cmd>lua vim.diagnostic.goto_next({ float = { border = "rounded" }})<CR>',
+    opts
+  )
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
 
   vim.api.nvim_buf_set_keymap(bufnr, "n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)

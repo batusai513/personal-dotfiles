@@ -102,7 +102,12 @@ return packer.startup(function(use)
   use "akinsho/bufferline.nvim"
 
   --tree file viewer
-  use 'kyazdani42/nvim-tree.lua'
+  use {
+    'kyazdani42/nvim-tree.lua',
+    requires = {
+      'kyazdani42/nvim-web-devicons', -- optional, for file icon
+    },
+  }
   -- file navigation
 
   use({

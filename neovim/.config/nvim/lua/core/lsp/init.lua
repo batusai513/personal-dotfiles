@@ -1,5 +1,7 @@
-local lspConfig = prequire("lspconfig")
-if not lspConfig then return end
+local lspConfig = prequire "lspconfig"
+if not lspConfig then
+  return
+end
 
 require "core.lsp.lsp-installer"
 require("core.lsp.diagnostics").init()
