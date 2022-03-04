@@ -62,3 +62,4 @@ keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 
 -- Terminal --
 keymap("n", "<A-\\>", "<cmd> ToggleTerm direction=horizontal size=15<CR>", opts)
+keymap("n", "<leader>lf", "<cmd> Format<CR>", opts)
