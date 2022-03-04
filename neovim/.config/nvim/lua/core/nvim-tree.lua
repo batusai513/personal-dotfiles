@@ -53,7 +53,7 @@ local config = {
   auto_reload_on_write = true,
   hijack_unnamed_buffer_when_opening = false,
   hijack_directories = {
-    enable = true,
+    enable = false,
     auto_open = false,
 	},
   auto_close = false,

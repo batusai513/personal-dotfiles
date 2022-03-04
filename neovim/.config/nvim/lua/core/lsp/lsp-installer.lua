@@ -10,9 +10,9 @@ local function on_server_ready(server)
     capabilities = require("core.lsp.capabilities").capabilities,
   }
 
-  local server_overrides = prequire("core.lsp.server_settings." .. server.name)
-  if server_overrides then
-    opts = vim.tbl_deep_extend("force", server_overrides, opts)
+  local has_custom_config, server_custom_config = pcall(require, "core.lsp.server_settings." .. server.name)
+  if has_custom_config then
+    opts = vim.tbl_deep_extend("force", server_custom_config, opts)
   end
 
   -- This setup() function is exactly the same as lspconfig's setup function.
