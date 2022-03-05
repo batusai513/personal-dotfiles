@@ -202,11 +202,21 @@ return packer.startup(function(use)
       require "core.toggleterm"
     end,
   }
+
   --tmux
   use {
     "aserowy/tmux.nvim",
     config = function()
       require("core.tmux").init()
+    end,
+  }
+
+  --line
+  use {
+    "nvim-lualine/lualine.nvim",
+    requires = { "kyazdani42/nvim-web-devicons", opt = true },
+    config = function()
+      require "core.lualine"
     end,
   }
 
