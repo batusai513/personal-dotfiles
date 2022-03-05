@@ -7,9 +7,10 @@ end
 lualine.setup {
   options = {
     theme = "tokyonight",
+    disabled_filetypes = { "dashboard", "NvimTree", "Outline" },
   },
   extensions = {
     "nvim-tree",
-    "toggleterm"
+    "toggleterm",
   },
 }

@@ -119,6 +119,12 @@ return packer.startup(function(use)
     end,
     after = "nvim-cmp",
   }
+  use {
+    "lukas-reineke/indent-blankline.nvim",
+    config = function ()
+      require "core.indent-blankline"
+    end
+  }
 
   --comments
   use {
