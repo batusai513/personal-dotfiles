@@ -121,7 +121,7 @@ return packer.startup(function(use)
   }
   use {
     "lukas-reineke/indent-blankline.nvim",
-    config = function ()
+    config = function()
       require "core.indent-blankline"
     end
   }
@@ -228,6 +228,14 @@ return packer.startup(function(use)
 
   --base colorscheme
   use "folke/tokyonight.nvim"
+
+  --add/remove sorrunding charactes
+  use {
+    "ur4ltz/surround.nvim",
+    config = function()
+      require "surround".setup { mappings_style = "surround" }
+    end
+  }
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
