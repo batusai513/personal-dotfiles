@@ -28,15 +28,19 @@ local confirm_opts = {
 
 cmp.setup {
   confirm_opts = confirm_opts,
-  documentation = {
-    border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+  window = {
+    documentation = {
+      border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+    },
   },
   completion = {
     keyword_length = 1,
   },
   experimental = {
     ghost_text = true,
-    native_menu = false,
+  },
+  view = {
+    entries = 'custom'
   },
   snippet = {
     expand = function(args)
