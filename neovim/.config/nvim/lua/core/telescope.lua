@@ -3,6 +3,7 @@ if not telescope then
   return
 end
 
+local _, builtin = pcall(require, "telescope.builtin")
 local actions = require "telescope.actions"
 local icons = require "core.theme.icons"
 local u = require "core.utils"
@@ -145,24 +146,31 @@ local map = require("core.utils").map
 local M = {}
 
 M.project_files = function()
-  local opts = {} -- define here if you want to define something
-  local ok = pcall(require("telescope.builtin").git_files, opts)
+  local ok = pcall(builtin.git_files)
   if not ok then
-    require("telescope.builtin").find_files(opts)
+    builtin.find_files()
   end
 end
 
 M.init = function()
   -- navigation
-  map("n", "<leader>ff", '<cmd>lua require("core.telescope").project_files()<cr>')
-  map("n", "<leader>fp", ":Telescope find_files<cr>")
-  map("n", "<leader>fk", ":Telescope buffers<cr>")
-  map("n", "<leader>fs", ":Telescope live_grep<cr>")
-  map("n", "<leader>fw", ":Telescope grep_string<cr>")
+  map("n", "<leader>sf", '<cmd>lua require("core.telescope").project_files()<cr>')
+  --map("n", "<leader>sf", ":Telescope find_files<cr>")
+  map("n", "<leader>sh", ":Telescope help_tags<cr>")
+  map("n", "<leader>sM", ":Telescope man_pages<cr>")
+  map("n", "<leader>sr", ":Telescope oldfiles<cr>")
+  map("n", "<leader>sR", ":Telescope registers<cr>")
+  map("n", "<leader>sB", ":Telescope buffers<cr>")
+  map("n", "<leader>st", ":Telescope live_grep<cr>")
+  map("n", "<leader>sw", ":Telescope grep_string<cr>")
+  map("n", "<leader>sk", ":Telescope keymaps<cr>")
+  map("n", "<leader>sC", ":Telescope commands<cr>")
+  map("n", "<leader>sc", ":<cmd> lua require'telescope.builtin.internal'.colorscheme({enable_preview=true})<cr>")
 
   -- git navigation
-  map("n", "<leader>ggc", ":Telescope git_commits<cr>")
-  map("n", "<leader>ggs", ":Telescope git_status<cr>")
+  map("n", "<leader>sb", ":Telescope git_branches<cr>")
+  map("n", "<leader>sgc", ":Telescope git_commits<cr>")
+  map("n", "<leader>sgs", ":Telescope git_status<cr>")
 end
 
 return M
