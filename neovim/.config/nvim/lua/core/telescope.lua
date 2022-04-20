@@ -17,6 +17,17 @@ local default_mappings = {
     ["v"] = actions.file_vsplit,
     ["s"] = actions.file_split,
     ["<cr>"] = actions.file_edit,
+    ["<C-n>"] = actions.move_selection_next,
+    ["<C-p>"] = actions.move_selection_previous,
+  },
+  i = {
+    ["<C-n>"] = actions.move_selection_next,
+    ["<C-p>"] = actions.move_selection_previous,
+    ["<C-c>"] = actions.close,
+    ["<C-j>"] = actions.cycle_history_next,
+    ["<C-k>"] = actions.cycle_history_prev,
+    ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
+    ["<CR>"] = actions.select_default,
   },
 }
 
@@ -83,7 +94,7 @@ local options = u.merge({
     },
   },
   pickers = {
-    buffers = u.merge(opts_flex, {
+    buffers = u.merge(opts_vertical, {
       prompt_title = "✨ Search Buffers ✨",
       mappings = u.merge({
         n = {
@@ -92,16 +103,15 @@ local options = u.merge({
       }, default_mappings),
       sort_mru = true,
       preview_title = false,
+      previewer = false,
     }),
     lsp_code_actions = u.merge(opts_cursor, {
       prompt_title = "Code Actions",
+      previewer = false,
     }),
     lsp_range_code_actions = u.merge(opts_vertical, {
       prompt_title = "Code Actions",
-    }),
-    lsp_document_diagnostics = u.merge(opts_vertical, {
-      prompt_title = "Document Diagnostics",
-      mappings = default_mappings,
+      previewer = false,
     }),
     lsp_implementations = u.merge(opts_cursor, {
       prompt_title = "Implementations",
@@ -115,14 +125,14 @@ local options = u.merge({
       prompt_title = "References",
       mappings = default_mappings,
     }),
-
+    diagnostics = u.merge({
+      mappings = default_mappings,
+      theme = "ivy"
+    }, {}),
     find_files = u.merge(opts_flex, {
       prompt_title = "✨ Search Project ✨",
       mappings = default_mappings,
       hidden = true,
-    }),
-    diagnostics = u.merge(opts_vertical, {
-      mappings = default_mappings,
     }),
     git_files = u.merge(opts_flex, {
       prompt_title = "✨ Search Git Project ✨",
@@ -137,6 +147,7 @@ local options = u.merge({
     grep_string = u.merge(opts_vertical, {
       prompt_title = "✨ Grep String ✨",
       mappings = default_mappings,
+      initial_mode = "insert",
     }),
   },
 }, {})
@@ -152,7 +163,7 @@ end
 
 M.init = function()
   telescope.setup(options)
-  require "telescope".load_extension "fzf"
+  require("telescope").load_extension "fzf"
 
   local map = require("core.utils").map
   -- navigation
@@ -164,11 +175,9 @@ M.init = function()
   map("n", "<leader>sR", ":Telescope registers<cr>")
   map("n", "<leader>sB", ":Telescope buffers<cr>")
   map("n", "<leader>st", ":Telescope live_grep<cr>")
-  map("n", "<leader>sw", ":Telescope grep_string<cr>")
   map("n", "<leader>sk", ":Telescope keymaps<cr>")
   map("n", "<leader>sC", ":Telescope commands<cr>")
   map("n", "<leader>sc", ":<cmd> lua require'telescope.builtin.internal'.colorscheme({enable_preview=true})<cr>")
 end
-
 
 return M

@@ -58,6 +58,10 @@ local config = {
   -- see https://neovim.io/doc/user/map.html#:map-cmd
   vmappings = {
     ["/"] = { "<ESC><CMD>lua require('Comment.api').toggle_linewise_op(vim.fn.visualmode())<CR>", "Comment" },
+    f = {
+      name = "Find selected",
+      w = { "<cmd>Telescope grep_string<cr>", "Selected text" },
+    }
   },
   mappings = {
     ["w"] = { "<cmd>w!<CR>", "Save" },
@@ -144,9 +148,9 @@ local config = {
       l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
       p = {
         name = "Peek",
-        d = { "<cmd>lua require'cosmic-ui'.rename()<CR>", "Definition" },
-        t = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Type Definition" },
-        i = { "<cmd>lua vim.lsp.buf.implementation()<CR>", "Implementation" },
+        d = { "<cmd>lua require'core.lsp.peek'.Peek('definition')<cr>", "Definition" },
+        t = { "<cmd>lua require'core.lsp.peek'.Peek('typeDefinition')<cr>", "Type Definition" },
+        i = { "<cmd>lua require'core.lsp.peek'.Peek('implementation')<cr>", "Implementation" },
       },
       q = { "<cmd>lua vim.diagnostic.setloclist()<cr>", "Quickfix" },
       r = { "<cmd>lua require'cosmic-ui'.rename()<CR>", "Rename" },
