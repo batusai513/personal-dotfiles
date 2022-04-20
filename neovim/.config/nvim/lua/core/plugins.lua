@@ -196,9 +196,6 @@ return packer.startup(function(use)
   --neovim optimisations
   use {
     "lewis6991/impatient.nvim",
-    config = function()
-      require "core.impatient"
-    end,
   }
 
   --terminal
