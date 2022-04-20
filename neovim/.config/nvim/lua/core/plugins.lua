@@ -193,6 +193,15 @@ return packer.startup(function(use)
     end,
   }
 
+  -- which-key
+  use {
+    "folke/which-key.nvim",
+    config = function()
+      require("core.which_key").init()
+    end,
+    event = "BufWinEnter",
+  }
+
   --neovim optimisations
   use {
     "lewis6991/impatient.nvim",

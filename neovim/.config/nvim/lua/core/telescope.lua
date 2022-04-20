@@ -52,8 +52,6 @@ local opts_flex = {
   },
 }
 
-telescope.load_extension "fzf"
-
 telescope.setup(u.merge({
   defaults = {
     prompt_prefix = "🔍 ",
@@ -172,5 +170,7 @@ M.init = function()
   map("n", "<leader>sgc", ":Telescope git_commits<cr>")
   map("n", "<leader>sgs", ":Telescope git_status<cr>")
 end
+
+telescope.load_extension "fzf"
 
 return M
