@@ -52,7 +52,7 @@ local opts_flex = {
   },
 }
 
-telescope.setup(u.merge({
+local options = u.merge({
   defaults = {
     prompt_prefix = "🔍 ",
     selection_caret = icons.folder.arrow_closed,
@@ -132,15 +132,15 @@ telescope.setup(u.merge({
     live_grep = u.merge(opts_flex, {
       prompt_title = "✨ Live Grep ✨",
       mappings = default_mappings,
+      only_sort_text = true,
     }),
     grep_string = u.merge(opts_vertical, {
       prompt_title = "✨ Grep String ✨",
       mappings = default_mappings,
     }),
   },
-}, {}))
+}, {})
 
-local map = require("core.utils").map
 local M = {}
 
 M.project_files = function()
@@ -151,6 +151,10 @@ M.project_files = function()
 end
 
 M.init = function()
+  telescope.setup(options)
+  require "telescope".load_extension "fzf"
+
+  local map = require("core.utils").map
   -- navigation
   map("n", "<leader>sf", '<cmd>lua require("core.telescope").project_files()<cr>')
   --map("n", "<leader>sf", ":Telescope find_files<cr>")
@@ -164,13 +168,7 @@ M.init = function()
   map("n", "<leader>sk", ":Telescope keymaps<cr>")
   map("n", "<leader>sC", ":Telescope commands<cr>")
   map("n", "<leader>sc", ":<cmd> lua require'telescope.builtin.internal'.colorscheme({enable_preview=true})<cr>")
-
-  -- git navigation
-  map("n", "<leader>sb", ":Telescope git_branches<cr>")
-  map("n", "<leader>sgc", ":Telescope git_commits<cr>")
-  map("n", "<leader>sgs", ":Telescope git_status<cr>")
 end
 
-telescope.load_extension "fzf"
 
 return M
