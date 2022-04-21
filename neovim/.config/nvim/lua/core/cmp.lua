@@ -33,14 +33,11 @@ cmp.setup {
       border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
     },
   },
-  completion = {
-    keyword_length = 1,
-  },
   experimental = {
     ghost_text = true,
   },
   view = {
-    entries = 'custom'
+    entries = "custom",
   },
   snippet = {
     expand = function(args)
@@ -51,32 +48,17 @@ cmp.setup {
   mapping = {
     ["<C-k>"] = cmp.mapping.select_prev_item(),
     ["<C-j>"] = cmp.mapping.select_next_item(),
+    ["<C-p>"] = cmp.mapping.select_prev_item(),
+    ["<C-n>"] = cmp.mapping.select_next_item(),
     ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
     ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
     ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-    ["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+    -- ["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
     ["<C-e>"] = cmp.mapping {
       i = cmp.mapping.abort(),
       c = cmp.mapping.close(),
     },
-    -- Accept currently selected item. If none selected, `select` first item.
-    -- Set `select` to `false` to only confirm explicitly selected items.
-    ["<CR>"] = cmp.mapping(function(fallback)
-      if cmp.visible() and cmp.confirm(confirm_opts) then
-        if jumpable() then
-          luasnip.jump(1)
-        end
-        return
-      end
-
-      if jumpable() then
-        if not luasnip.jump(1) then
-          fallback()
-        end
-      else
-        fallback()
-      end
-    end),
+    ["<CR>"] = cmp.mapping.confirm { select = true },
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
