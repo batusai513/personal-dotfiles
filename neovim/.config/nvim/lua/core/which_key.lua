@@ -61,21 +61,22 @@ local config = {
     f = {
       name = "Find selected",
       w = { "<cmd>Telescope grep_string<cr>", "Selected text" },
-    }
+    },
   },
   mappings = {
     ["w"] = { "<cmd>w!<CR>", "Save" },
     ["q"] = { "<cmd>q!<CR>", "Quit" },
     ["/"] = { "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>", "Comment" },
-    ["c"] = { "<cmd>BufferKill<CR>", "Close Buffer" },
     ["f"] = { "<cmd>Format<cr>", "Format" },
     ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
+    ["e"] = { "<cmd>NvimTreeToggle<cr>", "Open explorer" },
+    ["c"] = { "<cmd>BufferKill<cr>", "Close buffer" },
     b = {
       name = "Buffers",
       j = { "<cmd>BufferLinePick<cr>", "Jump" },
       f = { "<cmd>Telescope buffers<cr>", "Find" },
       b = { "<cmd>BufferLineCyclePrev<cr>", "Previous" },
-      -- w = { "<cmd>BufferWipeout<cr>", "Wipeout" }, -- TODO: implement this for bufferline
+      c = { "<cmd>BufferKill<cr>", "Close buffer" },
       e = {
         "<cmd>BufferLinePickClose<cr>",
         "Pick which buffer to close",
@@ -128,6 +129,7 @@ local config = {
         "<cmd>Gitsigns diffthis HEAD<cr>",
         "Git Diff",
       },
+      g = { "<cmd>lua _lazygit_toggle()<cr>", "LazyGit" },
     },
     l = {
       name = "LSP",
@@ -176,6 +178,16 @@ local config = {
         "<cmd>lua require('telescope.builtin.internal').colorscheme({enable_preview = true})<cr>",
         "Colorscheme with Preview",
       },
+    },
+    t = {
+    name = "Terminal",
+    ["1"] = { ":1ToggleTerm<cr>", "1" },
+    ["2"] = { ":2ToggleTerm<cr>", "2" },
+    ["3"] = { ":3ToggleTerm<cr>", "3" },
+    ["4"] = { ":4ToggleTerm<cr>", "4" },
+      h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
+      v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
+      t = { "<cmd><cmd>lua _htop_toggle()<cr>", "HTOP" },
     },
     T = {
       name = "Treesitter",

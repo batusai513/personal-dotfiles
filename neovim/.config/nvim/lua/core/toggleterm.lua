@@ -3,7 +3,7 @@ if not toggleterm then
   return
 end
 
-toggleterm.setup {
+local config = {
   size = 20,
   open_mapping = [[<c-\>]],
   hide_numbers = true,
@@ -24,11 +24,13 @@ toggleterm.setup {
       background = "Normal",
     },
     execs = {
-      {"lazygit", "<leader>gg", "LazyGit", "float"},
-      {"lazygit", "<c-\\><c-g>", "LazyGit", "float"},
-    }
+      { "lazygit", "<leader>gg", "LazyGit", "float" },
+      { "lazygit", "<c-\\><c-g>", "LazyGit", "float" },
+    },
   },
 }
+
+toggleterm.setup(config)
 
 function _G.set_terminal_keymaps()
   local opts = { noremap = true }
@@ -41,14 +43,16 @@ end
 
 vim.cmd "autocmd! TermOpen term://* lua set_terminal_keymaps()"
 
-local Terminal = require("toggleterm.terminal").Terminal
+local terminal = prequire "toggleterm.terminal"
+if not terminal then
+  return
+end
+local Terminal = terminal.Terminal
 local lazygit = Terminal:new { cmd = "lazygit", count = 101 }
 
 function _lazygit_toggle()
   lazygit:toggle()
 end
-
-vim.keymap.set("n", "<leader>gg", "<cmd>lua _lazygit_toggle()<CR>", { noremap = true, silent = true })
 
 local htop = Terminal:new { cmd = "htop", hidden = true, count = 102 }
 
@@ -56,4 +60,3 @@ function _htop_toggle()
   htop:toggle()
 end
 
-vim.keymap.set("n", "<leader>ht", "<cmd>lua _htop_toggle()<CR>", { noremap = true, silent = true })
