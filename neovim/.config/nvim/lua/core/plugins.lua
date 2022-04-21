@@ -97,7 +97,11 @@ return packer.startup(function(use)
       },
       {
         "ray-x/lsp_signature.nvim",
-      }
+      },
+      {
+        "folke/trouble.nvim",
+        cmd = "TroubleToggle",
+      },
     },
   }
 
@@ -125,7 +129,7 @@ return packer.startup(function(use)
     "lukas-reineke/indent-blankline.nvim",
     config = function()
       require "core.indent-blankline"
-    end
+    end,
   }
 
   --comments
@@ -241,8 +245,8 @@ return packer.startup(function(use)
   use {
     "ur4ltz/surround.nvim",
     config = function()
-      require "surround".setup { mappings_style = "surround" }
-    end
+      require("surround").setup { mappings_style = "surround" }
+    end,
   }
 
   -- Automatically set up your configuration after cloning packer.nvim
