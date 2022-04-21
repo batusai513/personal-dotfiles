@@ -11,8 +11,12 @@ return {
           [vim.fn.expand "$VIMRUNTIME/lua"] = true,
           [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
           [vim.fn.stdpath "config" .. "/lua"] = true,
+          library = vim.api.nvim_get_runtime_file("", true),
         },
         maxPreload = 10000,
+        telemetry = {
+          enable = false,
+        },
       },
     },
   },
