@@ -239,6 +239,8 @@ return packer.startup(function(use)
   }
 
   --base colorscheme
+  use "lunarvim/darkplus.nvim"
+  use "rose-pine/neovim"
   use "folke/tokyonight.nvim"
 
   --add/remove sorrunding charactes

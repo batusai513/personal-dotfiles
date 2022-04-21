@@ -9,7 +9,7 @@ local config = {
   hide_numbers = true,
   shade_filetypes = {},
   shade_terminals = true,
-  shading_factor = 2,
+  shading_factor = 3,
   start_in_insert = true,
   insert_mappings = true,
   persist_size = true,
@@ -50,13 +50,13 @@ end
 local Terminal = terminal.Terminal
 local lazygit = Terminal:new { cmd = "lazygit", count = 101 }
 
-function _lazygit_toggle()
+function _Lazygit_toggle()
   lazygit:toggle()
 end
 
 local htop = Terminal:new { cmd = "htop", hidden = true, count = 102 }
 
-function _htop_toggle()
+function _Htop_toggle()
   htop:toggle()
 end
 

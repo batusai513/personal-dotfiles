@@ -129,7 +129,7 @@ local config = {
         "<cmd>Gitsigns diffthis HEAD<cr>",
         "Git Diff",
       },
-      g = { "<cmd>lua _lazygit_toggle()<cr>", "LazyGit" },
+      g = { "<cmd>lua _Lazygit_toggle()<cr>", "LazyGit" },
     },
     l = {
       name = "LSP",
@@ -188,7 +188,7 @@ local config = {
     ["4"] = { ":4ToggleTerm<cr>", "4" },
       h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
       v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
-      t = { "<cmd><cmd>lua _htop_toggle()<cr>", "HTOP" },
+      t = { "<cmd>lua _Htop_toggle()<cr>", "HTOP" },
     },
     T = {
       name = "Treesitter",
