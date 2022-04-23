@@ -164,6 +164,7 @@ end
 M.init = function()
   telescope.setup(options)
   require("telescope").load_extension "fzf"
+  require("telescope").load_extension "ui-select"
 
   local map = require("core.utils").map
   -- navigation
