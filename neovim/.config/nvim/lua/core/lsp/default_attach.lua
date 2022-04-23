@@ -1,4 +1,11 @@
+local autocmds = require "core.set-autocommands"
 local M = {}
+
+local function lsp_code_lens_refresh(client)
+  if client.resolved_capabilities.code_lens then
+    autocmds.enable_code_lens_refresh()
+  end
+end
 
 local function lsp_highlight_document(client)
   -- Set autocommands conditional on server_capabilities
@@ -54,10 +61,13 @@ end
 M.on_attach = function(client, bufnr)
   if client.name == "tsserver" then
     client.resolved_capabilities.document_formatting = false
+    client.resolved_capabilities.document_range_formatting = false
   end
   if client.name == "sumneko_lua" then
     client.resolved_capabilities.document_formatting = false
+    client.resolved_capabilities.document_range_formatting = false
   end
+  lsp_code_lens_refresh(client)
   lsp_keymaps(bufnr)
   lsp_highlight_document(client)
 end
