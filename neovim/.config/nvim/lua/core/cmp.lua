@@ -45,7 +45,7 @@ cmp.setup {
     end,
   },
   completion = {
-    keyword_length = 3,
+    keyword_length = 2,
   },
   mapping = cmp.mapping.preset.insert {
     ["<C-k>"] = cmp.mapping.select_prev_item(),
@@ -124,6 +124,13 @@ cmp.setup.cmdline("/", {
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline(":", {
+  formatting = {
+    fields = { "kind", "abbr" },
+    format = function(entry, vim_item)
+      vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
+      return vim_item
+    end,
+  },
   mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({
     { name = "path" },
