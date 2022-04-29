@@ -6,6 +6,9 @@ return function(server, opts)
     },
     server = vim.tbl_deep_extend("force", server:get_default_options(), opts, {}),
   }
-  require("rust-tools").setup(rustopts)
-  server:attach_buffers()
+  local ok, rust_tools = pcall(require, "rust-tools")
+  if ok then
+    rust_tools.setup(rustopts)
+    server:attach_buffers()
+  end
 end

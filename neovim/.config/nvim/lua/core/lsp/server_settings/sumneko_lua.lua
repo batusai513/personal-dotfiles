@@ -25,7 +25,6 @@ return function(server, default_opts)
     }
 
     opts = lua_dev.setup(dev_opts)
-    vim.pretty_print(opts)
   end
 
   server:setup(opts)

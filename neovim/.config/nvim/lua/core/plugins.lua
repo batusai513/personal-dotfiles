@@ -119,6 +119,11 @@ return packer.startup(function(use)
     "max397574/lua-dev.nvim"
   }
 
+  --typescript
+  use {
+    "jose-elias-alvarez/typescript.nvim"
+  }
+
   --syntax highlighting
   use {
     "nvim-treesitter/nvim-treesitter",
