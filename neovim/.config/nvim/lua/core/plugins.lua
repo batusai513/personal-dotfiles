@@ -112,22 +112,11 @@ return packer.startup(function(use)
     requires = {
       { "mfussenegger/nvim-dap" },
     },
-    config = function()
-      require("rust-tools").setup {
-        tools = {
-          autoSetHints = true,
-          hover_with_actions = true,
-          runnables = {
-            use_telescope = true,
-          },
-        },
-        server = {
-          cmd = { vim.fn.stdpath "data" .. "/lsp_servers/rust/rust-analyzer" },
-          on_attach = require("core.lsp.default_attach").on_attach,
-        },
-      }
-    end,
-    ft = { "rust", "rs" },
+  }
+
+  --lua
+  use {
+    "max397574/lua-dev.nvim"
   }
 
   --syntax highlighting

@@ -1,23 +1,32 @@
-return {
+local opts = {
   settings = {
     Lua = {
-      diagnostics = {
-        -- Get the language server to recognize the `vim` global
-        globals = { "vim" },
-      },
       workspace = {
-        -- Make the server aware of Neovim runtime files
         library = {
-          [vim.fn.expand "$VIMRUNTIME/lua"] = true,
-          [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
           [vim.fn.stdpath "config" .. "/lua"] = true,
-          library = vim.api.nvim_get_runtime_file("", true),
-        },
-        maxPreload = 10000,
-        telemetry = {
-          enable = false,
         },
       },
     },
   },
 }
+
+return function(server, default_opts)
+  local lua_dev_loaded, lua_dev = pcall(require, "lua-dev")
+  if lua_dev_loaded then
+    local dev_opts = {
+      library = {
+        vimruntime = true, -- runtime path
+        types = true, -- full signature, docs and completion of vim.api, vim.treesitter, vim.lsp and others
+        -- plugins = true, -- installed opt or start plugins in packpath
+        -- you can also specify the list of plugins to make available as a workspace library
+        plugins = { "plenary.nvim" },
+      },
+      lspconfig = vim.tbl_deep_extend("force", opts, default_opts),
+    }
+
+    opts = lua_dev.setup(dev_opts)
+    vim.pretty_print(opts)
+  end
+
+  server:setup(opts)
+end

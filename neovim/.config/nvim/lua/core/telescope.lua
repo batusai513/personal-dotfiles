@@ -127,7 +127,7 @@ local options = u.merge({
     }),
     diagnostics = u.merge({
       mappings = default_mappings,
-      theme = "ivy"
+      theme = "ivy",
     }, {}),
     find_files = u.merge(opts_flex, {
       prompt_title = "✨ Search Project ✨",
@@ -166,19 +166,22 @@ M.init = function()
   require("telescope").load_extension "fzf"
   require("telescope").load_extension "ui-select"
 
-  local map = require("core.utils").map
+  local map = require("core.utils").set_keymap
+
+  local opts = {}
   -- navigation
-  map("n", "<leader>sf", '<cmd>lua require("core.telescope").project_files()<cr>')
-  --map("n", "<leader>sf", ":Telescope find_files<cr>")
-  map("n", "<leader>sh", ":Telescope help_tags<cr>")
-  map("n", "<leader>sM", ":Telescope man_pages<cr>")
-  map("n", "<leader>sr", ":Telescope oldfiles<cr>")
-  map("n", "<leader>sR", ":Telescope registers<cr>")
-  map("n", "<leader>sB", ":Telescope buffers<cr>")
-  map("n", "<leader>st", ":Telescope live_grep<cr>")
-  map("n", "<leader>sk", ":Telescope keymaps<cr>")
-  map("n", "<leader>sC", ":Telescope commands<cr>")
-  map("n", "<leader>sc", ":<cmd> lua require'telescope.builtin.internal'.colorscheme({enable_preview=true})<cr>")
+  map("n", "<leader>sf", require("core.telescope").project_files)
+  map("n", "<leader>sh", builtin.help_tags)
+  map("n", "<leader>sM", builtin.man_pages)
+  map("n", "<leader>sr", builtin.oldfiles)
+  map("n", "<leader>sR", builtin.registers)
+  map("n", "<leader>sB", builtin.buffers)
+  map("n", "<leader>st", builtin.live_grep)
+  map("n", "<leader>sk", builtin.keymaps)
+  map("n", "<leader>sC", builtin.commands)
+  map("n", "<leader>sc", function()
+    require("telescope.builtin.internal").colorscheme { enable_preview = true }
+  end)
 end
 
 return M
