@@ -132,6 +132,7 @@ return packer.startup(function(use)
   }
 
   use "p00f/nvim-ts-rainbow"
+
   use {
     "windwp/nvim-autopairs",
     config = function()
@@ -139,6 +140,7 @@ return packer.startup(function(use)
     end,
     after = "nvim-cmp",
   }
+
   use {
     "lukas-reineke/indent-blankline.nvim",
     config = function()
