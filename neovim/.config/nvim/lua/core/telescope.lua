@@ -172,7 +172,7 @@ M.init = function()
 
   local opts = {}
   -- navigation
-  map("n", "<leader>sf", require("core.telescope").project_files)
+  map("n", "<leader>sf", M.project_files)
   map("n", "<leader>sh", builtin.help_tags)
   map("n", "<leader>sM", builtin.man_pages)
   map("n", "<leader>sr", builtin.oldfiles)
