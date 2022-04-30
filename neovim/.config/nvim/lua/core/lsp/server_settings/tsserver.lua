@@ -1,6 +1,5 @@
 return function(server, default_opts)
   local ok, typescript = pcall(require, "typescript")
-  print(ok)
   if ok then
     local dev_opts = {
       disable_formatting = false,
