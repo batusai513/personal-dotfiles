@@ -36,6 +36,14 @@ keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 keymap("n", "<S-l>", ":bnext<CR>", opts)
 keymap("n", "<S-h>", ":bprevious<CR>", opts)
 
+--tabs
+keymap("n", "th", ":tabfirst<cr>")
+keymap("n", "tj", ":tabprev<cr>")
+keymap("n", "tk", ":tabnext<cr>")
+keymap("n", "tl", ":tablast<cr>")
+keymap("n", "tc", ":tabclose<cr>")
+keymap("n", "tn", ":tabnew<cr>")
+
 -- Insert --
 -- Press jk fast to enter
 keymap("i", "jk", "<ESC>", opts)
