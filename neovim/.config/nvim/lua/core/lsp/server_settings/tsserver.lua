@@ -2,7 +2,7 @@ return function(server, default_opts)
   local ok, typescript = pcall(require, "typescript")
   if ok then
     local dev_opts = {
-      disable_formatting = false,
+      disable_formatting = true,
       debug = false,
       server = vim.tbl_deep_extend("force", server:get_default_options(), default_opts),
     }
