@@ -82,6 +82,7 @@ local options = u.merge({
       "--column",
       "--smart-case",
       "--trim",
+      "--glob=!.git/",
     },
   },
   extensions = {
@@ -131,6 +132,7 @@ local options = u.merge({
     }, {}),
     find_files = u.merge(opts_flex, {
       prompt_title = "✨ Search Project ✨",
+      find_command = { "fd", "--type=file", "--hidden", "--smart-case" },
       mappings = default_mappings,
       hidden = true,
     }),
