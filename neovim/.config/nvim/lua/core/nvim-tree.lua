@@ -105,7 +105,9 @@ local config = {
   },
   actions = {
     change_dir = {
+      enable = false,
       global = false,
+      restrict_above_cwd = false,
     },
     open_file = {
       quit_on_open = false,
