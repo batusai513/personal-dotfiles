@@ -45,18 +45,6 @@ return packer.startup(function(use)
   use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
   use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
 
-  --UI
-  use {
-    "CosmicNvim/cosmic-ui",
-    requires = {
-      "MunifTanjim/nui.nvim",
-      "nvim-lua/plenary.nvim",
-    },
-    config = function()
-      require("cosmic-ui").setup()
-    end,
-  }
-
   --completions plugins
   use {
     "hrsh7th/nvim-cmp",

@@ -133,7 +133,7 @@ local config = {
     },
     l = {
       name = "LSP",
-      a = { "<cmd>lua require'cosmic-ui'.code_actions()<CR>", "Code Action" },
+      a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
       d = { "<cmd>lua require'telescope.builtin'.diagnostics({bufnr=0, theme='get_ivy'})<cr>", "Buffer Diagnostics" },
       t = { "<cmd>Trouble document_diagnostics<cr>", "Document Troubles" },
       w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
@@ -150,7 +150,7 @@ local config = {
       },
       l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
       q = { "<cmd>lua vim.diagnostic.setloclist()<cr>", "Quickfix" },
-      r = { "<cmd>lua require'cosmic-ui'.rename()<CR>", "Rename" },
+      r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
       s = { "<cmd>lua require'telescope.builtin'.lsp_document_symbols()<cr>", "Document Symbols" },
       e = { "<cmd>lua require'telescope.builtin'.quickfix()<cr>", "Telescope Quickfix" },
       S = {
