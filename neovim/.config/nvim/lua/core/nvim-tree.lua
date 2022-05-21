@@ -11,16 +11,25 @@ vim.g.nvim_tree_show_icons = {
 }
 vim.g.nvim_tree_icons = {
   default = "",
-  symlink = icons.symlink,
-  git = icons.git,
-  folder = icons.folder,
-  lsp = {
-    hint = icons.hint,
-    info = icons.info,
-    warning = icons.warn,
-    error = icons.error,
+  symlink = icons.kind.Reference,
+  git = {
+    unstaged = "",
+    staged = "S",
+    unmerged = "",
+    renamed = "➜",
+    deleted = "",
+    untracked = "U",
+    ignored = "◌",
   },
-}
+  folder = {
+    -- arrow_open = " ",
+    -- arrow_closed = "",
+    default = icons.misc.folder_default,
+    open = icons.misc.folder_open,
+    empty = icons.misc.folder_empty,
+    empty_open = icons.misc.folder_empty_open,
+    symlink = icons.misc.folder_symlink,
+  },}
 
 local nvim_tree = prequire "nvim-tree"
 if not nvim_tree then

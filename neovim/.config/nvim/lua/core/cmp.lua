@@ -18,7 +18,7 @@ end
 require("luasnip/loaders/from_vscode").lazy_load()
 
 --   פּ ﯟ   some other good icons
-local kind_icons = icons.kind_icons
+local kind_icons = icons.kind;
 -- find more here: https://www.nerdfonts.com/cheat-sheet
 
 local confirm_opts = {

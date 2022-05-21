@@ -3,10 +3,10 @@ local M = {}
 
 function M.init()
   local signs = {
-    { name = "DiagnosticSignError", text = icons.error },
-    { name = "DiagnosticSignWarn", text = icons.warn },
-    { name = "DiagnosticSignHint", text = icons.hint },
-    { name = "DiagnosticSignInfo", text = icons.info },
+    { name = "DiagnosticSignError", text = icons.diagnostics.Error},
+    { name = "DiagnosticSignWarn", text = icons.diagnostics.Warning },
+    { name = "DiagnosticSignHint", text = icons.diagnostics.Hint },
+    { name = "DiagnosticSignInfo", text = icons.diagnostics.Information },
   }
 
   for _, sign in ipairs(signs) do
@@ -26,7 +26,7 @@ function M.init()
       style = "minimal",
       border = "rounded",
       source = "always",
-      header = { icons.debug .. " Diagnostics:", "Normal" },
+      header = { icons.ui.Bug .. " Diagnostics:", "Normal" },
       prefix = "",
     },
     virtual_text = false,

@@ -66,7 +66,7 @@ local opts_flex = {
 local options = u.merge({
   defaults = {
     prompt_prefix = "🔍 ",
-    selection_caret = icons.folder.arrow_closed,
+    selection_caret = icons.misc.arrow_closed,
     file_ignore_patterns = {
       ".git/",
     },
