@@ -84,7 +84,6 @@ local config = {
         "<cmd>BufferLinePickClose<cr>",
         "Pick which buffer to close",
       },
-
       h = { "<cmd>BufferLineCloseLeft<cr>", "Close all to the left" },
       l = {
         "<cmd>BufferLineCloseRight<cr>",
@@ -92,21 +91,12 @@ local config = {
       },
       D = {
         "<cmd>BufferLineSortByDirectory<cr>",
-
         "Sort by directory",
       },
       L = {
         "<cmd>BufferLineSortByExtension<cr>",
         "Sort by language",
       },
-    },
-    p = {
-      name = "Packer",
-      c = { "<cmd>PackerCompile<cr>", "Compile" },
-      i = { "<cmd>PackerInstall<cr>", "Install" },
-      s = { "<cmd>PackerSync<cr>", "Sync" },
-      S = { "<cmd>PackerStatus<cr>", "Status" },
-      u = { "<cmd>PackerUpdate<cr>", "Update" },
     },
     g = {
       name = "Git",
@@ -166,6 +156,20 @@ local config = {
         t = { "<cmd>lua require'core.lsp.peek'.Peek('typeDefinition')<cr>", "Type Definition" },
         i = { "<cmd>lua require'core.lsp.peek'.Peek('implementation')<cr>", "Implementation" },
       },
+    },
+    p = {
+      name = "Packer",
+      c = { "<cmd>PackerCompile<cr>", "Compile" },
+      i = { "<cmd>PackerInstall<cr>", "Install" },
+      s = { "<cmd>PackerSync<cr>", "Sync" },
+      S = { "<cmd>PackerStatus<cr>", "Status" },
+      u = { "<cmd>PackerUpdate<cr>", "Update" },
+    },
+    r = {
+      name = "Replace",
+      r = { "<cmd>lua require('spectre').open()<cr>", "Replace" },
+      w = { "<cmd>lua require('spectre').open_visual({select_word=true})<cr>", "Replace Word" },
+      f = { "<cmd>lua require('spectre').open_file_search()<cr>", "Replace Buffer" },
     },
     s = {
       name = "Search",

@@ -104,12 +104,12 @@ return packer.startup(function(use)
 
   --lua
   use {
-    "max397574/lua-dev.nvim"
+    "max397574/lua-dev.nvim",
   }
 
   --typescript
   use {
-    "jose-elias-alvarez/typescript.nvim"
+    "jose-elias-alvarez/typescript.nvim",
   }
 
   --syntax highlighting
@@ -122,7 +122,7 @@ return packer.startup(function(use)
     config = function()
       require "core.treesitter"
     end,
-    commit = "bc25a6a5c4fd659bbf78ba0a2442ecf14eb00398"
+    commit = "bc25a6a5c4fd659bbf78ba0a2442ecf14eb00398",
   }
 
   use "p00f/nvim-ts-rainbow"
@@ -207,6 +207,14 @@ return packer.startup(function(use)
     event = "BufWinEnter",
     config = function()
       require("core.telescope").init()
+    end,
+  }
+
+  --find and replace
+  use {
+    "windwp/nvim-spectre",
+    config = function()
+      require("core.spectre").init()
     end,
   }
 
