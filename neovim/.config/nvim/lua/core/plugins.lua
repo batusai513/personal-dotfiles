@@ -232,6 +232,15 @@ return packer.startup(function(use)
     "lewis6991/impatient.nvim",
   }
 
+  -- gps
+  use {
+    "christianchiarulli/nvim-gps",
+    branch = "text_hl",
+    config = function()
+      require("core.gps").init()
+    end,
+  }
+
   --terminal
   use {
     "akinsho/toggleterm.nvim",
