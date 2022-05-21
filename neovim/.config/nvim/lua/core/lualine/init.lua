@@ -4,10 +4,28 @@ if not lualine then
   return
 end
 
+local status_gps_ok, gps = pcall(require, "nvim-gps")
+if not status_gps_ok then
+  return
+end
+
+local hide_in_width = function()
+  return vim.fn.winwidth(0) > 80
+end
+
+local nvim_gps = function()
+  local gps_location = gps.get_location()
+  if gps_location == "error" then
+    return ""
+  else
+    return gps.get_location()
+  end
+end
+
 lualine.setup {
   options = {
-    theme = "tokyonight",
-    disabled_filetypes = { "dashboard", "NvimTree", "Outline" },
+    theme = "auto",
+    disabled_filetypes = { "dashboard", "NvimTree", "Outline", "toggleterm" },
     globalstatus = true,
   },
   extensions = {
