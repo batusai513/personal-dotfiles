@@ -1,36 +1,5 @@
 local icons = require "core.theme.icons"
 
-vim.g.nvim_tree_git_hl = 1
-vim.g.nvim_tree_root_folder_modifier = ":t"
-vim.g.nvim_tree_create_in_closed_folder = 1
-vim.g.nvim_tree_show_icons = {
-  git = 1,
-  folders = 1,
-  files = 1,
-  folder_arrows = 1,
-}
-vim.g.nvim_tree_icons = {
-  default = "",
-  symlink = icons.kind.Reference,
-  git = {
-    unstaged = "",
-    staged = "S",
-    unmerged = "",
-    renamed = "➜",
-    deleted = "",
-    untracked = "U",
-    ignored = "◌",
-  },
-  folder = {
-    -- arrow_open = " ",
-    -- arrow_closed = "",
-    default = icons.misc.folder_default,
-    open = icons.misc.folder_open,
-    empty = icons.misc.folder_empty,
-    empty_open = icons.misc.folder_empty_open,
-    symlink = icons.misc.folder_symlink,
-  },}
-
 local nvim_tree = prequire "nvim-tree"
 if not nvim_tree then
   return
@@ -58,6 +27,7 @@ local config = {
   hijack_netrw = true,
   open_on_setup = false,
   ignore_buffer_on_setup = false,
+  create_in_closed_folder = true,
   ignore_ft_on_setup = {
     "startify",
     "dashboard",
@@ -90,8 +60,9 @@ local config = {
   view = {
     width = 40,
     height = 30,
-    hide_root_folder = false,
     side = "right",
+    hide_root_folder = false,
+    adaptive_size = false,
     mappings = {
       custom_only = false,
       list = {
@@ -104,9 +75,43 @@ local config = {
     relativenumber = false,
     signcolumn = "yes",
   },
+  renderer = {
+    highlight_git = true,
+    root_folder_modifier = ":t",
+    icons = {
+      show = {
+        git = true,
+        folder = true,
+        file = true,
+        folder_arrow = true,
+      },
+      glyphs = {
+        default = "",
+        symlink = icons.kind.Reference,
+        git = {
+          unstaged = "",
+          staged = "S",
+          unmerged = "",
+          renamed = "➜",
+          deleted = "",
+          untracked = "U",
+          ignored = "◌",
+        },
+        folder = {
+          -- arrow_open = " ",
+          -- arrow_closed = "",
+          default = icons.misc.folder_default,
+          open = icons.misc.folder_open,
+          empty = icons.misc.folder_empty,
+          empty_open = icons.misc.folder_empty_open,
+          symlink = icons.misc.folder_symlink,
+        },
+      },
+    },
+  },
   filters = {
     dotfiles = false,
-    custom = { "node_modules", ".cache" },
+    custom = { ".cache" },
   },
   trash = {
     cmd = "trash",
@@ -116,10 +121,11 @@ local config = {
     change_dir = {
       enable = false,
       global = false,
-      restrict_above_cwd = false,
+      restrict_above_cwd = true,
     },
     open_file = {
       quit_on_open = false,
+      resize_window = true,
       window_picker = {
         enable = true,
         chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",
