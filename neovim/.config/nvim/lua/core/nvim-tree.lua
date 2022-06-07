@@ -34,11 +34,11 @@ local config = {
     "alpha",
   },
   auto_reload_on_write = true,
-  hijack_unnamed_buffer_when_opening = false,
   open_on_tab = false,
   hijack_cursor = false,
   update_cwd = false,
   diagnostics = diagnosticsConfig,
+  hijack_unnamed_buffer_when_opening = false,
   hijack_directories = {
     enable = false,
     auto_open = false,
