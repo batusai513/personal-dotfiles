@@ -66,6 +66,11 @@ M.on_attach = function(client, bufnr)
     client.resolved_capabilities.document_range_formatting = false
   end
 
+  if client.name == "tsserver" then
+    client.resolved_capabilities.document_formatting = false
+    client.resolved_capabilities.document_range_formatting = false
+  end
+
   lsp_code_lens_refresh(client)
   lsp_keymaps(bufnr)
   lsp_highlight_document(client)
