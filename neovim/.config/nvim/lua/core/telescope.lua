@@ -157,7 +157,7 @@ local options = u.merge({
 local M = {}
 
 M.project_files = function()
-  local ok = pcall(builtin.git_files)
+  local ok = pcall(builtin.git_files, { show_untracked = true })
   if not ok then
     builtin.find_files()
   end

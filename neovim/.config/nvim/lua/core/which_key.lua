@@ -63,7 +63,7 @@ local config = {
     ["/"] = { "<ESC><CMD>lua require('Comment.api').toggle_linewise_op(vim.fn.visualmode())<CR>", "Comment" },
     f = {
       name = "Find selected",
-      w = { "<cmd>Telescope grep_string<cr>", "Selected text" },
+      w = { "<cmd>lua require 'telescope.builtin'.grep_string()<cr>", "Selected text" },
     },
   },
   mappings = {
@@ -77,7 +77,7 @@ local config = {
     b = {
       name = "Buffers",
       j = { "<cmd>BufferLinePick<cr>", "Jump" },
-      f = { "<cmd>Telescope buffers<cr>", "Find" },
+      f = { "<cmd>lua require 'telescope.builtin'.buffers()<cr>", "Find buffer" },
       b = { "<cmd>BufferLineCyclePrev<cr>", "Previous" },
       c = { "<cmd>BufferKill<cr>", "Close buffer" },
       e = {
