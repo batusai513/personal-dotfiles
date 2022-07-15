@@ -60,3 +60,45 @@ function _Htop_toggle()
   htop:toggle()
 end
 
+local cargo_run = Terminal:new { cmd = "cargo run", hidden = true }
+
+function _CARGO_RUN()
+  cargo_run:toggle()
+end
+
+local cargo_test = Terminal:new { cmd = "cargo test", hidden = true }
+
+function _CARGO_TEST()
+  cargo_test:toggle()
+end
+
+local float_term = Terminal:new {
+  direction = "float",
+  on_open = function(term)
+    vim.cmd "startinsert!"
+    vim.api.nvim_buf_set_keymap(
+      term.bufnr,
+      "n",
+      "<m-1>",
+      "<cmd>1ToggleTerm direction=float<cr>",
+      { noremap = true, silent = true }
+    )
+    vim.api.nvim_buf_set_keymap(
+      term.bufnr,
+      "t",
+      "<m-1>",
+      "<cmd>1ToggleTerm direction=float<cr>",
+      { noremap = true, silent = true }
+    )
+    vim.api.nvim_buf_set_keymap(
+      term.bufnr,
+      "i",
+      "<m-1>",
+      "<cmd>1ToggleTerm direction=float<cr>",
+      { noremap = true, silent = true }
+    )
+    vim.api.nvim_buf_set_keymap(term.bufnr, "", "<m-2>", "<nop>", { noremap = true, silent = true })
+    vim.api.nvim_buf_set_keymap(term.bufnr, "", "<m-3>", "<nop>", { noremap = true, silent = true })
+  end,
+  count = 1,
+}
