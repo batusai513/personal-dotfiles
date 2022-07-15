@@ -19,12 +19,6 @@ null_ls.setup {
     formatting.rubocop,
     diagnostics.rubocop,
 
-    -- diagnostics.eslint_d.with {
-    --   prefer_local = 'node_modules/.bin'
-    -- },
-    -- code_actions.eslint_d.with {
-    --   prefer_local = 'node_modules/.bin'
-    -- },
     formatting.stylua,
     code_actions.gitsigns,
   },
