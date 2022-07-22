@@ -123,7 +123,6 @@ return packer.startup(function(use)
     config = function()
       require "core.treesitter"
     end,
-    commit = "bc25a6a5c4fd659bbf78ba0a2442ecf14eb00398",
   }
 
   use "p00f/nvim-ts-rainbow"
