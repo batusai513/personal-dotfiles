@@ -49,7 +49,7 @@ treesitter_configs.setup {
     highlight_current_scope = { enable = false },
   },
   rainbow = {
-    enable = true,
+    enable = false,
     extended_mode = true,
   },
 }
