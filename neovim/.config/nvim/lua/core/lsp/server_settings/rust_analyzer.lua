@@ -4,7 +4,6 @@ return function(server, opts)
   local rustopts = {
     tools = {
       autoSetHints = true,
-      hover_with_actions = true,
       inlay_hints = {
         -- prefix for parameter hints
         -- default: "<-"
