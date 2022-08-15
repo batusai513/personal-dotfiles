@@ -120,10 +120,10 @@ local options = {
 
 local highlights = {
   background = {
-    gui = "italic",
+    italic = true,
   },
   buffer_selected = {
-    gui = "bold",
+    bold = true,
   },
 }
 
