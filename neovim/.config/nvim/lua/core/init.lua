@@ -1,3 +1,7 @@
+local autocmd = vim.api.nvim_create_autocmd
+local augroup = vim.api.nvim_create_augroup
+local api = vim.api
+
 vim.cmd [[
   augroup _alpha
     autocmd!
@@ -13,8 +17,9 @@ vim.cmd "au ColorScheme * hi TelescopeBorder ctermbg=none guibg=none"
 vim.cmd "au ColorScheme * hi NvimTreeNormal ctermbg=none guibg=none"
 vim.cmd "au ColorScheme * hi EndOfBuffer ctermbg=none guibg=none"
 vim.cmd "let &fcs='eob: '"
+vim.cmd [[ command! BufferKill lua require('plugins.configs.bufferline').buf_kill('bd') ]]
 
-vim.api.nvim_create_autocmd({ "FileType" }, {
+autocmd({ "FileType" }, {
   pattern = { "qf", "help", "man", "lspinfo", "spectre_panel" },
   callback = function()
     vim.cmd [[
@@ -24,7 +29,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
   end,
 })
 
-vim.api.nvim_create_autocmd({ "FileType" }, {
+autocmd({ "FileType" }, {
   pattern = { "gitcommit", "markdown" },
   callback = function()
     vim.opt_local.wrap = true
@@ -32,18 +37,18 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
   end,
 })
 
-vim.api.nvim_create_autocmd({ "VimResized" }, {
-  callback = function()
-    vim.cmd "tabdo wincmd ="
-  end,
-})
-
 -- Highlight on yank
-local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
-vim.api.nvim_create_autocmd("TextYankPost", {
+local highlight_group = augroup("YankHighlight", { clear = true })
+autocmd("TextYankPost", {
   callback = function()
     vim.highlight.on_yank { higroup = "Search" }
   end,
   group = highlight_group,
   pattern = "*",
+})
+
+autocmd({ "VimResized" }, {
+  callback = function()
+    vim.cmd "tabdo wincmd ="
+  end,
 })
