@@ -1,20 +1,4 @@
-local fn = vim.fn
-
--- Automatically install packer
-local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
-if fn.empty(fn.glob(install_path)) > 0 then
-  PACKER_BOOTSTRAP = fn.system {
-    "git",
-    "clone",
-    "--depth",
-    "1",
-    "https://github.com/wbthomason/packer.nvim",
-    install_path,
-  }
-  print "Installing packer close and reopen Neovim..."
-  vim.cmd [[packadd packer.nvim]]
-end
-
+vim.cmd "packadd packer.nvim"
 -- Autocommand that reloads neovim whenever you save the plugins.init file
 vim.cmd [[
   augroup packer_user_config
@@ -23,31 +7,30 @@ vim.cmd [[
   augroup end
 ]]
 
--- Use a protected call so we don't error out on first use
-local status_ok, packer = pcall(require, "packer")
-if not status_ok then
-  return
-end
-
--- Have packer use a popup window
-packer.init {
-  display = {
-    open_fn = function()
-      return require("packer.util").float { border = "rounded" }
+local plugins = {
+  ["nvim-lua/plenary.nvim"] = { module = "plenary" },
+  ["wbthomason/packer.nvim"] = {
+    cmd = {
+      "PackerSnapshot",
+      "PackerSnapshotRollback",
+      "PackerSnapshotDelete",
+      "PackerInstall",
+      "PackerUpdate",
+      "PackerSync",
+      "PackerClean",
+      "PackerCompile",
+      "PackerStatus",
+      "PackerProfile",
+      "PackerLoad",
+    },
+    config = function()
+      require "plugins"
     end,
   },
-}
 
--- Install your plugins here
-return packer.startup(function(use)
-  -- base plugins for things to work
-  use "wbthomason/packer.nvim" -- Have packer manage itself
-  use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
-  use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
-
+  ["nvim-lua/popup.nvim"] = {}, -- An implementation of the Popup API from vim in Neovim
   --completions plugins
-  use {
-    "hrsh7th/nvim-cmp",
+  ["hrsh7th/nvim-cmp"] = {
     config = function()
       require "plugins.configs.cmp"
     end,
@@ -65,11 +48,11 @@ return packer.startup(function(use)
         },
       },
     },
-  }
+  },
 
   --Language server protocol
-  use {
-    "neovim/nvim-lspconfig",
+
+  ["neovim/nvim-lspconfig"] = {
     config = function()
       require "plugins.configs.lsp"
     end,
@@ -91,30 +74,24 @@ return packer.startup(function(use)
         cmd = "TroubleToggle",
       },
     },
-  }
+  },
 
   --language specific
   --rust
-  use {
-    "simrat39/rust-tools.nvim",
+  ["simrat39/rust-tools.nvim"] = {
     requires = {
       { "mfussenegger/nvim-dap" },
     },
-  }
+  },
 
   --lua
-  use {
-    "max397574/lua-dev.nvim",
-  }
+  ["max397574/lua-dev.nvim"] = {},
 
   --typescript
-  use {
-    "jose-elias-alvarez/typescript.nvim",
-  }
+  ["jose-elias-alvarez/typescript.nvim"] = {},
 
   --syntax highlighting
-  use {
-    "nvim-treesitter/nvim-treesitter",
+  ["nvim-treesitter/nvim-treesitter"] = {
     run = ":TSUpdate",
     requires = {
       "JoosepAlviste/nvim-ts-context-commentstring",
@@ -122,47 +99,42 @@ return packer.startup(function(use)
     config = function()
       require "plugins.configs.treesitter"
     end,
-  }
+  },
 
-  use "p00f/nvim-ts-rainbow"
+  ["p00f/nvim-ts-rainbow"] = {},
 
-  use {
-    "windwp/nvim-autopairs",
+  ["windwp/nvim-autopairs"] = {
     config = function()
       require "plugins.configs.autopairs"
     end,
     after = "nvim-cmp",
-  }
+  },
 
-  use {
-    "lukas-reineke/indent-blankline.nvim",
+  ["lukas-reineke/indent-blankline.nvim"] = {
     config = function()
       require "plugins.configs.indent-blankline"
     end,
-  }
+  },
 
   --comments
-  use {
-    "numToStr/Comment.nvim",
+  ["numToStr/Comment.nvim"] = {
     requires = {
       "JoosepAlviste/nvim-ts-context-commentstring",
     },
     config = function()
       require "plugins.configs.comment"
     end,
-  }
+  },
 
-  use {
-    "folke/todo-comments.nvim",
+  ["folke/todo-comments.nvim"] = {
     requires = "nvim-lua/plenary.nvim",
     config = function()
       require "plugins.configs.todo-comments"
     end,
-  }
+  },
 
   --Github things
-  use {
-    "lewis6991/gitsigns.nvim",
+  ["lewis6991/gitsigns.nvim"] = {
     requires = {
       "nvim-lua/plenary.nvim",
     },
@@ -170,30 +142,27 @@ return packer.startup(function(use)
       require "plugins.configs.gitsigns"
     end,
     -- tag = 'release' -- To use the latest release
-  }
+  },
 
   --buffer management
-  use {
-    "akinsho/bufferline.nvim",
+  ["akinsho/bufferline.nvim"] = {
     config = function()
       require "plugins.configs.bufferline"
     end,
-  }
+  },
 
   --tree file viewer
-  use {
-    "kyazdani42/nvim-tree.lua",
+  ["kyazdani42/nvim-tree.lua"] = {
     requires = {
       "kyazdani42/nvim-web-devicons", -- optional, for file icon
     },
     config = function()
       require "plugins.configs.nvim-tree"
     end,
-  }
-  -- file navigation
+  },
 
-  use {
-    "nvim-telescope/telescope.nvim",
+  -- file navigation
+  ["nvim-telescope/telescope.nvim"] = {
     requires = {
       "nvim-lua/popup.nvim",
       "nvim-lua/plenary.nvim",
@@ -207,81 +176,68 @@ return packer.startup(function(use)
     config = function()
       require("plugins.configs.telescope").init()
     end,
-  }
+  },
 
   --find and replace
-  use {
-    "windwp/nvim-spectre",
+  ["windwp/nvim-spectre"] = {
     config = function()
       require("plugins.configs.spectre").init()
     end,
-  }
+  },
 
   -- which-key
-  use {
-    "folke/which-key.nvim",
+  ["folke/which-key.nvim"] = {
     config = function()
       require("plugins.configs.which_key").init()
     end,
     event = "BufWinEnter",
-  }
+  },
 
   --neovim optimisations
-  use {
-    "lewis6991/impatient.nvim",
-  }
+  ["lewis6991/impatient.nvim"] = {},
 
   -- gps
-  use {
-    "christianchiarulli/nvim-gps",
+  ["christianchiarulli/nvim-gps"] = {
     branch = "text_hl",
     config = function()
       require("plugins.configs.gps").init()
     end,
-  }
+  },
 
   --terminal
-  use {
-    "akinsho/toggleterm.nvim",
+  ["akinsho/toggleterm.nvim"] = {
     commit = "8e6f938ed8eec7f988dc07aec2af148ad57c6d95",
     config = function()
       require "plugins.configs.toggleterm"
     end,
-  }
+  },
 
   --tmux
-  use {
-    "aserowy/tmux.nvim",
+  ["aserowy/tmux.nvim"] = {
     config = function()
       require("plugins.configs.tmux").init()
     end,
-  }
+  },
 
   --line
-  use {
-    "nvim-lualine/lualine.nvim",
+  ["nvim-lualine/lualine.nvim"] = {
     requires = { "kyazdani42/nvim-web-devicons", opt = true },
     config = function()
       require "plugins.configs.lualine"
     end,
-  }
+  },
 
   --base colorscheme
-  use "lunarvim/darkplus.nvim"
-  use "rose-pine/neovim"
-  use "folke/tokyonight.nvim"
+  ["lunarvim/darkplus.nvim"] = {},
+  ["rose-pine/neovim"] = {},
+  ["folke/tokyonight.nvim"] = {},
 
   --add/remove sorrunding charactes
-  use {
-    "ur4ltz/surround.nvim",
+  ["ur4ltz/surround.nvim"] = {
     config = function()
       require("surround").setup { mappings_style = "surround" }
     end,
-  }
+  },
+}
 
-  -- Automatically set up your configuration after cloning packer.nvim
-  -- Put this at the end after all plugins
-  if PACKER_BOOTSTRAP then
-    require("packer").sync()
-  end
-end)
+require("core.packer").run(plugins)
