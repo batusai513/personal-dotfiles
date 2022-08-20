@@ -1,5 +1,7 @@
+vim.defer_fn(function()
+  pcall(require, "impatient")
+end, 0)
 require "core.utils.prequire"
-require "plugins.configs.impatient"
 require "core.options"
 require "core.keymaps"
 require "plugins"
