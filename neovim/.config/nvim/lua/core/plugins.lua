@@ -97,7 +97,6 @@ return packer.startup(function(use)
   --rust
   use {
     "simrat39/rust-tools.nvim",
-    branch = "modularize_and_inlay_rewrite",
     requires = {
       { "mfussenegger/nvim-dap" },
     },
