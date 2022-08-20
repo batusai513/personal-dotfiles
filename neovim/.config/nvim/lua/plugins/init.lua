@@ -15,11 +15,11 @@ if fn.empty(fn.glob(install_path)) > 0 then
   vim.cmd [[packadd packer.nvim]]
 end
 
--- Autocommand that reloads neovim whenever you save the plugins.lua file
+-- Autocommand that reloads neovim whenever you save the plugins.init file
 vim.cmd [[
   augroup packer_user_config
     autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerSync
+    autocmd BufWritePost neovim/.config/nvim/lua/plugins/init.lua source <afile> | PackerSync
   augroup end
 ]]
 
@@ -49,7 +49,7 @@ return packer.startup(function(use)
   use {
     "hrsh7th/nvim-cmp",
     config = function()
-      require "core.cmp"
+      require "plugins.configs.cmp"
     end,
     requires = {
       { "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" },
@@ -71,7 +71,7 @@ return packer.startup(function(use)
   use {
     "neovim/nvim-lspconfig",
     config = function()
-      require "core.lsp"
+      require "plugins.configs.lsp"
     end,
     requires = {
       { "b0o/SchemaStore.nvim" },
@@ -79,7 +79,7 @@ return packer.startup(function(use)
       {
         "jose-elias-alvarez/null-ls.nvim",
         config = function()
-          require "core.lsp.null-ls"
+          require "plugins.configs.lsp.null-ls"
         end,
         after = "nvim-lspconfig",
       },
@@ -120,7 +120,7 @@ return packer.startup(function(use)
       "JoosepAlviste/nvim-ts-context-commentstring",
     },
     config = function()
-      require "core.treesitter"
+      require "plugins.configs.treesitter"
     end,
   }
 
@@ -129,7 +129,7 @@ return packer.startup(function(use)
   use {
     "windwp/nvim-autopairs",
     config = function()
-      require "core.autopairs"
+      require "plugins.configs.autopairs"
     end,
     after = "nvim-cmp",
   }
@@ -137,7 +137,7 @@ return packer.startup(function(use)
   use {
     "lukas-reineke/indent-blankline.nvim",
     config = function()
-      require "core.indent-blankline"
+      require "plugins.configs.indent-blankline"
     end,
   }
 
@@ -148,7 +148,7 @@ return packer.startup(function(use)
       "JoosepAlviste/nvim-ts-context-commentstring",
     },
     config = function()
-      require "core.comment"
+      require "plugins.configs.comment"
     end,
   }
 
@@ -156,7 +156,7 @@ return packer.startup(function(use)
     "folke/todo-comments.nvim",
     requires = "nvim-lua/plenary.nvim",
     config = function()
-      require "core.todo-comments"
+      require "plugins.configs.todo-comments"
     end,
   }
 
@@ -167,7 +167,7 @@ return packer.startup(function(use)
       "nvim-lua/plenary.nvim",
     },
     config = function()
-      require "core.gitsigns"
+      require "plugins.configs.gitsigns"
     end,
     -- tag = 'release' -- To use the latest release
   }
@@ -176,7 +176,7 @@ return packer.startup(function(use)
   use {
     "akinsho/bufferline.nvim",
     config = function()
-      require "core.bufferline"
+      require "plugins.configs.bufferline"
     end,
   }
 
@@ -187,7 +187,7 @@ return packer.startup(function(use)
       "kyazdani42/nvim-web-devicons", -- optional, for file icon
     },
     config = function()
-      require "core.nvim-tree"
+      require "plugins.configs.nvim-tree"
     end,
   }
   -- file navigation
@@ -205,7 +205,7 @@ return packer.startup(function(use)
     },
     event = "BufWinEnter",
     config = function()
-      require("core.telescope").init()
+      require("plugins.configs.telescope").init()
     end,
   }
 
@@ -213,7 +213,7 @@ return packer.startup(function(use)
   use {
     "windwp/nvim-spectre",
     config = function()
-      require("core.spectre").init()
+      require("plugins.configs.spectre").init()
     end,
   }
 
@@ -221,7 +221,7 @@ return packer.startup(function(use)
   use {
     "folke/which-key.nvim",
     config = function()
-      require("core.which_key").init()
+      require("plugins.configs.which_key").init()
     end,
     event = "BufWinEnter",
   }
@@ -236,7 +236,7 @@ return packer.startup(function(use)
     "christianchiarulli/nvim-gps",
     branch = "text_hl",
     config = function()
-      require("core.gps").init()
+      require("plugins.configs.gps").init()
     end,
   }
 
@@ -245,7 +245,7 @@ return packer.startup(function(use)
     "akinsho/toggleterm.nvim",
     commit = "8e6f938ed8eec7f988dc07aec2af148ad57c6d95",
     config = function()
-      require "core.toggleterm"
+      require "plugins.configs.toggleterm"
     end,
   }
 
@@ -253,7 +253,7 @@ return packer.startup(function(use)
   use {
     "aserowy/tmux.nvim",
     config = function()
-      require("core.tmux").init()
+      require("plugins.configs.tmux").init()
     end,
   }
 
@@ -262,7 +262,7 @@ return packer.startup(function(use)
     "nvim-lualine/lualine.nvim",
     requires = { "kyazdani42/nvim-web-devicons", opt = true },
     config = function()
-      require "core.lualine"
+      require "plugins.configs.lualine"
     end,
   }
 

@@ -1,1 +1,1 @@
-vim.cmd [[ command! BufferKill lua require('core.bufferline').buf_kill('bd') ]]
+vim.cmd [[ command! BufferKill lua require('plugins.configs.bufferline').buf_kill('bd') ]]

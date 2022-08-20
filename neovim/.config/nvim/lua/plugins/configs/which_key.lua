@@ -152,9 +152,9 @@ local config = {
       },
       p = {
         name = "Peek",
-        d = { "<cmd>lua require'core.lsp.peek'.Peek('definition')<cr>", "Definition" },
-        t = { "<cmd>lua require'core.lsp.peek'.Peek('typeDefinition')<cr>", "Type Definition" },
-        i = { "<cmd>lua require'core.lsp.peek'.Peek('implementation')<cr>", "Implementation" },
+        d = { "<cmd>lua require'plugins.configs.lsp.peek'.Peek('definition')<cr>", "Definition" },
+        t = { "<cmd>lua require'plugins.configs.lsp.peek'.Peek('typeDefinition')<cr>", "Type Definition" },
+        i = { "<cmd>lua require'plugins.configs.lsp.peek'.Peek('implementation')<cr>", "Implementation" },
       },
     },
     p = {
@@ -173,7 +173,7 @@ local config = {
     },
     s = {
       name = "Search",
-      f = { "<cmd>lua require'core.telescope'.project_files()<cr>", "Find File" },
+      f = { "<cmd>lua require'plugins.configs.telescope'.project_files()<cr>", "Find File" },
       h = { "<cmd>lua require'telescope.builtin'.help_tags()<cr>", "Find Help" },
       M = { "<cmd>lua require'telescope.builtin'.man_pages()<cr>", "Man Pages" },
       r = { "<cmd>lua require'telescope.builtin'.oldfiles()<cr>", "Open Recent File" },

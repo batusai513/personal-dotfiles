@@ -6,11 +6,11 @@ end
 
 local function on_server_ready(server)
   local opts = {
-    on_attach = require("core.lsp.default_attach").on_attach,
-    capabilities = require("core.lsp.capabilities").capabilities,
+    on_attach = require("plugins.configs.lsp.default_attach").on_attach,
+    capabilities = require("plugins.configs.lsp.capabilities").capabilities,
   }
 
-  local has_custom_config, server_custom_config = pcall(require, "core.lsp.server_settings." .. server.name)
+  local has_custom_config, server_custom_config = pcall(require, "plugins.configs.lsp.server_settings." .. server.name)
   if has_custom_config then
     if type(server_custom_config) == "function" then
       return server_custom_config(server, opts)
