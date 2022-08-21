@@ -1,4 +1,5 @@
 neovim/.config/nvim/plugin
+neovim/.config/nvim/lua/custom
 tmux/.config/tmux/plugins
 
 .DS_Store
