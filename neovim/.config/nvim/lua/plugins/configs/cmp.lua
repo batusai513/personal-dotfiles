@@ -18,7 +18,7 @@ end
 require("luasnip/loaders/from_vscode").lazy_load()
 
 --   פּ ﯟ   some other good icons
-local kind_icons = icons.kind;
+local kind_icons = icons.kind
 -- find more here: https://www.nerdfonts.com/cheat-sheet
 
 local confirm_opts = {
@@ -26,7 +26,7 @@ local confirm_opts = {
   select = false,
 }
 
-cmp.setup {
+local options = {
   confirm_opts = confirm_opts,
   window = {
     documentation = {
@@ -113,6 +113,10 @@ cmp.setup {
     { name = "sources" },
   }),
 }
+
+options = require("core.utils").load_override(options, "hrsh7th/nvim-cmp")
+
+cmp.setup(options)
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline("/", {
