@@ -3,7 +3,7 @@ if not gitsigns then
   return
 end
 
-gitsigns.setup {
+local options = {
   signs = {
     add = { hl = "GitSignsAdd", text = "▎", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
     change = { hl = "GitSignsChange", text = "▎", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
@@ -52,3 +52,7 @@ gitsigns.setup {
     enable = false,
   },
 }
+
+options = require("core.utils").load_override(options, "lewis6991/gitsigns.nvim")
+
+gitsigns.setup(options)
