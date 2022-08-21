@@ -1,8 +1,10 @@
 local opt = vim.opt
 local g = vim.g
+local config = require("core.utils").load_config ()
+
+g.theme = config.ui.theme
 
 -- :help options
-
 opt.laststatus = 3
 opt.showmode = false -- we don't need to see things like -- INSERT -- anymore
 
