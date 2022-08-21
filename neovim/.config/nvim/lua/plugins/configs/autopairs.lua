@@ -3,7 +3,7 @@ if not npairs then
   return
 end
 
-npairs.setup {
+local options = {
   check_ts = true,
   ts_config = {
     lua = { "string", "source" },
@@ -23,6 +23,10 @@ npairs.setup {
     highlight_grey = "LineNr",
   },
 }
+
+options = require("core.utils").load_override(options, "nvim-autopairs")
+
+npairs.setup(options)
 
 local cmp_autopairs = require "nvim-autopairs.completion.cmp"
 
