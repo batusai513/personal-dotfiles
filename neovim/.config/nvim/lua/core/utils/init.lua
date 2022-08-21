@@ -16,9 +16,24 @@ function M.set_keymap(mode, lhs, rhs, opts)
   vim.keymap.set(mode, lhs, rhs, options)
 end
 
+M.load_config = function()
+  local config = require "core.default_config"
+  local customrc_exist, customrc = pcall(require, "custom.customrc")
+
+  if customrc_exist then
+    if type(customrc) == "table" then
+      config = merge_tb("force", config, customrc) or {}
+    else
+      error "customrc must return a table"
+    end
+  end
+
+  return config
+end
+
 -- merge default/user plugin tables
 M.merge_plugins = function(default_plugins)
-  local user_plugins = {}
+  local user_plugins = M.load_config().plugins.user
 
   -- merge default + user plugin table
   default_plugins = merge_tb("force", default_plugins, user_plugins)
@@ -31,6 +46,12 @@ M.merge_plugins = function(default_plugins)
   end
 
   return final_table
+end
+
+M.load_override = function(default_table, plugin_name)
+  local user_table = M.load_config().plugins.override[plugin_name] or {}
+  user_table = type(user_table) == "table" and user_table or user_table()
+  return merge_tb("force", default_table, user_table) or {}
 end
 
 M.packer_sync = function(...)
@@ -47,10 +68,10 @@ M.packer_sync = function(...)
         { "WARNING: You are trying to use ", "WarningMsg" },
         { "PackerSync" },
         {
-          " on a NvChadSnapshot. This will cause issues if NvChad dependencies contain "
-              .. "any breaking changes! Plugin updates will not be included in this "
-              .. "snapshot, so they will be lost after switching between snapshots! Would "
-              .. "you still like to continue? [y/N]\n",
+          " on a Snapshot. This will cause issues if Dotfiles dependencies contain "
+            .. "any breaking changes! Plugin updates will not be included in this "
+            .. "snapshot, so they will be lost after switching between snapshots! Would "
+            .. "you still like to continue? [y/N]\n",
           "WarningMsg",
         },
       }, false, {})
