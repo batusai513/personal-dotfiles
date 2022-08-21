@@ -229,10 +229,6 @@ local plugins = {
   },
 
   --base colorscheme
-  ["lunarvim/darkplus.nvim"] = {},
-  ["rose-pine/neovim"] = {
-    as = "rose-pine",
-  },
   ["folke/tokyonight.nvim"] = {},
 
   --add/remove sorrunding charactes
