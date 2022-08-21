@@ -118,6 +118,7 @@ local plugins = {
 
   --comments
   ["numToStr/Comment.nvim"] = {
+    tag = "v0.6.1",
     requires = {
       "JoosepAlviste/nvim-ts-context-commentstring",
     },
