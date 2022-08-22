@@ -5,8 +5,6 @@ end
 
 local _, builtin = pcall(require, "telescope.builtin")
 local actions = require "telescope.actions"
-local icons = require "core.theme.icons"
-local u = require "core.utils"
 
 local default_mappings = {
   n = {
@@ -31,129 +29,56 @@ local default_mappings = {
   },
 }
 
-local opts_cursor = {
-  initial_mode = "normal",
-  sorting_strategy = "ascending",
-  layout_strategy = "cursor",
-  results_title = false,
-  layout_config = {
-    width = 0.5,
-    height = 0.4,
-  },
-}
-
-local opts_vertical = {
-  initial_mode = "normal",
-  sorting_strategy = "ascending",
-  layout_strategy = "vertical",
-  results_title = false,
-  layout_config = {
-    width = 0.4,
-    height = 0.5,
-    prompt_position = "top",
-    mirror = true,
-  },
-}
-
-local opts_flex = {
-  layout_strategy = "flex",
-  layout_config = {
-    width = 0.7,
-    height = 0.7,
-  },
-}
-
-local options = u.merge({
+local options = {
   defaults = {
-    prompt_prefix = "🔍 ",
-    selection_caret = icons.misc.arrow_closed,
-    file_ignore_patterns = {
-      ".git/",
-    },
-    dynamic_preview_title = true,
     vimgrep_arguments = {
       "rg",
-      "--ignore",
-      "--hidden",
       "--color=never",
       "--no-heading",
       "--with-filename",
       "--line-number",
       "--column",
       "--smart-case",
-      "--trim",
-      "--glob=!.git/",
     },
-  },
-  extensions = {
-    fzf = {
-      fuzzy = true, -- false will only do exact matching
-      override_generic_sorter = true, -- override the generic sorter
-      override_file_sorter = true, -- override the file sorter
-      case_mode = "smart_case", -- or "ignore_case" or "respect_case"
-      -- the default case_mode is "smart_case"
+    prompt_prefix = "   ",
+    selection_caret = "  ",
+    entry_prefix = "  ",
+    initial_mode = "insert",
+    selection_strategy = "reset",
+    sorting_strategy = "ascending",
+    layout_strategy = "horizontal",
+    layout_config = {
+      horizontal = {
+        prompt_position = "top",
+        preview_width = 0.55,
+        results_width = 0.8,
+      },
+      vertical = {
+        mirror = false,
+      },
+      width = 0.87,
+      height = 0.80,
+      preview_cutoff = 120,
     },
+    file_sorter = require("telescope.sorters").get_fuzzy_file,
+    file_ignore_patterns = { "node_modules" },
+    generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
+    path_display = { "truncate" },
+    winblend = 0,
+    border = {},
+    borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+    color_devicons = true,
+    set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
+    file_previewer = require("telescope.previewers").vim_buffer_cat.new,
+    grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
+    qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
+    -- Developer configurations: Not meant for general override
+    buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
+    mappings = default_mappings,
   },
-  pickers = {
-    buffers = u.merge(opts_vertical, {
-      prompt_title = "✨ Search Buffers ✨",
-      mappings = u.merge({
-        n = {
-          ["d"] = actions.delete_buffer,
-        },
-      }, default_mappings),
-      sort_mru = true,
-      preview_title = false,
-      previewer = false,
-    }),
-    lsp_code_actions = u.merge(opts_cursor, {
-      prompt_title = "Code Actions",
-      previewer = false,
-    }),
-    lsp_range_code_actions = u.merge(opts_vertical, {
-      prompt_title = "Code Actions",
-      previewer = false,
-    }),
-    lsp_implementations = u.merge(opts_cursor, {
-      prompt_title = "Implementations",
-      mappings = default_mappings,
-    }),
-    lsp_definitions = u.merge(opts_cursor, {
-      prompt_title = "Definitions",
-      mappings = default_mappings,
-    }),
-    lsp_references = u.merge(opts_vertical, {
-      prompt_title = "References",
-      mappings = default_mappings,
-    }),
-    diagnostics = u.merge({
-      mappings = default_mappings,
-      theme = "ivy",
-    }, {}),
-    find_files = u.merge(opts_flex, {
-      prompt_title = "✨ Search Project ✨",
-      find_command = { "fd", "--type=file", "--hidden", "--smart-case" },
-      mappings = default_mappings,
-      hidden = true,
-    }),
-    git_files = u.merge(opts_flex, {
-      prompt_title = "✨ Search Git Project ✨",
-      mappings = default_mappings,
-      hidden = true,
-    }),
-    live_grep = u.merge(opts_flex, {
-      prompt_title = "✨ Live Grep ✨",
-      mappings = default_mappings,
-      only_sort_text = true,
-    }),
-    grep_string = u.merge(opts_vertical, {
-      prompt_title = "✨ Grep String ✨",
-      mappings = default_mappings,
-      initial_mode = "insert",
-    }),
-  },
-}, {})
 
+  extensions_list = { "themes", "terms" },
+}
 local M = {}
 
 M.project_files = function()
@@ -163,6 +88,8 @@ M.project_files = function()
   end
 end
 
+options = require("core.utils").load_override(options, "nvim-telescope/telescope.nvim")
+
 M.init = function()
   telescope.setup(options)
   require("telescope").load_extension "fzf"
@@ -170,7 +97,6 @@ M.init = function()
 
   local map = require("core.utils").set_keymap
 
-  local opts = {}
   -- navigation
   map("n", "<leader>sf", M.project_files)
   map("n", "<leader>sh", builtin.help_tags)
