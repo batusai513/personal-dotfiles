@@ -163,6 +163,7 @@ local plugins = {
 
   --tree file viewer
   ["kyazdani42/nvim-tree.lua"] = {
+    cmd = { "NvimTreeToggle", "NvimTreeFocus" },
     requires = {
       "kyazdani42/nvim-web-devicons", -- optional, for file icon
     },
