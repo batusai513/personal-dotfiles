@@ -93,6 +93,15 @@ local plugins = {
   --syntax highlighting
   ["nvim-treesitter/nvim-treesitter"] = {
     run = ":TSUpdate",
+    module = "nvim-treesitter",
+    cmd = {
+      "TSInstall",
+      "TSBufEnable",
+      "TSBufDisable",
+      "TSEnable",
+      "TSDisable",
+      "TSModuleInfo",
+    },
     requires = {
       "JoosepAlviste/nvim-ts-context-commentstring",
     },
