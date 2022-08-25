@@ -205,6 +205,7 @@ local plugins = {
       },
     },
     event = "BufWinEnter",
+    cmd = "Telescope",
     config = function()
       require("plugins.configs.telescope").init()
     end,
