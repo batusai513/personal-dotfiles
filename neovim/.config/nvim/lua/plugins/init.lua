@@ -29,27 +29,45 @@ local plugins = {
   },
 
   ["nvim-lua/popup.nvim"] = {}, -- An implementation of the Popup API from vim in Neovim
+
+  ["rafamadriz/friendly-snippets"] = {
+    module = { "cmp", "cmp_nvim_lsp" },
+    event = "InsertEnter",
+  },
+
   --completions plugins
   ["hrsh7th/nvim-cmp"] = {
+    after = "friendly-snippets",
+    event = "InsertEnter",
     config = function()
       require "plugins.configs.cmp"
     end,
-    requires = {
-      { "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" },
-      { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
-      { "hrsh7th/cmp-path", after = "nvim-cmp" },
-      { "hrsh7th/cmp-cmdline", after = "nvim-cmp" },
-      { "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
-      --snippets
-      {
-        "L3MON4D3/LuaSnip",
-        requires = {
-          { "rafamadriz/friendly-snippets" },
-        },
-      },
-    },
   },
 
+  ["L3MON4D3/LuaSnip"] = {
+    wants = "friendly-snippets",
+    after = "nvim-cmp",
+  },
+
+  ["saadparwaiz1/cmp_luasnip"] = {
+    after = "nvim-cmp",
+  },
+
+  ["hrsh7th/cmp-nvim-lsp"] = {
+    after = "cmp_luasnip",
+  },
+
+  ["hrsh7th/cmp-buffer"] = {
+    after = "cmp-nvim-lsp",
+  },
+
+  ["hrsh7th/cmp-cmdline"] = {
+    after = "cmp-nvim-lsp",
+  },
+
+  ["hrsh7th/cmp-path"] = {
+    after = "cmp-buffer",
+  },
   --Language server protocol
 
   ["neovim/nvim-lspconfig"] = {
@@ -115,7 +133,6 @@ local plugins = {
     after = "nvim-treesitter",
   },
 
-  --comments
   ["numToStr/Comment.nvim"] = {
     tag = "v0.6.1",
     after = "nvim-ts-context-commentstring",
