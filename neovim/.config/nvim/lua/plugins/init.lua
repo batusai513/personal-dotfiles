@@ -102,32 +102,23 @@ local plugins = {
       "TSDisable",
       "TSModuleInfo",
     },
-    requires = {
-      "JoosepAlviste/nvim-ts-context-commentstring",
-    },
     config = function()
       require "plugins.configs.treesitter"
     end,
   },
 
-  ["p00f/nvim-ts-rainbow"] = {},
-
-  ["windwp/nvim-autopairs"] = {
-    config = function()
-      require "plugins.configs.autopairs"
-    end,
-    after = "nvim-cmp",
+  ["p00f/nvim-ts-rainbow"] = {
+    after = "nvim-treesitter",
   },
 
-  ["lukas-reineke/indent-blankline.nvim"] = {
-    config = function()
-      require "plugins.configs.indent-blankline"
-    end,
+  ["JoosepAlviste/nvim-ts-context-commentstring"] = {
+    after = "nvim-treesitter",
   },
 
   --comments
   ["numToStr/Comment.nvim"] = {
     tag = "v0.6.1",
+    after = "nvim-ts-context-commentstring",
     requires = {
       "JoosepAlviste/nvim-ts-context-commentstring",
     },
@@ -140,6 +131,19 @@ local plugins = {
     requires = "nvim-lua/plenary.nvim",
     config = function()
       require "plugins.configs.todo-comments"
+    end,
+  },
+
+  ["windwp/nvim-autopairs"] = {
+    config = function()
+      require "plugins.configs.autopairs"
+    end,
+    after = "nvim-cmp",
+  },
+
+  ["lukas-reineke/indent-blankline.nvim"] = {
+    config = function()
+      require "plugins.configs.indent-blankline"
     end,
   },
 
