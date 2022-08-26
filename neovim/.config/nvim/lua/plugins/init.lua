@@ -151,9 +151,13 @@ local plugins = {
 
   --Github things
   ["lewis6991/gitsigns.nvim"] = {
+    ft = "gitcommit",
     requires = {
       "nvim-lua/plenary.nvim",
     },
+    setup = function()
+      require("core.lazy_load").gitsigns()
+    end,
     config = function()
       require "plugins.configs.gitsigns"
     end,
