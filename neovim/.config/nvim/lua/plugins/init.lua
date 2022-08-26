@@ -10,25 +10,17 @@ vim.cmd [[
 local plugins = {
   ["nvim-lua/plenary.nvim"] = { module = "plenary" },
   ["wbthomason/packer.nvim"] = {
-    cmd = {
-      "PackerSnapshot",
-      "PackerSnapshotRollback",
-      "PackerSnapshotDelete",
-      "PackerInstall",
-      "PackerUpdate",
-      "PackerSync",
-      "PackerClean",
-      "PackerCompile",
-      "PackerStatus",
-      "PackerProfile",
-      "PackerLoad",
-    },
+    cmd = require("core.lazy_load").packer_cmds,
     config = function()
       require "plugins"
     end,
   },
 
   ["nvim-lua/popup.nvim"] = {}, -- An implementation of the Popup API from vim in Neovim
+
+  ["kyazdani42/nvim-web-devicons"] = {
+    module = "nvim-web-devicons",
+  },
 
   ["rafamadriz/friendly-snippets"] = {
     module = { "cmp", "cmp_nvim_lsp" },
@@ -112,14 +104,7 @@ local plugins = {
   ["nvim-treesitter/nvim-treesitter"] = {
     run = ":TSUpdate",
     module = "nvim-treesitter",
-    cmd = {
-      "TSInstall",
-      "TSBufEnable",
-      "TSBufDisable",
-      "TSEnable",
-      "TSDisable",
-      "TSModuleInfo",
-    },
+    cmd = require("core.lazy_load").treesitter_cmds,
     config = function()
       require "plugins.configs.treesitter"
     end,
@@ -185,9 +170,6 @@ local plugins = {
   --tree file viewer
   ["kyazdani42/nvim-tree.lua"] = {
     cmd = { "NvimTreeToggle", "NvimTreeFocus" },
-    requires = {
-      "kyazdani42/nvim-web-devicons", -- optional, for file icon
-    },
     config = function()
       require "plugins.configs.nvim-tree"
     end,
@@ -254,7 +236,6 @@ local plugins = {
 
   --line
   ["nvim-lualine/lualine.nvim"] = {
-    requires = { "kyazdani42/nvim-web-devicons", opt = true },
     config = function()
       require "plugins.configs.lualine"
     end,
