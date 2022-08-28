@@ -225,7 +225,6 @@ local plugins = {
 
   --terminal
   ["akinsho/toggleterm.nvim"] = {
-    commit = "8e6f938ed8eec7f988dc07aec2af148ad57c6d95",
     config = function()
       require "plugins.configs.toggleterm"
     end,
