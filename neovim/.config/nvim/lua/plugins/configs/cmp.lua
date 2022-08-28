@@ -12,6 +12,7 @@ end
 
 local luasnip = prequire "luasnip"
 if not luasnip then
+  vim.notify "LuaSnip not loaded"
   return
 end
 
@@ -97,21 +98,19 @@ local options = {
       vim_item.kind = (kind_icons[vim_item.kind] or "") .. " " .. vim_item.kind
       vim_item.menu = ({
         nvim_lsp = "[LSP]",
-        luasnip = "[Snippet]",
-        buffer = "[Buffer]",
+        luasnip = "[Snip]",
+        buffer = "[Buf]",
         path = "[Path]",
       })[entry.source.name]
       return vim_item
     end,
   },
-  sources = cmp.config.sources({
+  sources = cmp.config.sources {
     { name = "nvim_lsp" },
-    { name = "luasnip" },
     { name = "buffer" },
     { name = "path" },
-  }, {
-    { name = "sources" },
-  }),
+    { name = "luasnip" },
+  },
 }
 
 options = require("core.utils").load_override(options, "hrsh7th/nvim-cmp")
