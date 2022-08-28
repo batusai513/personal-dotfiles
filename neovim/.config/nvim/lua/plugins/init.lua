@@ -46,19 +46,19 @@ local plugins = {
   },
 
   ["hrsh7th/cmp-nvim-lsp"] = {
-    after = "cmp_luasnip",
+    after = "nvim-cmp",
   },
 
   ["hrsh7th/cmp-buffer"] = {
-    after = "cmp-nvim-lsp",
+    after = "nvim-cmp",
   },
 
   ["hrsh7th/cmp-cmdline"] = {
-    after = "cmp-nvim-lsp",
+    after = "nvim-cmp",
   },
 
   ["hrsh7th/cmp-path"] = {
-    after = "cmp-buffer",
+    after = "nvim-cmp",
   },
   --Language server protocol
 
