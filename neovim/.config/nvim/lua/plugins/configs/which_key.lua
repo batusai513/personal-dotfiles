@@ -126,35 +126,55 @@ local config = {
     },
     l = {
       name = "LSP",
-      a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
-      d = { "<cmd>lua require'telescope.builtin'.diagnostics({bufnr=0, theme='get_ivy'})<cr>", "Buffer Diagnostics" },
+      a = { vim.lsp.buf.code_action, "Code Action" },
+      d = {
+        function()
+          require("telescope.builtin").diagnostics { bufnr = 0, theme = "get_ivy" }
+        end,
+        "Buffer Diagnostics",
+      },
       t = { "<cmd>Trouble document_diagnostics<cr>", "Document Troubles" },
       w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
       f = { "<cmd>Format<cr>", "Format" },
       i = { "<cmd>LspInfo<cr>", "Info" },
       I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
       j = {
-        "<cmd>lua vim.diagnostic.goto_next()<cr>",
+        vim.diagnostic.goto_next,
         "Next Diagnostic",
       },
       k = {
-        "<cmd>lua vim.diagnostic.goto_prev()<cr>",
+        vim.diagnostic.goto_prev,
         "Prev Diagnostic",
       },
-      l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
-      q = { "<cmd>lua vim.diagnostic.setloclist()<cr>", "Quickfix" },
-      r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
-      s = { "<cmd>lua require'telescope.builtin'.lsp_document_symbols()<cr>", "Document Symbols" },
-      e = { "<cmd>lua require'telescope.builtin'.quickfix()<cr>", "Telescope Quickfix" },
+      l = { require("plugins.configs.lsp.default_attach").find_and_run_codelens, "CodeLens Action" },
+      q = { vim.diagnostic.setloclist, "Quickfix" },
+      r = { vim.lsp.buf.rename, "Rename" },
+      s = { require("telescope.builtin").lsp_document_symbols, "Document Symbols" },
+      e = { require("telescope.builtin").quickfix, "Telescope Quickfix" },
       S = {
-        "<cmd>lua require'telescope.builtin'.lsp_dynamic_workspace_symbols()<cr>",
+        require("telescope.builtin").lsp_dynamic_workspace_symbols,
         "Workspace Symbols",
       },
       p = {
         name = "Peek",
-        d = { "<cmd>lua require'plugins.configs.lsp.peek'.Peek('definition')<cr>", "Definition" },
-        t = { "<cmd>lua require'plugins.configs.lsp.peek'.Peek('typeDefinition')<cr>", "Type Definition" },
-        i = { "<cmd>lua require'plugins.configs.lsp.peek'.Peek('implementation')<cr>", "Implementation" },
+        d = {
+          function()
+            require("plugins.configs.lsp.peek").Peek "definition"
+          end,
+          "Definition",
+        },
+        t = {
+          function()
+            require("plugins.configs.lsp.peek").Peek "typeDefinition"
+          end,
+          "Type Definition",
+        },
+        i = {
+          function()
+            require("plugins.configs.lsp.peek").Peek "implementation"
+          end,
+          "Implementation",
+        },
       },
     },
     p = {
