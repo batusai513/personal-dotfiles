@@ -5,5 +5,4 @@ end
 
 require "plugins.configs.lsp.lsp-signature"
 require "plugins.configs.lsp.lsp-installer"
-require("plugins.configs.lsp.diagnostics").init()
 require("plugins.configs.lsp.handlers").setup()

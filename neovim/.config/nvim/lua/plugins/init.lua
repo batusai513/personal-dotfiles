@@ -9,6 +9,7 @@ vim.cmd [[
 
 local plugins = {
   ["nvim-lua/plenary.nvim"] = { module = "plenary" },
+  ["famiu/bufdelete.nvim"] = {},
   ["wbthomason/packer.nvim"] = {
     cmd = require("core.lazy_load").packer_cmds,
     config = function()
@@ -23,42 +24,40 @@ local plugins = {
   },
 
   ["rafamadriz/friendly-snippets"] = {
-    module = { "cmp", "cmp_nvim_lsp" },
-    event = "InsertEnter",
+    -- module = { "cmp", "cmp_nvim_lsp" },
+    -- event = "InsertEnter",
   },
 
+  ["L3MON4D3/LuaSnip"] = {
+    -- after = "friendly-snippets",
+  },
   --completions plugins
   ["hrsh7th/nvim-cmp"] = {
-    after = "friendly-snippets",
-    event = "InsertEnter",
+    -- after = "friendly-snippets",
+    -- event = "InsertEnter",
     config = function()
       require "plugins.configs.cmp"
     end,
   },
 
-  ["L3MON4D3/LuaSnip"] = {
-    wants = "friendly-snippets",
-    after = "nvim-cmp",
-  },
-
   ["saadparwaiz1/cmp_luasnip"] = {
-    after = "nvim-cmp",
+    -- after = "nvim-cmp",
   },
 
   ["hrsh7th/cmp-nvim-lsp"] = {
-    after = "nvim-cmp",
+    -- after = "nvim-cmp",
   },
 
   ["hrsh7th/cmp-buffer"] = {
-    after = "nvim-cmp",
+    -- after = "nvim-cmp",
   },
 
   ["hrsh7th/cmp-cmdline"] = {
-    after = "nvim-cmp",
+    -- after = "nvim-cmp",
   },
 
   ["hrsh7th/cmp-path"] = {
-    after = "nvim-cmp",
+    -- after = "nvim-cmp",
   },
   --Language server protocol
 
@@ -206,6 +205,7 @@ local plugins = {
 
   -- which-key
   ["folke/which-key.nvim"] = {
+    after = "telescope.nvim",
     config = function()
       require("plugins.configs.which_key").init()
     end,

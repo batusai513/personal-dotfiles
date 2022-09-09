@@ -6,8 +6,8 @@ end
 
 local function on_server_ready(server)
   local opts = {
-    on_attach = require("plugins.configs.lsp.default_attach").on_attach,
-    capabilities = require("plugins.configs.lsp.capabilities").capabilities,
+    on_attach = require("plugins.configs.lsp.handlers").on_attach,
+    capabilities = require("plugins.configs.lsp.handlers").capabilities,
   }
 
   local has_custom_config, server_custom_config = pcall(require, "plugins.configs.lsp.server_settings." .. server.name)

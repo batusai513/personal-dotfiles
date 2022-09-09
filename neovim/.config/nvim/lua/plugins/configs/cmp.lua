@@ -1,9 +1,4 @@
 local icons = require "core.theme.icons"
-local lspUtils = require "core.utils.lsp"
-
-local jumpable = lspUtils.jumpable
-local is_emmet_active = lspUtils.is_emmet_active
-local check_backspace = lspUtils.check_backspace
 
 local cmp = prequire "cmp"
 if not cmp then
@@ -62,14 +57,12 @@ local options = {
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
+      elseif luasnip.jumpable(1) then
+        luasnip.jump(1)
+      elseif luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
       elseif luasnip.expandable() then
         luasnip.expand()
-      elseif jumpable() then
-        luasnip.jump(1)
-      elseif check_backspace() then
-        fallback()
-      elseif is_emmet_active() then
-        return vim.fn["cmp#complete"]()
       else
         fallback()
       end
@@ -80,7 +73,7 @@ local options = {
     ["<S-Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
-      elseif jumpable(-1) then
+      elseif luasnip.jumpable(-1) then
         luasnip.jump(-1)
       else
         fallback()

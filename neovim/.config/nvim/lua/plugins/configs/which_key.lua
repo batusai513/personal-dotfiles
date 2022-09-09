@@ -73,7 +73,8 @@ local config = {
     ["f"] = { "<cmd>Format<cr>", "Format" },
     ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
     ["e"] = { "<cmd>NvimTreeToggle<cr>", "Open explorer" },
-    ["c"] = { "<cmd>BufferKill<cr>", "Close buffer" },
+    ["c"] = { "<cmd>Bdelete<cr>", "Close buffer" },
+    ["C"] = { "<cmd>Bwipeout<cr>", "Close all buffers" },
     b = {
       name = "Buffers",
       j = { "<cmd>BufferLinePick<cr>", "Jump" },
@@ -146,7 +147,7 @@ local config = {
         vim.diagnostic.goto_prev,
         "Prev Diagnostic",
       },
-      l = { require("plugins.configs.lsp.default_attach").find_and_run_codelens, "CodeLens Action" },
+      l = { require("plugins.configs.lsp.utils").find_and_run_codelens, "CodeLens Action" },
       q = { vim.diagnostic.setloclist, "Quickfix" },
       r = { vim.lsp.buf.rename, "Rename" },
       s = { require("telescope.builtin").lsp_document_symbols, "Document Symbols" },
@@ -154,27 +155,6 @@ local config = {
       S = {
         require("telescope.builtin").lsp_dynamic_workspace_symbols,
         "Workspace Symbols",
-      },
-      p = {
-        name = "Peek",
-        d = {
-          function()
-            require("plugins.configs.lsp.peek").Peek "definition"
-          end,
-          "Definition",
-        },
-        t = {
-          function()
-            require("plugins.configs.lsp.peek").Peek "typeDefinition"
-          end,
-          "Type Definition",
-        },
-        i = {
-          function()
-            require("plugins.configs.lsp.peek").Peek "implementation"
-          end,
-          "Implementation",
-        },
       },
     },
     p = {
