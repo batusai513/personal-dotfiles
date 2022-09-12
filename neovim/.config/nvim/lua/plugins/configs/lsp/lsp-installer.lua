@@ -10,8 +10,6 @@ local function on_server_ready(server)
     capabilities = require("plugins.configs.lsp").capabilities,
   }
 
-  print(vim.inspect(opts))
-
   local has_custom_config, server_custom_config = pcall(require, "plugins.configs.lsp.server_settings." .. server.name)
   if has_custom_config then
     if type(server_custom_config) == "function" then

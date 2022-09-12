@@ -94,7 +94,7 @@ local plugins = {
   },
 
   --lua
-  ["max397574/lua-dev.nvim"] = {},
+  ["folke/lua-dev.nvim"] = {},
 
   --typescript
   ["jose-elias-alvarez/typescript.nvim"] = {},
