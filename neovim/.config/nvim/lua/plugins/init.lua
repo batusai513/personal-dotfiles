@@ -63,7 +63,7 @@ local plugins = {
 
   ["neovim/nvim-lspconfig"] = {
     config = function()
-      require "plugins.configs.lsp"
+      require("plugins.configs.lsp").setup()
     end,
     requires = {
       { "b0o/SchemaStore.nvim" },
