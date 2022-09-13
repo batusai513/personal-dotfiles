@@ -24,10 +24,9 @@ local confirm_opts = {
 
 local options = {
   confirm_opts = confirm_opts,
-  window = {
-    documentation = {
-      border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-    },
+  completion = {
+    completeopt = "menu,menuone,noinsert",
+    keyword_length = 1,
   },
   experimental = {
     ghost_text = true,
@@ -39,9 +38,6 @@ local options = {
     expand = function(args)
       luasnip.lsp_expand(args.body) -- For `luasnip` users.
     end,
-  },
-  completion = {
-    keyword_length = 2,
   },
   mapping = cmp.mapping.preset.insert {
     ["<C-k>"] = cmp.mapping.select_prev_item(),
@@ -99,10 +95,15 @@ local options = {
     end,
   },
   sources = cmp.config.sources {
-    { name = "nvim_lsp" },
-    { name = "buffer" },
-    { name = "path" },
+    { name = "nvim_lsp", max_item_count = 10 },
     { name = "luasnip" },
+    { name = "buffer", max_item_count = 5 },
+    { name = "path" },
+  },
+  window = {
+    documentation = {
+      border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+    },
   },
 }
 
