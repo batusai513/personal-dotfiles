@@ -90,7 +90,7 @@ end
 
 options = require("core.utils").load_override(options, "nvim-telescope/telescope.nvim")
 
-M.init = function()
+M.setup = function()
   telescope.setup(options)
   require("telescope").load_extension "fzf"
   require("telescope").load_extension "ui-select"

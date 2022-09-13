@@ -189,10 +189,19 @@ local plugins = {
         run = "make",
       },
     },
-    event = "BufWinEnter",
-    cmd = "Telescope",
+    wants = {
+      "plenary.nvim",
+      "popup.nvim",
+      "telescope-fzf-native.nvim",
+      "trouble.nvim",
+      "nvim-tree.lua",
+      "telescope-ui-select.nvim",
+    },
+    cmd = { "Telescope" },
+    module = { "telescope", "telescope.builtin" },
+    opt = true,
     config = function()
-      require("plugins.configs.telescope").init()
+      require("plugins.configs.telescope").setup()
     end,
   },
 
