@@ -9,7 +9,9 @@ vim.cmd [[
 
 local plugins = {
   ["nvim-lua/plenary.nvim"] = { module = "plenary" },
-  ["famiu/bufdelete.nvim"] = {},
+  ["famiu/bufdelete.nvim"] = {
+    cmd = { "Bdelete", "Bwipeout" },
+  },
   ["wbthomason/packer.nvim"] = {
     cmd = require("core.lazy_load").packer_cmds,
     config = function()
