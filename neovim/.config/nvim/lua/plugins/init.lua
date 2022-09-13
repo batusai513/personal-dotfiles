@@ -153,6 +153,7 @@ local plugins = {
   --Github things
   ["lewis6991/gitsigns.nvim"] = {
     ft = "gitcommit",
+    module = { "gitsigns" },
     requires = {
       "nvim-lua/plenary.nvim",
     },
@@ -160,7 +161,7 @@ local plugins = {
       require("core.lazy_load").gitsigns()
     end,
     config = function()
-      require "plugins.configs.gitsigns"
+      require("plugins.configs.gitsigns").setup()
     end,
     -- tag = 'release' -- To use the latest release
   },
