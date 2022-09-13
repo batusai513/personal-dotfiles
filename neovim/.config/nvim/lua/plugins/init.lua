@@ -208,7 +208,7 @@ local plugins = {
   --find and replace
   ["windwp/nvim-spectre"] = {
     config = function()
-      require("plugins.configs.spectre").init()
+      require("plugins.configs.spectre").setup()
     end,
   },
 
