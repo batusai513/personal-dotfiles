@@ -224,12 +224,11 @@ local plugins = {
   --neovim optimisations
   ["lewis6991/impatient.nvim"] = {},
 
-  -- gps
-  ["christianchiarulli/nvim-gps"] = {
-    branch = "text_hl",
+  ["SmiteshP/nvim-navic"] = {
     config = function()
-      require("plugins.configs.gps").init()
+      require("nvim-navic").setup {}
     end,
+    module = { "nvim-navic" },
   },
 
   --terminal
@@ -249,7 +248,7 @@ local plugins = {
   --line
   ["nvim-lualine/lualine.nvim"] = {
     config = function()
-      require "plugins.configs.lualine"
+      require("plugins.configs.lualine").setup()
     end,
   },
 

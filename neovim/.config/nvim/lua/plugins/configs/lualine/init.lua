@@ -4,41 +4,39 @@ if not lualine then
   return
 end
 
-local status_gps_ok, gps = pcall(require, "nvim-gps")
-if not status_gps_ok then
-  return
-end
-
 local hide_in_width = function()
-  return vim.fn.winwidth(0) > 80
+  return vim.fn.winwidth(0) < 420
 end
 
-local nvim_gps = function()
-  local gps_location = gps.get_location()
-  if gps_location == "error" then
-    return ""
-  else
-    return gps.get_location()
-  end
-end
+local navic = require "nvim-navic"
+local M = {}
 
-lualine.setup {
-  options = {
-    theme = "auto",
-    disabled_filetypes = { "dashboard", "NvimTree", "Outline", "toggleterm" },
-    globalstatus = true,
-  },
-  extensions = {
-    "nvim-tree",
-    "toggleterm",
-  },
-  sections = {
-    lualine_c = {
-      {
-        "filename",
-        file_status = true, -- displays file status (readonly status, modified status)
-        path = 1, -- 0 = just filename, 1 = relative path, 2 = absolute path
+function M.setup()
+  lualine.setup {
+    options = {
+      theme = "auto",
+      disabled_filetypes = { "dashboard", "NvimTree", "Outline", "toggleterm" },
+      globalstatus = true,
+    },
+    extensions = {
+      "nvim-tree",
+      "toggleterm",
+    },
+    sections = {
+      lualine_c = {
+        {
+          "filename",
+          file_status = true, -- displays file status (readonly status, modified status)
+          path = 1, -- 0 = just filename, 1 = relative path, 2 = absolute path
+        },
+        {
+          navic.get_location,
+          cond = function()
+            return navic.is_available and hide_in_width()
+          end,
+        },
       },
     },
-  },
-}
+  }
+end
+return M
