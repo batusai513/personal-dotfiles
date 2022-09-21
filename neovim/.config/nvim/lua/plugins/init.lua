@@ -1,11 +1,12 @@
 vim.cmd "packadd packer.nvim"
--- Autocommand that reloads neovim whenever you save the plugins.init file
-vim.cmd [[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost neovim/.config/nvim/lua/plugins/init.lua source <afile> | PackerSync
-  augroup end
-]]
+
+-- Run PackerCompile if there are changes in this file
+-- vim.cmd "autocmd BufWritePost plugins.lua source <afile> | PackerCompile"
+local packer_grp = vim.api.nvim_create_augroup("packer_user_config", { clear = true })
+vim.api.nvim_create_autocmd(
+  { "BufWritePost" },
+  { pattern = "init.lua", command = "source <afile> | PackerCompile", group = packer_grp }
+)
 
 local plugins = {
   ["nvim-lua/plenary.nvim"] = { module = "plenary" },
