@@ -255,7 +255,7 @@ local plugins = {
   --tmux
   ["aserowy/tmux.nvim"] = {
     config = function()
-      require("plugins.configs.tmux").init()
+      require("plugins.configs.tmux").setup()
     end,
   },
 
