@@ -128,7 +128,15 @@ cmp.setup.cmdline(":", {
       return vim_item
     end,
   },
-  mapping = cmp.mapping.preset.cmdline(),
+  mapping = cmp.mapping.preset.cmdline {
+    ["<CR>"] = cmp.mapping(
+      cmp.mapping.confirm {
+        behavior = cmp.ConfirmBehavior.Replace,
+        select = true,
+      },
+      { "i", "c" }
+    ),
+  },
   sources = cmp.config.sources({
     { name = "path" },
   }, {
