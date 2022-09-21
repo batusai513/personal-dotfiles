@@ -172,6 +172,8 @@ local plugins = {
 
   --buffer management
   ["akinsho/bufferline.nvim"] = {
+    event = "BufReadPre",
+    wants = "nvim-web-devicons",
     config = function()
       require "plugins.configs.bufferline"
     end,
@@ -214,6 +216,7 @@ local plugins = {
 
   --find and replace
   ["windwp/nvim-spectre"] = {
+    module = "spectre",
     config = function()
       require("plugins.configs.spectre").setup()
     end,
@@ -240,6 +243,9 @@ local plugins = {
 
   --terminal
   ["akinsho/toggleterm.nvim"] = {
+    cmd = { "ToggleTerm", "TermExec" },
+    module = { "toggleterm", "toggleterm.terminal" },
+    keys = { [[<C-\>]] },
     config = function()
       require "plugins.configs.toggleterm"
     end,
@@ -254,6 +260,8 @@ local plugins = {
 
   --line
   ["nvim-lualine/lualine.nvim"] = {
+    event = "BufReadPre",
+    after = "nvim-treesitter",
     config = function()
       require("plugins.configs.lualine").setup()
     end,
