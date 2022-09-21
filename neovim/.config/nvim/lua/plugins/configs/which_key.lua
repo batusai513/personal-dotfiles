@@ -125,7 +125,7 @@ local config = {
         end,
         "Git Diff",
       },
-      g = { _Lazygit_toggle, "LazyGit" },
+      g = { "<cmd>LazyGit <cr>", "LazyGit" },
     },
     l = {
       name = "LSP",

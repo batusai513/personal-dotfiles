@@ -166,6 +166,10 @@ local plugins = {
     -- tag = 'release' -- To use the latest release
   },
 
+  ["kdheepak/lazygit.nvim"] = {
+    cmd = { "LazyGit", "LazyGitConfig" },
+  },
+
   --buffer management
   ["akinsho/bufferline.nvim"] = {
     config = function()
