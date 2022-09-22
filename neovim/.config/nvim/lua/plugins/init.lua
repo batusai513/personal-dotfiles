@@ -133,8 +133,9 @@ local plugins = {
 
   ["folke/todo-comments.nvim"] = {
     requires = "nvim-lua/plenary.nvim",
+    cmd = { "TodoQuickFix", "TodoLocList", "TodoTrouble", "TodoTelescope" },
     config = function()
-      require "plugins.configs.todo-comments"
+      require("plugins.configs.todo-comments").setup()
     end,
   },
 
