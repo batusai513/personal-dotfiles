@@ -112,34 +112,34 @@ options = require("core.utils").load_override(options, "hrsh7th/nvim-cmp")
 cmp.setup(options)
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline("/", {
-  mapping = cmp.mapping.preset.cmdline(),
-  sources = {
-    { name = "buffer" },
-  },
-})
+-- cmp.setup.cmdline("/", {
+--   mapping = cmp.mapping.preset.cmdline(),
+--   sources = {
+--     { name = "buffer" },
+--   },
+-- })
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline(":", {
-  formatting = {
-    fields = { "kind", "abbr" },
-    format = function(entry, vim_item)
-      vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
-      return vim_item
-    end,
-  },
-  mapping = cmp.mapping.preset.cmdline {
-    ["<CR>"] = cmp.mapping(
-      cmp.mapping.confirm {
-        behavior = cmp.ConfirmBehavior.Replace,
-        select = true,
-      },
-      { "i", "c" }
-    ),
-  },
-  sources = cmp.config.sources({
-    { name = "path" },
-  }, {
-    { name = "cmdline" },
-  }),
-})
+-- cmp.setup.cmdline(":", {
+--   formatting = {
+--     fields = { "kind", "abbr" },
+--     format = function(entry, vim_item)
+--       vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
+--       return vim_item
+--     end,
+--   },
+--   mapping = cmp.mapping.preset.cmdline {
+--     ["<CR>"] = cmp.mapping(
+--       cmp.mapping.confirm {
+--         behavior = cmp.ConfirmBehavior.Replace,
+--         select = true,
+--       },
+--       { "i", "c" }
+--     ),
+--   },
+--   sources = cmp.config.sources({
+--     { name = "path" },
+--   }, {
+--     { name = "cmdline" },
+--   }),
+-- })
