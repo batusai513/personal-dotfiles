@@ -17,7 +17,6 @@ vim.cmd [[
 ]]
 
 vim.cmd "let &fcs='eob: '"
-vim.cmd [[ command! BufferKill lua require('plugins.configs.bufferline').buf_kill('bd') ]]
 
 autocmd({ "FileType" }, {
   pattern = { "qf", "help", "man", "lspinfo", "spectre_panel" },

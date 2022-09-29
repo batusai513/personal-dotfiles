@@ -80,7 +80,7 @@ local config = {
       j = { "<cmd>BufferLinePick<cr>", "Jump" },
       f = { "<cmd>lua require 'telescope.builtin'.buffers()<cr>", "Find buffer" },
       b = { "<cmd>BufferLineCyclePrev<cr>", "Previous" },
-      c = { "<cmd>BufferKill<cr>", "Close buffer" },
+      c = { "<cmd>Bdelete<cr>", "Close buffer" },
       e = {
         "<cmd>BufferLinePickClose<cr>",
         "Pick which buffer to close",
