@@ -26,42 +26,6 @@ local plugins = {
     module = "nvim-web-devicons",
   },
 
-  ["rafamadriz/friendly-snippets"] = {
-    -- module = { "cmp", "cmp_nvim_lsp" },
-    -- event = "InsertEnter",
-  },
-
-  ["L3MON4D3/LuaSnip"] = {
-    -- after = "friendly-snippets",
-  },
-  --completions plugins
-  ["hrsh7th/nvim-cmp"] = {
-    -- after = "friendly-snippets",
-    -- event = "InsertEnter",
-    config = function()
-      require "plugins.configs.cmp"
-    end,
-  },
-
-  ["saadparwaiz1/cmp_luasnip"] = {
-    -- after = "nvim-cmp",
-  },
-
-  ["hrsh7th/cmp-nvim-lsp"] = {
-    -- after = "nvim-cmp",
-  },
-
-  ["hrsh7th/cmp-buffer"] = {
-    -- after = "nvim-cmp",
-  },
-
-  ["hrsh7th/cmp-cmdline"] = {
-    -- after = "nvim-cmp",
-  },
-
-  ["hrsh7th/cmp-path"] = {
-    -- after = "nvim-cmp",
-  },
   --Language server protocol
 
   ["neovim/nvim-lspconfig"] = {
@@ -88,7 +52,50 @@ local plugins = {
     },
   },
 
-  --language specific
+  ["L3MON4D3/LuaSnip"] = {
+    event = "InsertEnter",
+    config = function()
+      require("luasnip.loaders.from_vscode").lazy_load()
+    end,
+  },
+
+  ["rafamadriz/friendly-snippets"] = {},
+
+  --completions plugins
+  ["hrsh7th/nvim-cmp"] = {
+    after = "LuaSnip",
+    event = "InsertEnter",
+    requires = {
+      "hrsh7th/cmp-nvim-lsp",
+      { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
+      { "hrsh7th/cmp-path", after = "nvim-cmp" },
+      { "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
+      { "hrsh7th/cmp-cmdline", after = "nvim-cmp", event = "CmdlineEnter" },
+    },
+    config = function()
+      require("plugins.configs.cmp").setup()
+    end,
+  },
+
+  -- ["hrsh7th/cmp-nvim-lsp"] = {},
+  --
+  -- ["saadparwaiz1/cmp_luasnip"] = {
+  --   after = "nvim-cmp",
+  -- },
+  --
+  -- ["hrsh7th/cmp-buffer"] = {
+  --   after = "nvim-cmp",
+  -- },
+  --
+  -- ["hrsh7th/cmp-cmdline"] = {
+  --   after = "nvim-cmp",
+  --   event = "CmdlineEnter",
+  -- },
+  --
+  -- ["hrsh7th/cmp-path"] = {
+  --   after = "nvim-cmp",
+  -- },
+
   --rust
   ["simrat39/rust-tools.nvim"] = {
     requires = {
