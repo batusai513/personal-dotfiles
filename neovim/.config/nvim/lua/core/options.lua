@@ -8,6 +8,8 @@ g.theme = config.ui.theme
 opt.laststatus = 3
 opt.showmode = false -- we don't need to see things like -- INSERT -- anymore
 
+opt.hidden = true -- Hide unused buffers
+
 opt.title = true
 opt.clipboard = "unnamedplus" -- allows neovim to access the system clipboard
 

@@ -1,11 +1,9 @@
-vim.cmd "packadd packer.nvim"
-
 -- Run PackerCompile if there are changes in this file
 -- vim.cmd "autocmd BufWritePost plugins.lua source <afile> | PackerCompile"
 local packer_grp = vim.api.nvim_create_augroup("packer_user_config", { clear = true })
 vim.api.nvim_create_autocmd(
   { "BufWritePost" },
-  { pattern = "init.lua", command = "source <afile> | PackerCompile", group = packer_grp }
+  { pattern = "init.lua", command = "source <afile> | PackerSync", group = packer_grp }
 )
 
 local plugins = {

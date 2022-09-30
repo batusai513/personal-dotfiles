@@ -1,6 +1,7 @@
-vim.defer_fn(function()
-  pcall(require, "impatient")
-end, 0)
+local has_impatient, impatient = pcall(require, "impatient")
+if has_impatient then
+  impatient.enable_profile()
+end
 
 require "core"
 require "core.options"
