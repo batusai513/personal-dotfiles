@@ -181,10 +181,10 @@ local plugins = {
 
   --buffer management
   ["akinsho/bufferline.nvim"] = {
-    event = "BufReadPre",
-    wants = "nvim-web-devicons",
+    event = "UIEnter",
+    requires = "nvim-web-devicons",
     config = function()
-      require "plugins.configs.bufferline"
+      require("plugins.configs.bufferline").setup()
     end,
   },
 
