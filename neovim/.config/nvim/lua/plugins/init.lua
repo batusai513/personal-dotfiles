@@ -129,13 +129,12 @@ local plugins = {
   },
 
   ["numToStr/Comment.nvim"] = {
-    tag = "v0.6.1",
     after = "nvim-ts-context-commentstring",
     requires = {
       "JoosepAlviste/nvim-ts-context-commentstring",
     },
     config = function()
-      require "plugins.configs.comment"
+      require("plugins.configs.comment").setup()
     end,
   },
 
