@@ -113,9 +113,10 @@ local plugins = {
   ["nvim-treesitter/nvim-treesitter"] = {
     run = ":TSUpdate",
     module = "nvim-treesitter",
+    event = "BufRead",
     cmd = require("core.lazy_load").treesitter_cmds,
     config = function()
-      require "plugins.configs.treesitter"
+      require("plugins.configs.treesitter").setup()
     end,
   },
 
