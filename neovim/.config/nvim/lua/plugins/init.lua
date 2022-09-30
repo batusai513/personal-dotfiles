@@ -270,7 +270,6 @@ local plugins = {
   --line
   ["nvim-lualine/lualine.nvim"] = {
     event = "BufReadPre",
-    after = "nvim-treesitter",
     config = function()
       require("plugins.configs.lualine").setup()
     end,
