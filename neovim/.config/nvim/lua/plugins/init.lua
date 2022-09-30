@@ -159,6 +159,10 @@ local plugins = {
     end,
   },
 
+  ["dstein64/vim-startuptime"] = {
+    cmd = "StartupTime",
+  },
+
   --Github things
   ["lewis6991/gitsigns.nvim"] = {
     ft = "gitcommit",
