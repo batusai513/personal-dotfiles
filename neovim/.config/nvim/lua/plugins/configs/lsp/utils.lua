@@ -8,7 +8,7 @@ local function w(fn)
 end
 
 function M.buf_autocmd_codelens(client, bufnr)
-  if client.resolved_capabilities.code_lens then
+  if client.supports_method "textDocument/codeLens" then
     local group = vim.api.nvim_create_augroup("lsp_document_codelens", {})
     vim.api.nvim_create_autocmd({ "BufEnter", "InsertLeave", "BufWritePost", "CursorHold" }, {
       buffer = bufnr,
