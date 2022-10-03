@@ -30,4 +30,5 @@ end
 
 require "core.utils.prequire"
 require "core.keymaps"
+require "core.winbar"
 pcall(require, "custom")
