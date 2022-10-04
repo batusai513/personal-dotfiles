@@ -21,21 +21,4 @@ function M.define_augroups(definitions, buffer)
   end
 end
 
-function M.enable_code_lens_refresh()
-  M.define_augroups({
-    lsp_code_lens_refresh = {
-      {
-        "InsertLeave ",
-        "<buffer>",
-        "lua vim.lsp.codelens.refresh()",
-      },
-      {
-        "InsertLeave ",
-        "<buffer>",
-        "lua vim.lsp.codelens.display()",
-      },
-    },
-  }, true)
-end
-
 return M
