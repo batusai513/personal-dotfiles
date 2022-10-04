@@ -8,14 +8,12 @@ local function w(fn)
 end
 
 function M.buf_autocmd_codelens(client, bufnr)
-  if client.supports_method "textDocument/codeLens" then
-    local group = vim.api.nvim_create_augroup("lsp_document_codelens", {})
-    vim.api.nvim_create_autocmd({ "BufEnter", "InsertLeave", "BufWritePost", "CursorHold" }, {
-      buffer = bufnr,
-      group = group,
-      callback = w(vim.lsp.codelens.refresh),
-    })
-  end
+  local group = vim.api.nvim_create_augroup("lsp_document_codelens", {})
+  vim.api.nvim_create_autocmd({ "BufEnter", "InsertLeave", "BufWritePost", "CursorHold" }, {
+    buffer = bufnr,
+    group = group,
+    callback = w(vim.lsp.codelens.refresh),
+  })
 end
 
 -- Finds and runs the closest codelens (searches upwards only)
