@@ -43,6 +43,10 @@ local plugins = {
     },
   },
 
+  ["rafamadriz/friendly-snippets"] = {
+    event = { "InsertEnter", "CmdlineEnter" },
+  },
+
   ["L3MON4D3/LuaSnip"] = {
     event = "InsertEnter",
     config = function()
@@ -50,42 +54,30 @@ local plugins = {
     end,
   },
 
-  ["rafamadriz/friendly-snippets"] = {},
-
-  --completions plugins
   ["hrsh7th/nvim-cmp"] = {
     after = "LuaSnip",
-    event = "InsertEnter",
-    requires = {
-      "hrsh7th/cmp-nvim-lsp",
-      { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
-      { "hrsh7th/cmp-path", after = "nvim-cmp" },
-      { "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
-      { "hrsh7th/cmp-cmdline", after = "nvim-cmp", event = "CmdlineEnter" },
-    },
     config = function()
       require("plugins.configs.cmp").setup()
     end,
   },
 
-  -- ["hrsh7th/cmp-nvim-lsp"] = {},
-  --
-  -- ["saadparwaiz1/cmp_luasnip"] = {
-  --   after = "nvim-cmp",
-  -- },
-  --
-  -- ["hrsh7th/cmp-buffer"] = {
-  --   after = "nvim-cmp",
-  -- },
-  --
-  -- ["hrsh7th/cmp-cmdline"] = {
-  --   after = "nvim-cmp",
-  --   event = "CmdlineEnter",
-  -- },
-  --
-  -- ["hrsh7th/cmp-path"] = {
-  --   after = "nvim-cmp",
-  -- },
+  ["hrsh7th/cmp-nvim-lsp"] = {},
+
+  ["saadparwaiz1/cmp_luasnip"] = {
+    after = "LuaSnip",
+  },
+
+  ["hrsh7th/cmp-buffer"] = {
+    after = "nvim-cmp",
+  },
+
+  ["hrsh7th/cmp-cmdline"] = {
+    after = "nvim-cmp",
+  },
+
+  ["hrsh7th/cmp-path"] = {
+    after = "nvim-cmp",
+  },
 
   --rust
   ["simrat39/rust-tools.nvim"] = {
