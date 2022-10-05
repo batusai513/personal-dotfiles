@@ -10,8 +10,6 @@ local plugins = {
     end,
   },
 
-  ["nvim-lua/popup.nvim"] = {}, -- An implementation of the Popup API from vim in Neovim
-
   ["kyazdani42/nvim-web-devicons"] = {
     module = "nvim-web-devicons",
   },
