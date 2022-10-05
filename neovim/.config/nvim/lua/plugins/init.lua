@@ -142,6 +142,7 @@ local plugins = {
   },
 
   ["lukas-reineke/indent-blankline.nvim"] = {
+    event = "BufWinEnter",
     config = function()
       require "plugins.configs.indent-blankline"
     end,
