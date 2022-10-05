@@ -127,10 +127,10 @@ local plugins = {
   },
 
   ["windwp/nvim-autopairs"] = {
+    event = "InsertEnter",
     config = function()
-      require "plugins.configs.autopairs"
+      require("plugins.configs.autopairs").setup()
     end,
-    after = "nvim-cmp",
   },
 
   ["lukas-reineke/indent-blankline.nvim"] = {
