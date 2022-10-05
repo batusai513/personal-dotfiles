@@ -15,30 +15,7 @@ local utils = require "plugins.configs.lsp.utils"
 local M = {}
 
 function M.on_attach(client, bufnr)
-  -- Enable completion triggered by <C-X><C-O>
-  -- See `:help omnifunc` and `:help ins-completion` for more information.
-  vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-
-  -- Use LSP as the handler for formatexpr.
-  -- See `:help formatexpr` for more information.
-  vim.api.nvim_buf_set_option(bufnr, "formatexpr", "v:lua.vim.lsp.formatexpr()")
-
   require("plugins.configs.lsp.keymaps").setup(client, bufnr)
-
-  if client.name == "sumneko_lua" then
-    -- client.resolved_capabilities.document_formatting = false
-    -- client.resolved_capabilities.document_range_formatting = false
-  end
-
-  if client.name == "solargraph" then
-    -- client.resolved_capabilities.document_formatting = false
-    -- client.resolved_capabilities.document_range_formatting = false
-  end
-
-  if client.name == "tsserver" then
-    -- client.resolved_capabilities.document_formatting = false
-    -- client.resolved_capabilities.document_range_formatting = false
-  end
 
   -- tagfunc
   if client.server_capabilities.definitionProvider then
