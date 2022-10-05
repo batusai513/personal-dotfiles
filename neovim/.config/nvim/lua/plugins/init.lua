@@ -226,11 +226,11 @@ local plugins = {
 
   -- which-key
   ["folke/which-key.nvim"] = {
-    after = "telescope.nvim",
     config = function()
       require("plugins.configs.which_key").init()
     end,
-    event = "BufWinEnter",
+    module = "which-key",
+    keys = { "<leader>", "`", "'" },
   },
 
   --neovim optimisations
