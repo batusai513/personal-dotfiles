@@ -35,6 +35,12 @@ local plugins = {
       },
       {
         "ray-x/lsp_signature.nvim",
+        module = "lsp_signature",
+        event = { "InsertEnter" },
+        after = "nvim-lspconfig",
+        config = function()
+          require("plugins.configs.lsp.lsp-signature").setup()
+        end,
       },
       {
         "folke/trouble.nvim",
