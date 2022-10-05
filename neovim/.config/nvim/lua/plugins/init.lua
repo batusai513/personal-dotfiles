@@ -121,9 +121,6 @@ local plugins = {
 
   ["numToStr/Comment.nvim"] = {
     after = "nvim-ts-context-commentstring",
-    requires = {
-      "JoosepAlviste/nvim-ts-context-commentstring",
-    },
     config = function()
       require("plugins.configs.comment").setup()
     end,
