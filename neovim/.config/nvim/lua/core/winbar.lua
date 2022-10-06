@@ -25,6 +25,7 @@ M.winbar_filetype_exclude = {
   "dapui_console",
   "lab",
   "Markdown",
+  "lazygit",
   "",
 }
 local f = require "core.utils"
