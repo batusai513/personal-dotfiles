@@ -24,14 +24,19 @@ local plugins = {
       require("plugins.configs.lsp").setup()
     end,
     requires = {
-      { "b0o/SchemaStore.nvim" },
-      { "williamboman/nvim-lsp-installer" },
+      {
+        "b0o/SchemaStore.nvim",
+        module = { "schemastore" },
+      },
+      {
+        "williamboman/nvim-lsp-installer",
+      },
       {
         "jose-elias-alvarez/null-ls.nvim",
+        after = "nvim-lspconfig",
         config = function()
           require "plugins.configs.lsp.null-ls"
         end,
-        after = "nvim-lspconfig",
       },
       {
         "ray-x/lsp_signature.nvim",
