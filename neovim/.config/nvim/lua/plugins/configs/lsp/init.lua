@@ -52,7 +52,7 @@ M.capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
 require("plugins.configs.lsp.handlers").setup()
 
 function M.setup()
-  require "plugins.configs.lsp.lsp-installer"
+  require("plugins.configs.lsp.installer").setup(lspConfig)
 end
 
 return M

@@ -1,6 +1,4 @@
-return function(server, opts)
-  local server_default_props = server:get_default_options()
-
+return function(lspConfig, opts)
   local rustopts = {
     tools = {
       autoSetHints = true,
@@ -29,7 +27,7 @@ return function(server, opts)
         })
       end,
     },
-    server = vim.tbl_deep_extend("force", server_default_props, opts, {
+    server = vim.tbl_deep_extend("force", {}, opts, {
       settings = {
         ["rust-analyzer"] = {
           lens = {
@@ -43,8 +41,8 @@ return function(server, opts)
     }),
   }
   local ok, rust_tools = pcall(require, "rust-tools")
+
   if ok then
     rust_tools.setup(rustopts)
-    server:attach_buffers()
   end
 end
