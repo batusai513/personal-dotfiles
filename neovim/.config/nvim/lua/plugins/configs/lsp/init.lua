@@ -29,14 +29,6 @@ function M.on_attach(client, bufnr)
   if client.supports_method "textDocument/documentHighlight" then
     utils.lsp_highlight_document(client, bufnr)
   end
-  -- nvim-navic
-  if client.server_capabilities.documentSymbolProvider then
-    local navic = prequire "nvim-navic"
-    if not navic then
-      return
-    end
-    navic.attach(client, bufnr)
-  end
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()

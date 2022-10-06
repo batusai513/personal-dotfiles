@@ -54,6 +54,14 @@ local plugins = {
     },
   },
 
+  ["SmiteshP/nvim-navic"] = {
+    config = function()
+      require("plugins.configs.lsp.navic").setup()
+    end,
+    module = { "nvim-navic" },
+    event = { "BufWinEnter" },
+  },
+
   ["rafamadriz/friendly-snippets"] = {
     event = { "InsertEnter", "CmdlineEnter" },
   },
@@ -238,13 +246,6 @@ local plugins = {
 
   --neovim optimisations
   ["lewis6991/impatient.nvim"] = {},
-
-  ["SmiteshP/nvim-navic"] = {
-    config = function()
-      require("nvim-navic").setup {}
-    end,
-    module = { "nvim-navic" },
-  },
 
   --terminal
   ["akinsho/toggleterm.nvim"] = {
