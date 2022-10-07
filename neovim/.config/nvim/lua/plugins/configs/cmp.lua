@@ -1,4 +1,5 @@
 local M = {}
+require("luasnip.loaders.from_vscode").lazy_load()
 
 function M.setup()
   local icons = require "core.theme.icons"
