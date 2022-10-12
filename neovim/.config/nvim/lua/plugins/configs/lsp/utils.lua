@@ -1,18 +1,11 @@
 local M = {}
 
---- @return fun() @function that calls the provided fn, but with no args
-local function w(fn)
-  return function()
-    return fn()
-  end
-end
-
 function M.buf_autocmd_codelens(client, bufnr)
-  local group = vim.api.nvim_create_augroup("lsp_document_codelens", {})
+  vim.api.nvim_create_augroup("lsp_document_codelens", {})
   vim.api.nvim_create_autocmd({ "BufEnter", "InsertLeave", "BufWritePost", "CursorHold" }, {
     buffer = bufnr,
-    group = group,
-    callback = w(vim.lsp.codelens.refresh),
+    group = "lsp_document_codelens",
+    callback = vim.lsp.codelens.refresh,
   })
 end
 
@@ -41,16 +34,27 @@ end
 
 function M.lsp_highlight_document(client, bufnr)
   -- Set autocommands conditional on server_capabilities
-  local group = vim.api.nvim_create_augroup("lsp_document_highlight", {})
+  -- vim.cmd [[
+  --   hi! LspReferenceRead cterm=bold ctermbg=red guibg=LightYellow
+  --   hi! LspReferenceText cterm=bold ctermbg=red guibg=LightYellow
+  --   hi! LspReferenceWrite cterm=bold ctermbg=red guibg=LightYellow
+  -- ]]
+  vim.api.nvim_create_augroup("lsp_document_highlight", {
+    clear = false,
+  })
+  vim.api.nvim_clear_autocmds {
+    buffer = bufnr,
+    group = "lsp_document_highlight",
+  }
   vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
     buffer = bufnr,
-    group = group,
-    callback = w(vim.lsp.buf.document_highlight),
+    group = "lsp_document_highlight",
+    callback = vim.lsp.buf.document_highlight,
   })
   vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
     buffer = bufnr,
-    group = group,
-    callback = w(vim.lsp.buf.clear_references),
+    group = "lsp_document_highlight",
+    callback = vim.lsp.buf.clear_references,
   })
 end
 

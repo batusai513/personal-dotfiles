@@ -3,9 +3,8 @@ return function(server, default_opts)
   if ok then
     local dev_opts = {
       debug = false,
-      server = vim.tbl_deep_extend("force", server:get_default_options(), default_opts),
+      server = vim.tbl_deep_extend("force", {}, default_opts, {}),
     }
     typescript.setup(dev_opts)
-    server:attach_buffers()
   end
 end

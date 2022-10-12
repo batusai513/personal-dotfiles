@@ -36,7 +36,7 @@ function M.on_attach(client, bufnr)
     utils.buf_autocmd_codelens(client)
     vim.schedule(vim.lsp.codelens.refresh)
   end
-  if client.supports_method "textDocument/documentHighlight" then
+  if client.server_capabilities.documentHighlightProvider then
     utils.lsp_highlight_document(client, bufnr)
   end
 end
@@ -52,7 +52,7 @@ M.capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
 require("plugins.configs.lsp.handlers").setup()
 
 function M.setup()
-  require "plugins.configs.lsp.lsp-installer"
+  require("plugins.configs.lsp.installer").setup(lspConfig)
 end
 
 return M

@@ -17,6 +17,12 @@ local plugins = {
     event = "BufWinEnter",
   },
 
+  ["williamboman/mason.nvim"] = {
+    config = function()
+      require("plugins.configs.lsp.mason").setup()
+    end,
+  },
+
   --Language server protocol
 
   ["neovim/nvim-lspconfig"] = {
@@ -29,7 +35,7 @@ local plugins = {
         module = { "schemastore" },
       },
       {
-        "williamboman/nvim-lsp-installer",
+        "williamboman/mason-lspconfig.nvim",
       },
       {
         "jose-elias-alvarez/null-ls.nvim",
