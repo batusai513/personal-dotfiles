@@ -34,11 +34,11 @@ end
 
 function M.lsp_highlight_document(client, bufnr)
   -- Set autocommands conditional on server_capabilities
-  vim.cmd [[
-    hi! LspReferenceRead cterm=bold ctermbg=red guibg=LightYellow
-    hi! LspReferenceText cterm=bold ctermbg=red guibg=LightYellow
-    hi! LspReferenceWrite cterm=bold ctermbg=red guibg=LightYellow
-  ]]
+  -- vim.cmd [[
+  --   hi! LspReferenceRead cterm=bold ctermbg=red guibg=LightYellow
+  --   hi! LspReferenceText cterm=bold ctermbg=red guibg=LightYellow
+  --   hi! LspReferenceWrite cterm=bold ctermbg=red guibg=LightYellow
+  -- ]]
   vim.api.nvim_create_augroup("lsp_document_highlight", {
     clear = false,
   })
