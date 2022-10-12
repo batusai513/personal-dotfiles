@@ -18,14 +18,6 @@ return function(lspConfig, opts)
         border = "rounded",
         width = 60,
       },
-      on_initialized = function()
-        vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter", "CursorHold", "InsertLeave" }, {
-          pattern = { "*.rs" },
-          callback = function()
-            vim.lsp.codelens.refresh()
-          end,
-        })
-      end,
     },
     server = vim.tbl_deep_extend("force", {}, opts, {
       settings = {

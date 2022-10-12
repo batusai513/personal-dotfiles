@@ -1,10 +1,10 @@
 local M = {}
 
 function M.buf_autocmd_codelens(client, bufnr)
-  local group = vim.api.nvim_create_augroup("lsp_document_codelens", {})
+  vim.api.nvim_create_augroup("lsp_document_codelens", {})
   vim.api.nvim_create_autocmd({ "BufEnter", "InsertLeave", "BufWritePost", "CursorHold" }, {
     buffer = bufnr,
-    group = group,
+    group = "lsp_document_codelens",
     callback = vim.lsp.codelens.refresh,
   })
 end
