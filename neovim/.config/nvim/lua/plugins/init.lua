@@ -110,7 +110,7 @@ local plugins = {
   },
 
   --lua
-  ["folke/lua-dev.nvim"] = {},
+  ["folke/neodev.nvim"] = {},
 
   --typescript
   ["jose-elias-alvarez/typescript.nvim"] = {},

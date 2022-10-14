@@ -11,9 +11,9 @@ local opts = {
 }
 
 return function(server, default_opts)
-  local lua_dev_loaded, lua_dev = pcall(require, "lua-dev")
-  if lua_dev_loaded then
-    lua_dev.setup {}
+  local neodev_loaded, neodev = pcall(require, "neodev")
+  if neodev_loaded then
+    neodev.setup {}
   end
 
   server.setup(vim.tbl_deep_extend("force", {}, opts, default_opts))
