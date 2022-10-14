@@ -8,7 +8,6 @@ local hide_in_width = function()
   return vim.fn.winwidth(0) < 420
 end
 
-local navic = require "nvim-navic"
 local M = {}
 
 function M.setup()
@@ -29,14 +28,9 @@ function M.setup()
           file_status = true, -- displays file status (readonly status, modified status)
           path = 1, -- 0 = just filename, 1 = relative path, 2 = absolute path
         },
-        {
-          navic.get_location,
-          cond = function()
-            return navic.is_available and hide_in_width()
-          end,
-        },
       },
     },
   }
 end
+
 return M

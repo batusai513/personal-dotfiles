@@ -49,12 +49,12 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 opt.backup = false -- creates a backup file
-opt.cmdheight = 2 -- more space in the neovim command line for displaying messages
+opt.cmdheight = 1 -- more space in the neovim command line for displaying messages
 opt.completeopt = { "menuone", "noselect" } -- mostly just for cmp
 opt.conceallevel = 0 -- so that `` is visible in markdown files
 opt.fileencoding = "utf-8" -- the encoding written to a file
 opt.hlsearch = true -- highlight all matches on previous search pattern
-opt.pumheight = 10 -- pop up menu height
+opt.pumheight = 15 -- pop up menu height
 opt.showtabline = 2 -- always show tabs
 opt.swapfile = false -- creates a swapfile
 opt.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited

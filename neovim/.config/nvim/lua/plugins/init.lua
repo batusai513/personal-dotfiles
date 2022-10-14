@@ -1,8 +1,10 @@
 local plugins = {
   ["nvim-lua/plenary.nvim"] = { module = "plenary" },
+
   ["famiu/bufdelete.nvim"] = {
     cmd = { "Bdelete", "Bwipeout" },
   },
+
   ["wbthomason/packer.nvim"] = {
     cmd = require("core.lazy_load").packer_cmds,
     config = function()
@@ -10,10 +12,15 @@ local plugins = {
     end,
   },
 
-  ["nvim-lua/popup.nvim"] = {}, -- An implementation of the Popup API from vim in Neovim
-
   ["kyazdani42/nvim-web-devicons"] = {
     module = "nvim-web-devicons",
+    event = "BufWinEnter",
+  },
+
+  ["williamboman/mason.nvim"] = {
+    config = function()
+      require("plugins.configs.lsp.mason").setup()
+    end,
   },
 
   --Language server protocol
@@ -23,17 +30,28 @@ local plugins = {
       require("plugins.configs.lsp").setup()
     end,
     requires = {
-      { "b0o/SchemaStore.nvim" },
-      { "williamboman/nvim-lsp-installer" },
+      {
+        "b0o/SchemaStore.nvim",
+        module = { "schemastore" },
+      },
+      {
+        "williamboman/mason-lspconfig.nvim",
+      },
       {
         "jose-elias-alvarez/null-ls.nvim",
+        after = "nvim-lspconfig",
         config = function()
           require "plugins.configs.lsp.null-ls"
         end,
-        after = "nvim-lspconfig",
       },
       {
         "ray-x/lsp_signature.nvim",
+        module = "lsp_signature",
+        event = { "InsertEnter" },
+        after = "nvim-lspconfig",
+        config = function()
+          require("plugins.configs.lsp.lsp-signature").setup()
+        end,
       },
       {
         "folke/trouble.nvim",
@@ -42,49 +60,47 @@ local plugins = {
     },
   },
 
-  ["L3MON4D3/LuaSnip"] = {
-    event = "InsertEnter",
+  ["SmiteshP/nvim-navic"] = {
     config = function()
-      require("luasnip.loaders.from_vscode").lazy_load()
+      require("plugins.configs.lsp.navic").setup()
     end,
+    module = { "nvim-navic" },
+    event = { "BufWinEnter" },
   },
 
-  ["rafamadriz/friendly-snippets"] = {},
+  ["rafamadriz/friendly-snippets"] = {
+    event = { "InsertEnter", "CmdlineEnter" },
+  },
 
-  --completions plugins
+  ["L3MON4D3/LuaSnip"] = {
+    event = "InsertEnter",
+    after = "friendly-snippets",
+  },
+
   ["hrsh7th/nvim-cmp"] = {
     after = "LuaSnip",
-    event = "InsertEnter",
-    requires = {
-      "hrsh7th/cmp-nvim-lsp",
-      { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
-      { "hrsh7th/cmp-path", after = "nvim-cmp" },
-      { "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
-      { "hrsh7th/cmp-cmdline", after = "nvim-cmp", event = "CmdlineEnter" },
-    },
     config = function()
       require("plugins.configs.cmp").setup()
     end,
   },
 
-  -- ["hrsh7th/cmp-nvim-lsp"] = {},
-  --
-  -- ["saadparwaiz1/cmp_luasnip"] = {
-  --   after = "nvim-cmp",
-  -- },
-  --
-  -- ["hrsh7th/cmp-buffer"] = {
-  --   after = "nvim-cmp",
-  -- },
-  --
-  -- ["hrsh7th/cmp-cmdline"] = {
-  --   after = "nvim-cmp",
-  --   event = "CmdlineEnter",
-  -- },
-  --
-  -- ["hrsh7th/cmp-path"] = {
-  --   after = "nvim-cmp",
-  -- },
+  ["hrsh7th/cmp-nvim-lsp"] = {},
+
+  ["saadparwaiz1/cmp_luasnip"] = {
+    after = "LuaSnip",
+  },
+
+  ["hrsh7th/cmp-buffer"] = {
+    after = "nvim-cmp",
+  },
+
+  ["hrsh7th/cmp-cmdline"] = {
+    after = "nvim-cmp",
+  },
+
+  ["hrsh7th/cmp-path"] = {
+    after = "nvim-cmp",
+  },
 
   --rust
   ["simrat39/rust-tools.nvim"] = {
@@ -120,9 +136,6 @@ local plugins = {
 
   ["numToStr/Comment.nvim"] = {
     after = "nvim-ts-context-commentstring",
-    requires = {
-      "JoosepAlviste/nvim-ts-context-commentstring",
-    },
     config = function()
       require("plugins.configs.comment").setup()
     end,
@@ -137,13 +150,14 @@ local plugins = {
   },
 
   ["windwp/nvim-autopairs"] = {
+    event = "InsertEnter",
     config = function()
-      require "plugins.configs.autopairs"
+      require("plugins.configs.autopairs").setup()
     end,
-    after = "nvim-cmp",
   },
 
   ["lukas-reineke/indent-blankline.nvim"] = {
+    event = "BufWinEnter",
     config = function()
       require "plugins.configs.indent-blankline"
     end,
@@ -227,22 +241,15 @@ local plugins = {
 
   -- which-key
   ["folke/which-key.nvim"] = {
-    after = "telescope.nvim",
     config = function()
       require("plugins.configs.which_key").init()
     end,
-    event = "BufWinEnter",
+    module = "which-key",
+    keys = { "<leader>", "`", "'" },
   },
 
   --neovim optimisations
   ["lewis6991/impatient.nvim"] = {},
-
-  ["SmiteshP/nvim-navic"] = {
-    config = function()
-      require("nvim-navic").setup {}
-    end,
-    module = { "nvim-navic" },
-  },
 
   --terminal
   ["akinsho/toggleterm.nvim"] = {

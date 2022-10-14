@@ -69,9 +69,9 @@ M.packer_sync = function(...)
         { "PackerSync" },
         {
           " on a Snapshot. This will cause issues if Dotfiles dependencies contain "
-            .. "any breaking changes! Plugin updates will not be included in this "
-            .. "snapshot, so they will be lost after switching between snapshots! Would "
-            .. "you still like to continue? [y/N]\n",
+              .. "any breaking changes! Plugin updates will not be included in this "
+              .. "snapshot, so they will be lost after switching between snapshots! Would "
+              .. "you still like to continue? [y/N]\n",
           "WarningMsg",
         },
       }, false, {})
@@ -88,6 +88,19 @@ M.packer_sync = function(...)
     packer.sync(...)
   else
     error "Packer could not be loaded!"
+  end
+end
+
+function M.isempty(s)
+  return s == nil or s == ""
+end
+
+function M.get_buf_option(opt)
+  local status_ok, buf_option = pcall(vim.api.nvim_buf_get_option, 0, opt)
+  if not status_ok then
+    return nil
+  else
+    return buf_option
   end
 end
 
