@@ -26,19 +26,19 @@ local config = {
   disable_netrw = true,
   hijack_netrw = true,
   open_on_setup = false,
-  ignore_buffer_on_setup = false,
-  create_in_closed_folder = true,
   ignore_ft_on_setup = {
     "startify",
     "dashboard",
     "alpha",
   },
+  hijack_cursor = true,
+  hijack_unnamed_buffer_when_opening = false,
+  update_cwd = false,
+  ignore_buffer_on_setup = false,
+  create_in_closed_folder = true,
   auto_reload_on_write = true,
   open_on_tab = false,
-  hijack_cursor = false,
-  update_cwd = false,
   diagnostics = diagnosticsConfig,
-  hijack_unnamed_buffer_when_opening = false,
   hijack_directories = {
     enable = false,
     auto_open = false,
@@ -46,7 +46,6 @@ local config = {
   update_focused_file = {
     enable = true,
     update_cwd = false,
-    ignore_list = {},
   },
   system_open = {
     cmd = nil,
@@ -57,12 +56,14 @@ local config = {
     ignore = false,
     timeout = 500,
   },
+  filesystem_watchers = {
+    enable = true,
+  },
   view = {
-    width = 40,
-    height = 30,
+    width = 25,
     side = "right",
     hide_root_folder = false,
-    adaptive_size = false,
+    adaptive_size = true,
     mappings = {
       custom_only = false,
       list = {
@@ -126,14 +127,6 @@ local config = {
     open_file = {
       quit_on_open = false,
       resize_window = true,
-      window_picker = {
-        enable = true,
-        chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",
-        exclude = {
-          filetype = { "notify", "packer", "qf", "diff", "fugitive", "fugitiveblame" },
-          buftype = { "nofile", "terminal", "help" },
-        },
-      },
     },
   },
 }
