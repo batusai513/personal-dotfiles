@@ -73,13 +73,14 @@ local config = {
     ["f"] = { "<cmd>Format<cr>", "Format" },
     ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
     ["e"] = { "<cmd>NvimTreeToggle<cr>", "Open explorer" },
-    ["c"] = { "<cmd>BufferKill<cr>", "Close buffer" },
+    ["c"] = { "<cmd>Bdelete<cr>", "Close buffer" },
+    ["C"] = { "<cmd>Bwipeout<cr>", "Close all buffers" },
     b = {
       name = "Buffers",
       j = { "<cmd>BufferLinePick<cr>", "Jump" },
       f = { "<cmd>lua require 'telescope.builtin'.buffers()<cr>", "Find buffer" },
       b = { "<cmd>BufferLineCyclePrev<cr>", "Previous" },
-      c = { "<cmd>BufferKill<cr>", "Close buffer" },
+      c = { "<cmd>Bdelete<cr>", "Close buffer" },
       e = {
         "<cmd>BufferLinePickClose<cr>",
         "Pick which buffer to close",
