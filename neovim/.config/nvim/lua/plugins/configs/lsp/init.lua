@@ -10,8 +10,6 @@ if not status_ok then
   return
 end
 
-local utils = require "plugins.configs.lsp.utils"
-
 local M = {}
 
 function M.on_attach(client, bufnr)
@@ -31,14 +29,6 @@ function M.on_attach(client, bufnr)
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false
   end
-
-  if client.supports_method "textDocument/codeLens" then
-    utils.buf_autocmd_codelens(client)
-    vim.schedule(vim.lsp.codelens.refresh)
-  end
-  if client.server_capabilities.documentHighlightProvider then
-    utils.lsp_highlight_document(client, bufnr)
-  end
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -53,6 +43,9 @@ require("plugins.configs.lsp.handlers").setup()
 
 function M.setup()
   require("plugins.configs.lsp.installer").setup(lspConfig)
+  require "plugins.configs.lsp.format"
+  require "plugins.configs.lsp.document_highlight"
+  require "plugins.configs.lsp.codelens"
 end
 
 return M
