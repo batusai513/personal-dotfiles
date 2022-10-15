@@ -1,7 +1,5 @@
-return function(server, opts)
-  local server_default_props = server:get_default_options()
-
-  local rustopts = {
+return function(opts)
+  return {
     tools = {
       autoSetHints = true,
       inlay_hints = {
@@ -20,16 +18,8 @@ return function(server, opts)
         border = "rounded",
         width = 60,
       },
-      on_initialized = function()
-        vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter", "CursorHold", "InsertLeave" }, {
-          pattern = { "*.rs" },
-          callback = function()
-            vim.lsp.codelens.refresh()
-          end,
-        })
-      end,
     },
-    server = vim.tbl_deep_extend("force", server_default_props, opts, {
+    server = vim.tbl_deep_extend("force", {}, opts, {
       settings = {
         ["rust-analyzer"] = {
           lens = {
@@ -42,9 +32,4 @@ return function(server, opts)
       },
     }),
   }
-  local ok, rust_tools = pcall(require, "rust-tools")
-  if ok then
-    rust_tools.setup(rustopts)
-    server:attach_buffers()
-  end
 end

@@ -70,6 +70,9 @@ return packer.startup(function(use)
       },
     },
   }
+  use { "williamboman/mason.nvim" }
+  use { "williamboman/mason-lspconfig.nvim" }
+  use { "b0o/SchemaStore.nvim" }
 
   --Language server protocol
   use {
@@ -78,14 +81,11 @@ return packer.startup(function(use)
       require "core.lsp"
     end,
     requires = {
-      { "b0o/SchemaStore.nvim" },
-      { "williamboman/nvim-lsp-installer" },
       {
         "jose-elias-alvarez/null-ls.nvim",
         config = function()
           require "core.lsp.null-ls"
         end,
-        after = "nvim-lspconfig",
       },
       {
         "ray-x/lsp_signature.nvim",
@@ -107,9 +107,7 @@ return packer.startup(function(use)
   }
 
   --lua
-  use {
-    "max397574/lua-dev.nvim",
-  }
+  use { "folke/neodev.nvim" }
 
   --typescript
   use {
