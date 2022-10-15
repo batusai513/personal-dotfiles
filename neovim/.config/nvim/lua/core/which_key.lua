@@ -60,7 +60,7 @@ local config = {
   -- NOTE: Prefer using : over <cmd> as the latter avoids going back in normal-mode.
   -- see https://neovim.io/doc/user/map.html#:map-cmd
   vmappings = {
-    ["/"] = { "<ESC><CMD>lua require('Comment.api').toggle_linewise_op(vim.fn.visualmode())<CR>", "Comment" },
+    ["/"] = { "<ESC><CMD>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>", "Comment" },
     f = {
       name = "Find selected",
       w = { "<cmd>lua require 'telescope.builtin'.grep_string()<cr>", "Selected text" },
@@ -69,7 +69,7 @@ local config = {
   mappings = {
     ["w"] = { "<cmd>w!<CR>", "Save" },
     ["q"] = { "<cmd>q!<CR>", "Quit" },
-    ["/"] = { "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>", "Comment" },
+    ["/"] = { "<cmd>lua require('Comment.api').toggle.linewise.current()<CR>", "Comment" },
     ["f"] = { "<cmd>Format<cr>", "Format" },
     ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
     ["e"] = { "<cmd>NvimTreeToggle<cr>", "Open explorer" },
@@ -101,61 +101,62 @@ local config = {
     },
     g = {
       name = "Git",
-      j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
-      k = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
-      l = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame" },
-      p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
-      r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
-      R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
-      s = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
+      j = { require("gitsigns").next_hunk, "Next Hunk" },
+      k = { require("gitsigns").prev_hunk, "Prev Hunk" },
+      l = { require("gitsigns").blame_line, "Blame" },
+      p = { require("gitsigns").preview_hunk, "Preview Hunk" },
+      r = { require("gitsigns").reset_hunk, "Reset Hunk" },
+      R = { require("gitsigns").reset_buffer, "Reset Buffer" },
+      s = { require("gitsigns").stage_hunk, "Stage Hunk" },
       u = {
-        "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
+        require("gitsigns").undo_stage_hunk,
         "Undo Stage Hunk",
       },
-      o = { "<cmd>lua require'telescope.builtin'.git_status()<cr>", "Open changed file" },
-      b = { "<cmd>lua require'telescope.builtin'.git_branches()<cr>", "Checkout branch" },
-      c = { "<cmd>lua require'telescope.builtin'.git_commits()<cr>", "Checkout commit" },
+      o = { require("telescope.builtin").git_status, "Open changed file" },
+      b = { require("telescope.builtin").git_branches, "Checkout branch" },
+      c = { require("telescope.builtin").git_commits, "Checkout commit" },
       C = {
-        "<cmd>lua require'telescope.builtin'.git_bcommits()<cr>",
+        require("telescope.builtin").git_bcommits,
         "Checkout commit(for current file)",
       },
       d = {
-        "<cmd>Gitsigns diffthis HEAD<cr>",
+        function()
+          require("gitsigns").diffthis "HEAD"
+        end,
         "Git Diff",
       },
       g = { "<cmd>LazyGit <cr>", "LazyGit" },
     },
     l = {
       name = "LSP",
-      a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
-      d = { "<cmd>lua require'telescope.builtin'.diagnostics({bufnr=0, theme='get_ivy'})<cr>", "Buffer Diagnostics" },
+      a = { vim.lsp.buf.code_action, "Code Action" },
+      d = {
+        function()
+          require("telescope.builtin").diagnostics { bufnr = 0, theme = "get_ivy" }
+        end,
+        "Buffer Diagnostics",
+      },
       t = { "<cmd>Trouble document_diagnostics<cr>", "Document Troubles" },
       w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
       f = { "<cmd>Format<cr>", "Format" },
       i = { "<cmd>LspInfo<cr>", "Info" },
       I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
       j = {
-        "<cmd>lua vim.diagnostic.goto_next()<cr>",
+        vim.diagnostic.goto_next,
         "Next Diagnostic",
       },
       k = {
-        "<cmd>lua vim.diagnostic.goto_prev()<cr>",
+        vim.diagnostic.goto_prev,
         "Prev Diagnostic",
       },
-      l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
-      q = { "<cmd>lua vim.diagnostic.setloclist()<cr>", "Quickfix" },
-      r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
-      s = { "<cmd>lua require'telescope.builtin'.lsp_document_symbols()<cr>", "Document Symbols" },
-      e = { "<cmd>lua require'telescope.builtin'.quickfix()<cr>", "Telescope Quickfix" },
+      l = { require("core.lsp.utils").find_and_run_codelens, "CodeLens Action" },
+      q = { vim.diagnostic.setloclist, "Quickfix" },
+      r = { vim.lsp.buf.rename, "Rename" },
+      s = { require("telescope.builtin").lsp_document_symbols, "Document Symbols" },
+      e = { require("telescope.builtin").quickfix, "Telescope Quickfix" },
       S = {
-        "<cmd>lua require'telescope.builtin'.lsp_dynamic_workspace_symbols()<cr>",
+        require("telescope.builtin").lsp_dynamic_workspace_symbols,
         "Workspace Symbols",
-      },
-      p = {
-        name = "Peek",
-        d = { "<cmd>lua require'core.lsp.peek'.Peek('definition')<cr>", "Definition" },
-        t = { "<cmd>lua require'core.lsp.peek'.Peek('typeDefinition')<cr>", "Type Definition" },
-        i = { "<cmd>lua require'core.lsp.peek'.Peek('implementation')<cr>", "Implementation" },
       },
     },
     p = {
