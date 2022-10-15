@@ -123,7 +123,7 @@ local config = {
         "<cmd>Gitsigns diffthis HEAD<cr>",
         "Git Diff",
       },
-      g = { "<cmd>lua _Lazygit_toggle()<cr>", "LazyGit" },
+      g = { "<cmd>LazyGit <cr>", "LazyGit" },
     },
     l = {
       name = "LSP",

@@ -52,6 +52,10 @@ return packer.startup(function(use)
     "famiu/bufdelete.nvim",
     cmd = { "Bdelete", "Bwipeout" },
   }
+  use {
+    "kdheepak/lazygit.nvim",
+    cmd = { "LazyGit", "LazyGitConfig" },
+  }
   --completions plugins
   use {
     "hrsh7th/nvim-cmp",

@@ -48,11 +48,6 @@ if not terminal then
   return
 end
 local Terminal = terminal.Terminal
-local lazygit = Terminal:new { cmd = "lazygit", count = 101 }
-
-function _Lazygit_toggle()
-  lazygit:toggle()
-end
 
 local htop = Terminal:new { cmd = "htop", hidden = true, count = 102 }
 
