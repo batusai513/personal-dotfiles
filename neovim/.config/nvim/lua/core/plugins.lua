@@ -49,6 +49,16 @@ return packer.startup(function(use)
   use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
   use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
   use {
+    "lewis6991/impatient.nvim",
+  }
+  use { "kyazdani42/nvim-web-devicons" }
+
+  --base colorscheme
+  use "lunarvim/darkplus.nvim"
+  use "rose-pine/neovim"
+  use "folke/tokyonight.nvim"
+
+  use {
     "famiu/bufdelete.nvim",
     cmd = { "Bdelete", "Bwipeout" },
   }
@@ -57,29 +67,21 @@ return packer.startup(function(use)
     cmd = { "LazyGit", "LazyGitConfig" },
   }
   --completions plugins
+  use { "hrsh7th/cmp-nvim-lsp" }
+  use { "hrsh7th/cmp-buffer" }
+  use { "hrsh7th/cmp-path" }
+  use { "hrsh7th/cmp-cmdline" }
+  use { "saadparwaiz1/cmp_luasnip" }
+  use { "L3MON4D3/LuaSnip" }
+  use { "rafamadriz/friendly-snippets" }
   use {
     "hrsh7th/nvim-cmp",
     config = function()
       require "core.cmp"
     end,
-    requires = {
-      { "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" },
-      { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
-      { "hrsh7th/cmp-path", after = "nvim-cmp" },
-      { "hrsh7th/cmp-cmdline", after = "nvim-cmp" },
-      { "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
-      --snippets
-      {
-        "L3MON4D3/LuaSnip",
-        requires = {
-          { "rafamadriz/friendly-snippets" },
-        },
-      },
-    },
   }
   use { "williamboman/mason.nvim" }
   use { "williamboman/mason-lspconfig.nvim" }
-  use { "b0o/SchemaStore.nvim" }
 
   --Language server protocol
   use {
@@ -87,62 +89,36 @@ return packer.startup(function(use)
     config = function()
       require "core.lsp"
     end,
-    requires = {
-      {
-        "jose-elias-alvarez/null-ls.nvim",
-        config = function()
-          require "core.lsp.null-ls"
-        end,
-      },
-      {
-        "ray-x/lsp_signature.nvim",
-      },
-      {
-        "folke/trouble.nvim",
-        cmd = "TroubleToggle",
-      },
-    },
   }
 
-  --language specific
-  --rust
   use {
-    "simrat39/rust-tools.nvim",
-    requires = {
-      { "mfussenegger/nvim-dap" },
-    },
+    "jose-elias-alvarez/null-ls.nvim",
+    config = function()
+      require "core.lsp.null-ls"
+    end,
   }
-
-  --lua
+  use { "ray-x/lsp_signature.nvim" }
+  use { "folke/trouble.nvim", cmd = "TroubleToggle" }
+  use { "b0o/SchemaStore.nvim" }
+  use { "simrat39/rust-tools.nvim" }
   use { "folke/neodev.nvim" }
-
-  --typescript
-  use {
-    "jose-elias-alvarez/typescript.nvim",
-  }
+  use { "jose-elias-alvarez/typescript.nvim" }
 
   --syntax highlighting
   use {
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
-    requires = {
-      "JoosepAlviste/nvim-ts-context-commentstring",
-    },
     config = function()
       require "core.treesitter"
     end,
   }
-
   use "p00f/nvim-ts-rainbow"
-
   use {
     "windwp/nvim-autopairs",
     config = function()
       require "core.autopairs"
     end,
-    after = "nvim-cmp",
   }
-
   use {
     "lukas-reineke/indent-blankline.nvim",
     config = function()
@@ -153,17 +129,13 @@ return packer.startup(function(use)
   --comments
   use {
     "numToStr/Comment.nvim",
-    requires = {
-      "JoosepAlviste/nvim-ts-context-commentstring",
-    },
     config = function()
       require "core.comment"
     end,
   }
-
+  use { "JoosepAlviste/nvim-ts-context-commentstring" }
   use {
     "folke/todo-comments.nvim",
-    requires = "nvim-lua/plenary.nvim",
     config = function()
       require "core.todo-comments"
     end,
@@ -172,9 +144,6 @@ return packer.startup(function(use)
   --Github things
   use {
     "lewis6991/gitsigns.nvim",
-    requires = {
-      "nvim-lua/plenary.nvim",
-    },
     config = function()
       require "core.gitsigns"
     end,
@@ -192,9 +161,6 @@ return packer.startup(function(use)
   --tree file viewer
   use {
     "kyazdani42/nvim-tree.lua",
-    requires = {
-      "kyazdani42/nvim-web-devicons", -- optional, for file icon
-    },
     config = function()
       require "core.nvim-tree"
     end,
@@ -204,8 +170,6 @@ return packer.startup(function(use)
   use {
     "nvim-telescope/telescope.nvim",
     requires = {
-      "nvim-lua/popup.nvim",
-      "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope-ui-select.nvim",
       {
         "nvim-telescope/telescope-fzf-native.nvim",
@@ -235,11 +199,6 @@ return packer.startup(function(use)
     event = "BufWinEnter",
   }
 
-  --neovim optimisations
-  use {
-    "lewis6991/impatient.nvim",
-  }
-
   --terminal
   use {
     "akinsho/toggleterm.nvim",
@@ -259,16 +218,10 @@ return packer.startup(function(use)
   --line
   use {
     "nvim-lualine/lualine.nvim",
-    requires = { "kyazdani42/nvim-web-devicons", opt = true },
     config = function()
       require "core.lualine"
     end,
   }
-
-  --base colorscheme
-  use "lunarvim/darkplus.nvim"
-  use "rose-pine/neovim"
-  use "folke/tokyonight.nvim"
 
   --add/remove sorrunding charactes
   use {
