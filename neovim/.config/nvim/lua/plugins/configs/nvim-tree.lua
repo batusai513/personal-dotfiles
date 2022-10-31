@@ -57,7 +57,7 @@ local config = {
     timeout = 500,
   },
   filesystem_watchers = {
-    enable = true,
+    enable = false,
   },
   view = {
     width = 25,
