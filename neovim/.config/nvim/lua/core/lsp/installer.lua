@@ -12,7 +12,7 @@ mason_lspconfig.setup {
     "solargraph",
     "sumneko_lua",
     "tsserver",
-    "esling",
+    "eslint",
     "jsonls",
     "yamlls",
     "emmet_ls",
