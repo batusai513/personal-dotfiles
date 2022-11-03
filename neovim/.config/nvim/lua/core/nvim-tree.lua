@@ -112,7 +112,6 @@ local config = {
   },
   filters = {
     dotfiles = false,
-    custom = { ".cache" },
   },
   trash = {
     cmd = "trash",
