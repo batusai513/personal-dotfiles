@@ -28,7 +28,6 @@ function M.setup(lspconfig)
   mason_lspconfig.setup_handlers {
     function(server_name)
       local opts = {
-        on_attach = require("plugins.configs.lsp").on_attach,
         capabilities = require("plugins.configs.lsp").capabilities,
       }
       local has_custom_config, server_custom_config = pcall(
