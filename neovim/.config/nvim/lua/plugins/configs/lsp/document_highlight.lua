@@ -1,20 +1,9 @@
-local function lsp_highlight_document(bufnr)
-  -- Set autocommands conditional on server_capabilities
-  -- vim.cmd [[
-  --   hi! LspReferenceRead cterm=bold ctermbg=red guibg=LightYellow
-  --   hi! LspReferenceText cterm=bold ctermbg=red guibg=LightYellow
-  --   hi! LspReferenceWrite cterm=bold ctermbg=red guibg=LightYellow
-  -- ]]
-  vim.api.nvim_create_augroup("lsp_document_highlight", {
-    clear = false,
-  })
-  vim.api.nvim_clear_autocmds {
-    buffer = bufnr,
-    group = "lsp_document_highlight",
-  }
+local group = vim.api.nvim_create_augroup("lsp_document_highlight", {})
+
+local function buf_autocmd_document_highlight(bufnr)
   vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
     buffer = bufnr,
-    group = "lsp_document_highlight",
+    group = group,
     callback = vim.lsp.buf.document_highlight,
   })
   vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
@@ -27,8 +16,22 @@ end
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
     local client = vim.lsp.get_client_by_id(args.data.client_id)
-    if client.server_capabilities.documentHighlightProvider then
-      lsp_highlight_document(args.buf)
+    local bufnr = args.buf
+
+    if client.supports_method "textDocument/documentHighlight" then
+      buf_autocmd_document_highlight(bufnr)
     end
+  end,
+})
+
+vim.api.nvim_create_autocmd("LspDetach", {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    local bufnr = args.buf
+
+    vim.api.nvim_clear_autocmds {
+      buffer = bufnr,
+      group = group,
+    }
   end,
 })
