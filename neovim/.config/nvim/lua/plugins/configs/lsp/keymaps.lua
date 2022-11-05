@@ -1,5 +1,3 @@
-local M = {}
-
 local function keymappings(client, bufnr)
   local opts = { noremap = true, silent = true, buffer = bufnr }
   --diagnostics
@@ -26,8 +24,11 @@ local function keymappings(client, bufnr)
   vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
 end
 
-function M.setup(client, bufnr)
-  keymappings(client, bufnr)
-end
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local bufnr = args.buf
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
 
-return M
+    keymappings(client, bufnr)
+  end,
+})

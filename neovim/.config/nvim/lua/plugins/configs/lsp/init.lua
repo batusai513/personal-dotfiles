@@ -13,8 +13,6 @@ end
 local M = {}
 
 function M.on_attach(client, bufnr)
-  require("plugins.configs.lsp.keymaps").setup(client, bufnr)
-
   if client.name == "sumneko_lua" then
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false
@@ -43,6 +41,7 @@ require("plugins.configs.lsp.handlers").setup()
 
 function M.setup()
   require("plugins.configs.lsp.installer").setup(lspConfig)
+  require "plugins.configs.lsp.keymaps"
   require "plugins.configs.lsp.format"
   require "plugins.configs.lsp.document_highlight"
   require "plugins.configs.lsp.codelens"
