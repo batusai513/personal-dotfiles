@@ -1,0 +1,14 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+[fill]
+symbol = " "
+
+[nodejs]
+format = "[$symbol($version )]($style)"
+
+[jobs]
+symbol = " "
+style = "bold red"
+number_threshold = 1
+format = "[$symbol]($style)"
+
