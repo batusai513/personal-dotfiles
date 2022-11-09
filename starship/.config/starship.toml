@@ -12,3 +12,5 @@ style = "bold red"
 number_threshold = 1
 format = "[$symbol]($style)"
 
+[package]
+display_private = true
