@@ -1,5 +1,4 @@
 local M = {}
-require("luasnip.loaders.from_vscode").lazy_load()
 
 function M.setup()
   local icons = require "core.theme.icons"
@@ -13,6 +12,8 @@ function M.setup()
   if not luasnip then
     return
   end
+
+  require("luasnip.loaders.from_vscode").lazy_load()
 
   --   פּ ﯟ   some other good icons
   local kind_icons = icons.kind
