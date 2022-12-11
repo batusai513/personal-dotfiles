@@ -35,7 +35,6 @@ local config = {
   hijack_unnamed_buffer_when_opening = false,
   update_cwd = false,
   ignore_buffer_on_setup = false,
-  create_in_closed_folder = true,
   auto_reload_on_write = true,
   open_on_tab = false,
   diagnostics = diagnosticsConfig,
