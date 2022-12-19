@@ -6,3 +6,4 @@ tmux/.config/tmux/plugins
 .netrwhist
 .git
 Brewfile.lock.json
+.luarc.json
