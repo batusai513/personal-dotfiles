@@ -1,5 +1,6 @@
 local mason = prequire "mason"
 local mason_lspconfig = prequire "mason-lspconfig"
+local u = require "core.utils"
 
 if not mason or not mason_lspconfig then
   return
@@ -62,7 +63,15 @@ mason_lspconfig.setup_handlers {
     if neodev_loaded then
       neodev.setup {}
     end
-    require("lspconfig")["sumneko_lua"].setup(global_opts)
+    require("lspconfig")["sumneko_lua"].setup(u.merge(global_opts, {
+      settings = {
+        Lua = {
+          completion = {
+            callSnippet = "Replace",
+          },
+        },
+      },
+    }))
   end,
   ["tsserver"] = function()
     local create = require "core.lsp.server_settings.tsserver"
