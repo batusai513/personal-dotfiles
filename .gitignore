@@ -1,7 +1,8 @@
-neovim/.config/nvim/plugin
+neovim/.config/nvim/plugin/packer_compiled.lua
 tmux/.config/tmux/plugins
 
 .DS_Store
 .netrwhist
 .git
 Brewfile.lock.json
+.luarc.json
