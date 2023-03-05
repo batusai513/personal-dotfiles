@@ -8,7 +8,7 @@ function M.setup(lspconfig)
       "astro",
       "rust_analyzer",
       "solargraph",
-      "sumneko_lua",
+      "lua_ls",
       "tailwindcss",
       "taplo",
       "tsserver",
