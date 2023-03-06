@@ -16,6 +16,9 @@ null_ls.setup {
     formatting.prettier.with {
       prefer_local = "node_modules/.bin",
     },
+    formatting.rome.with {
+      prefer_local = "node_modules/.bin",
+    },
     formatting.rubocop,
     diagnostics.rubocop,
 
