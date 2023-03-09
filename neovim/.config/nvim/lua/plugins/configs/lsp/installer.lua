@@ -1,7 +1,7 @@
 local M = {}
 
 function M.setup(lspconfig)
-  local ok_mason_lspconfig, mason_lspconfig = pcall(require, "mason-lspconfig")
+  local _, mason_lspconfig = pcall(require, "mason-lspconfig")
 
   mason_lspconfig.setup {
     ensure_installed = {
@@ -28,7 +28,7 @@ function M.setup(lspconfig)
   mason_lspconfig.setup_handlers {
     function(server_name)
       local opts = {
-        capabilities = require("plugins.configs.lsp").capabilities,
+        capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities()),
       }
       local has_custom_config, server_custom_config = pcall(
         require,
