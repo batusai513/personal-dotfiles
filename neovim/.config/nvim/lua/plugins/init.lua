@@ -321,7 +321,10 @@ local plugins = {
   },
   --line
   ["nvim-lualine/lualine.nvim"] = {
-    event = "BufReadPre",
+    event = "VeryLazy",
+    dependencies = {
+      "SmiteshP/nvim-navic"
+    },
     config = function()
       require("plugins.configs.lualine").setup()
     end,

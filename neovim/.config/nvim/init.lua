@@ -29,5 +29,4 @@ require("lazy").setup("plugins", {
   }
 })
 
-require "core.winbar"
 pcall(require, "custom")
