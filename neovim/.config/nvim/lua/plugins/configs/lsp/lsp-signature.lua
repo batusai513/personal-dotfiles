@@ -1,10 +1,7 @@
 local M = {}
 
 function M.setup()
-  local signature = prequire "lsp_signature"
-  if not signature then
-    return
-  end
+  local signature = require "lsp_signature"
 
   local options = {
     bind = true,
@@ -15,11 +12,9 @@ function M.setup()
 
   options = require("core.utils").load_override(options, "ray-x/lsp_signature.nvim")
 
-  vim.api.nvim_create_autocmd("LspAttach", {
-    callback = function(args)
-      signature.on_attach(options, args.buf)
-    end,
-  })
+  require("core.utils").on_attach(function(_, buffer)
+    signature.on_attach(options, buffer)
+  end)
 end
 
 return M

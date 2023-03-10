@@ -24,18 +24,13 @@ local function keymappings(client, bufnr)
   vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
 end
 
-vim.api.nvim_create_autocmd("LspAttach", {
-  callback = function(args)
-    local bufnr = args.buf
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
+require("core.utils").on_attach(function(client, buffer)
+  if client.server_capabilities.completionProvider then
+    vim.bo[buffer].omnifunc = "v:lua.vim.lsp.omnifunc"
+  end
+  if client.server_capabilities.definitionProvider then
+    vim.bo[buffer].tagfunc = "v:lua.vim.lsp.tagfunc"
+  end
 
-    if client.server_capabilities.completionProvider then
-      vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
-    end
-    if client.server_capabilities.definitionProvider then
-      vim.bo[bufnr].tagfunc = "v:lua.vim.lsp.tagfunc"
-    end
-
-    keymappings(client, bufnr)
-  end,
-})
+  keymappings(client, buffer)
+end)

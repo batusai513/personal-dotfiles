@@ -9,19 +9,24 @@ local M = {}
 function M.setup()
   local options = {
     ensure_installed = {
+      "bash",
       "css",
       "html",
       "javascript",
-      "jsdoc",
       "json",
+      "json5",
+      "jsonc",
       "lua",
       "markdown",
+      "markdown_inline",
       "php",
       "python",
+      "ruby",
       "scss",
       "tsx",
       "typescript",
-      "ruby",
+      "vim",
+      "yaml",
     },
     sync_install = false,
     highlight = {
@@ -34,10 +39,10 @@ function M.setup()
     incremental_selection = {
       enable = true,
       keymaps = {
-        init_selection = "gnn",
-        node_incremental = "grn",
-        scope_incremental = "grc",
-        node_decremental = "grm",
+        init_selection = "<C-space>",
+        node_incremental = "<C-space>",
+        scope_incremental = "<nop>",
+        node_decremental = "<bs>",
       },
     },
     autotag = {
