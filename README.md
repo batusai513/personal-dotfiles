@@ -26,7 +26,6 @@ cd personal-dotfiles
 
 then run
 
- 
 ```
 brew bundle
 ```
@@ -64,5 +63,5 @@ Right now the instalation of servers is manual and can be performed by running t
 ```
 
 you can get the list of server names supported at:
-https://github.com/williamboman/nvim-lsp-installer#available-lsps
+https://github.com/williamboman/mason-lspconfig.nvim
 
