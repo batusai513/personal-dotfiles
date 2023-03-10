@@ -5,7 +5,6 @@ end
 
 require "core"
 require "core.options"
-require "core.colorscheme"
 require "core.utils.prequire"
 require "core.keymaps"
 
@@ -29,4 +28,5 @@ require("lazy").setup("plugins", {
   }
 })
 
+require "core.colorscheme"
 pcall(require, "custom")

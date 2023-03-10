@@ -1,10 +1,7 @@
 local M = {}
 
 function M.setup()
-  local signature = prequire "lsp_signature"
-  if not signature then
-    return
-  end
+  local signature = require "lsp_signature"
 
   local options = {
     bind = true,

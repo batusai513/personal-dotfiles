@@ -330,7 +330,10 @@ local plugins = {
     end,
   },
   --base colorscheme
-  ["folke/tokyonight.nvim"] = {},
+  ["folke/tokyonight.nvim"] = {
+    lazy = false,
+    priority = 1000,
+  },
   --add/remove sorrunding charactes
   ["ur4ltz/surround.nvim"] = {
     config = function()
