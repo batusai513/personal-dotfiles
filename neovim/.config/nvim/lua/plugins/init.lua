@@ -58,10 +58,10 @@ local plugins = {
     cmd = { "TroubleToggle", "Trouble" },
     opts = { use_diagnostic_signs = true },
     keys = {
-      { "<leader>xx", "<cmd>TroubleToggle document_diagnostics<cr>",  desc = "Document Diagnostics (Trouble)" },
+      { "<leader>xx", "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Document Diagnostics (Trouble)" },
       { "<leader>xX", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace Diagnostics (Trouble)" },
-      { "<leader>xL", "<cmd>TroubleToggle loclist<cr>",               desc = "Location List (Trouble)" },
-      { "<leader>xQ", "<cmd>TroubleToggle quickfix<cr>",              desc = "Quickfix List (Trouble)" },
+      { "<leader>xL", "<cmd>TroubleToggle loclist<cr>", desc = "Location List (Trouble)" },
+      { "<leader>xQ", "<cmd>TroubleToggle quickfix<cr>", desc = "Quickfix List (Trouble)" },
       {
         "[q",
         function()
@@ -211,7 +211,7 @@ local plugins = {
     event = "VeryLazy",
     dependencies = "nvim-web-devicons",
     keys = {
-      { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>",            desc = "Toggle pin" },
+      { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle pin" },
       { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete non-pinned buffers" },
     },
     opts = {
@@ -258,12 +258,70 @@ local plugins = {
       },
     },
   },
-  --tree file viewer
-  ["kyazdani42/nvim-tree.lua"] = {
-    cmd = { "NvimTreeToggle", "NvimTreeFocus" },
-    config = function()
-      require "plugins.configs.nvim-tree"
+  ["nvim-neo-tree/neo-tree.nvim"] = {
+    cmd = "Neotree",
+    keys = {
+      {
+        "<leader>e",
+        function()
+          require("neo-tree.command").execute {
+            toggle = true,
+          }
+        end,
+        desc = "Explorer NeoTree (root dir)",
+      },
+    },
+    deactivate = function()
+      vim.cmd [[Neotree close]]
     end,
+    init = function()
+      vim.g.neo_tree_remove_legacy_commands = 1
+      if vim.fn.argc() == 1 then
+        local stat = vim.loop.fs_stat(vim.fn.argv(0))
+        if stat and stat.type == "directory" then
+          require "neo-tree"
+        end
+      end
+    end,
+    opts = {
+      filtered_items = {
+        visible = true,
+      },
+      filesystem = {
+        bind_to_cwd = false,
+        follow_current_file = true,
+      },
+      window = {
+        position = "right",
+        mappings = {
+          ["<space>"] = "none",
+        },
+      },
+      default_component_configs = {
+        indent = {
+          with_expanders = true, -- if nil and file nesting is enabled, will enable expanders
+          expander_collapsed = "",
+          expander_expanded = "",
+          expander_highlight = "NeoTreeExpander",
+        },
+        git_status = {
+          symbols = {
+            -- Change type
+            added = "✚", -- NOTE: you can set any of these to an empty string to not show them
+            deleted = "✖",
+            modified = "",
+            renamed = "",
+            -- Status type
+            untracked = "",
+            ignored = "",
+            unstaged = require("core.theme.icons").git.Diff,
+            staged = "",
+            conflict = "",
+          },
+          align = "right",
+        },
+      },
+    },
   },
   -- file navigation
   ["nvim-telescope/telescope.nvim"] = {
@@ -272,7 +330,6 @@ local plugins = {
       "popup.nvim",
       "telescope-fzf-native.nvim",
       "trouble.nvim",
-      "nvim-tree.lua",
       "telescope-ui-select.nvim",
       "nvim-lua/popup.nvim",
       "nvim-lua/plenary.nvim",
@@ -346,6 +403,7 @@ local plugins = {
       require("surround").setup { mappings_style = "surround" }
     end,
   },
+  ["MunifTanjim/nui.nvim"] = { lazy = true },
 }
 
 return require("core.plugins").merge(plugins)

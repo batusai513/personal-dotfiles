@@ -18,7 +18,7 @@ function M.setup()
       globalstatus = true,
     },
     extensions = {
-      "nvim-tree",
+      "neo-tree",
       "toggleterm",
     },
     sections = {

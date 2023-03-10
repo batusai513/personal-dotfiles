@@ -70,7 +70,7 @@ local config = {
     ["q"] = { "<cmd>q!<CR>", "Quit" },
     ["f"] = { "<cmd>Format<cr>", "Format" },
     ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
-    ["e"] = { "<cmd>NvimTreeToggle<cr>", "Open explorer" },
+    ["e"] = { name = "Open explorer (root dir)" },
     ["c"] = { "<cmd>Bdelete<cr>", "Close buffer" },
     ["C"] = { "<cmd>Bwipeout<cr>", "Close all buffers" },
     b = {
