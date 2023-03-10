@@ -5,7 +5,7 @@ local plugins = {
   },
   ["kyazdani42/nvim-web-devicons"] = {
     module = "nvim-web-devicons",
-    lazy = true
+    lazy = true,
   },
   --Language server protocol
 
@@ -18,10 +18,10 @@ local plugins = {
       { "folke/neoconf.nvim", cmd = "Neoconf", config = true },
       {
         "folke/neodev.nvim",
-        opts = { experimental = { pathStrict = true } }
+        opts = { experimental = { pathStrict = true } },
       },
       {
-        "jose-elias-alvarez/typescript.nvim"
+        "jose-elias-alvarez/typescript.nvim",
       },
       {
         "b0o/SchemaStore.nvim",
@@ -34,7 +34,7 @@ local plugins = {
       {
         "hrsh7th/cmp-nvim-lsp",
         cond = function()
-          return require("core.utils").has("nvim-cmp")
+          return require("core.utils").has "nvim-cmp"
         end,
       },
       {
@@ -58,7 +58,7 @@ local plugins = {
             "[q",
             function()
               if require("trouble").is_open() then
-                require("trouble").previous({ skip_groups = true, jump = true })
+                require("trouble").previous { skip_groups = true, jump = true }
               else
                 vim.cmd.cprev()
               end
@@ -69,7 +69,7 @@ local plugins = {
             "]q",
             function()
               if require("trouble").is_open() then
-                require("trouble").next({ skip_groups = true, jump = true })
+                require("trouble").next { skip_groups = true, jump = true }
               else
                 vim.cmd.cnext()
               end
@@ -100,7 +100,7 @@ local plugins = {
     ---@param opts MasonSettings | {ensure_installed: string[]}
     config = function(_, opts)
       require("mason").setup(opts)
-      local mr = require("mason-registry")
+      local mr = require "mason-registry"
       for _, tool in ipairs(opts.ensure_installed) do
         local p = mr.get_package(tool)
         if not p:is_installed() then
@@ -293,7 +293,13 @@ local plugins = {
   ["windwp/nvim-spectre"] = {
     module = "spectre",
     keys = {
-      { "<leader>sr", function() require("spectre").open() end, desc = "Replace in files (Spectre)" },
+      {
+        "<leader>sr",
+        function()
+          require("spectre").open()
+        end,
+        desc = "Replace in files (Spectre)",
+      },
     },
   },
   -- which-key
@@ -323,7 +329,7 @@ local plugins = {
   ["nvim-lualine/lualine.nvim"] = {
     event = "VeryLazy",
     dependencies = {
-      "SmiteshP/nvim-navic"
+      "SmiteshP/nvim-navic",
     },
     config = function()
       require("plugins.configs.lualine").setup()
@@ -342,4 +348,4 @@ local plugins = {
   },
 }
 
-return require("core.packer").run(plugins)
+return require("core.plugins").merge(plugins)
