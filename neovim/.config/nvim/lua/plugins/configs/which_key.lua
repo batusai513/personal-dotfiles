@@ -2,52 +2,30 @@ local M = {}
 
 local config = {
   plugins = {
-    marks = true,     -- shows a list of your marks on ' and `
-    registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
-    -- the presets plugin, adds help for a bunch of default keybindings in Neovim
-    -- No actual key bindings are created
     presets = {
-      operators = false,                             -- adds help for operators like d, y, ...
-      motions = false,                               -- adds help for motions
-      text_objects = false,                          -- help for text objects triggered after entering an operator
-      windows = true,                                -- default bindings on <c-w>
-      nav = true,                                    -- misc bindings to work with windows
-      z = true,                                      -- bindings for folds, spelling and others prefixed with z
-      g = true,                                      -- bindings for prefixed with g
+      operators = false,    -- adds help for operators like d, y, ...
+      motions = false,      -- adds help for motions
+      text_objects = false, -- help for text objects triggered after entering an operator
+      windows = true,       -- default bindings on <c-w>
+      nav = true,           -- misc bindings to work with windows
+      z = true,             -- bindings for folds, spelling and others prefixed with z
+      g = true,             -- bindings for prefixed with g
     },
-    spelling = { enabled = true, suggestions = 20 }, -- use which-key for spelling hints
-  },
-  icons = {
-    breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
-    separator = "➜", -- symbol used between a key and it's label
-    group = "+",      -- symbol prepended to a group
-  },
-  popup_mappings = {
-    scroll_down = "<c-d>", -- binding to scroll down inside the popup
-    scroll_up = "<c-u>",   -- binding to scroll up inside the popup
   },
   window = {
-    border = "single",        -- none, single, double, shadow
-    position = "bottom",      -- bottom, top
-    margin = { 1, 0, 1, 0 },  -- extra window margin [top, right, bottom, left]
-    padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
+    border = "single", -- none, single, double, shadow
   },
   layout = {
-    height = { min = 4, max = 25 }, -- min and max height of the columns
-    width = { min = 20, max = 50 }, -- min and max width of the columns
-    spacing = 6,                    -- spacing between columns
+    spacing = 4, -- spacing between columns
     align = "center",
   },
-  ignore_missing = true,
-  hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
-  show_help = true,                                                             -- show help message on the command line when the popup is visible
   opts = {
-    mode = "n",                                                                 -- NORMAL mode
+    mode = "n",     -- NORMAL mode
     prefix = "<leader>",
-    buffer = nil,                                                               -- Global mappings. Specify a buffer number for buffer local mappings
-    silent = true,                                                              -- use `silent` when creating keymaps
-    noremap = true,                                                             -- use `noremap` when creating keymaps
-    nowait = true,                                                              -- use `nowait` when creating keymaps
+    buffer = nil,   -- Global mappings. Specify a buffer number for buffer local mappings
+    silent = true,  -- use `silent` when creating keymaps
+    noremap = true, -- use `noremap` when creating keymaps
+    nowait = true,  -- use `nowait` when creating keymaps
   },
   vopts = {
     mode = "v",     -- VISUAL mode
@@ -57,8 +35,6 @@ local config = {
     noremap = true, -- use `noremap` when creating keymaps
     nowait = true,  -- use `nowait` when creating keymaps
   },
-  -- NOTE: Prefer using : over <cmd> as the latter avoids going back in normal-mode.
-  -- see https://neovim.io/doc/user/map.html#:map-cmd
   vmappings = {
     f = {
       name = "Find selected",
@@ -66,65 +42,12 @@ local config = {
     },
   },
   mappings = {
-    ["w"] = { "<cmd>w!<CR>", "Save" },
-    ["q"] = { "<cmd>q!<CR>", "Quit" },
-    ["f"] = { "<cmd>Format<cr>", "Format" },
-    ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
-    ["e"] = { name = "Open explorer (root dir)" },
-    ["c"] = { "<cmd>Bdelete<cr>", "Close buffer" },
-    ["C"] = { "<cmd>Bwipeout<cr>", "Close all buffers" },
-    b = {
-      name = "Buffers",
-      j = { "<cmd>BufferLinePick<cr>", "Jump" },
-      f = { "<cmd>lua require 'telescope.builtin'.buffers()<cr>", "Find buffer" },
-      b = { "<cmd>BufferLineCyclePrev<cr>", "Previous" },
-      c = { "<cmd>Bdelete<cr>", "Close buffer" },
-      e = {
-        "<cmd>BufferLinePickClose<cr>",
-        "Pick which buffer to close",
-      },
-      h = { "<cmd>BufferLineCloseLeft<cr>", "Close all to the left" },
-      l = {
-        "<cmd>BufferLineCloseRight<cr>",
-        "Close all to the right",
-      },
-      D = {
-        "<cmd>BufferLineSortByDirectory<cr>",
-        "Sort by directory",
-      },
-      L = {
-        "<cmd>BufferLineSortByExtension<cr>",
-        "Sort by language",
-      },
-    },
-    g = {
-      name = "Git",
-      j = { require("gitsigns").next_hunk, "Next Hunk" },
-      k = { require("gitsigns").prev_hunk, "Prev Hunk" },
-      l = { require("gitsigns").blame_line, "Blame" },
-      p = { require("gitsigns").preview_hunk, "Preview Hunk" },
-      r = { require("gitsigns").reset_hunk, "Reset Hunk" },
-      R = { require("gitsigns").reset_buffer, "Reset Buffer" },
-      s = { require("gitsigns").stage_hunk, "Stage Hunk" },
-      u = {
-        require("gitsigns").undo_stage_hunk,
-        "Undo Stage Hunk",
-      },
-      o = { require("telescope.builtin").git_status, "Open changed file" },
-      b = { require("telescope.builtin").git_branches, "Checkout branch" },
-      c = { require("telescope.builtin").git_commits, "Checkout commit" },
-      C = {
-        require("telescope.builtin").git_bcommits,
-        "Checkout commit(for current file)",
-      },
-      d = {
-        function()
-          require("gitsigns").diffthis "HEAD"
-        end,
-        "Git Diff",
-      },
-      g = { "<cmd>LazyGit <cr>", "LazyGit" },
-    },
+    w = { "<cmd>w!<CR>", "Save" },
+    q = { "<cmd>q!<CR>", "Quit" },
+    f = { "<cmd>Format<cr>", "Format" },
+    t = { name = "+tabs" },
+    b = { name = "+buffer" },
+    g = { name = "+git" },
     l = {
       name = "LSP",
       a = { vim.lsp.buf.code_action, "Code Action" },
@@ -171,9 +94,18 @@ local config = {
       t = { "<cmd>lua require'telescope.builtin'.live_grep()<cr>", "Text" },
       k = { "<cmd>lua require'telescope.builtin'.keymaps()<cr>", "Keymaps" },
       C = { "<cmd>lua require'telescope.builtin'.commands()<cr>", "Commands" },
+      b = { "<cmd>lua require 'telescope.builtin'.buffers()<cr>", "Find buffer" },
       c = {
         "<cmd>lua require'telescope.builtin.internal'.colorscheme({enable_preview = true})<cr>",
         "Colorscheme with Preview",
+      },
+      --Git
+      o = { require("telescope.builtin").git_status, "Open changed file" },
+      ["gb"] = { require("telescope.builtin").git_branches, "Checkout branch" },
+      ["gc"] = { require("telescope.builtin").git_commits, "Checkout commit" },
+      ["gC"] = {
+        require("telescope.builtin").git_bcommits,
+        "Checkout commit(for current file)",
       },
     },
     ["\\"] = {

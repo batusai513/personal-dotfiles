@@ -6,7 +6,6 @@ end
 require "core"
 require "core.options"
 require "core.utils.prequire"
-require "core.keymaps"
 
 local fn = vim.fn
 local lazypath = fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -45,5 +44,6 @@ require("lazy").setup("plugins", {
   },
 })
 
+require "core.keymaps"
 require "core.colorscheme"
 pcall(require, "custom")

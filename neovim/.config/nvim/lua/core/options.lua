@@ -2,6 +2,9 @@ local opt = vim.opt
 local g = vim.g
 local config = require("core.utils").load_config ()
 
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
 g.theme = config.ui.theme
 
 -- :help options
@@ -44,9 +47,6 @@ opt.updatetime = 300 -- faster completion (4000ms default)
 
 opt.whichwrap:append "<>[]hl"
 opt.shortmess:append "c"
-
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
 
 opt.backup = false -- creates a backup file
 opt.cmdheight = 1 -- more space in the neovim command line for displaying messages
