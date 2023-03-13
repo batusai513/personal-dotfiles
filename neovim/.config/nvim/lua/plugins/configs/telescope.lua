@@ -78,7 +78,6 @@ local options = {
     buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
     mappings = default_mappings,
   },
-
   extensions_list = { "themes", "terms" },
 }
 local M = {}
@@ -90,9 +89,8 @@ M.project_files = function()
   end
 end
 
-options = require("core.utils").load_override(options, "nvim-telescope/telescope.nvim")
-
 M.setup = function()
+  options = require("core.utils").load_override(options, "nvim-telescope/telescope.nvim")
   telescope.setup(options)
   require("telescope").load_extension "fzf"
   require("telescope").load_extension "ui-select"

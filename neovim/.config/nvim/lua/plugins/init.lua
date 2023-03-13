@@ -1,13 +1,5 @@
 local plugins = {
   ["nvim-lua/plenary.nvim"] = { lazy = true },
-  -- buffer remove
-  ["echasnovski/mini.bufremove"] = {
-    -- stylua: ignore
-    keys = {
-      { "<leader>bd", function() require("mini.bufremove").delete(0, false) end, desc = "Delete Buffer" },
-      { "<leader>bD", function() require("mini.bufremove").delete(0, true) end,  desc = "Delete Buffer (Force)" },
-    },
-  },
   ["kyazdani42/nvim-web-devicons"] = {
     module = "nvim-web-devicons",
     lazy = true,
@@ -63,10 +55,10 @@ local plugins = {
     cmd = { "TroubleToggle", "Trouble" },
     opts = { use_diagnostic_signs = true },
     keys = {
-      { "<leader>xx", "<cmd>TroubleToggle document_diagnostics<cr>",  desc = "Document Diagnostics (Trouble)" },
+      { "<leader>xx", "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Document Diagnostics (Trouble)" },
       { "<leader>xX", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace Diagnostics (Trouble)" },
-      { "<leader>xL", "<cmd>TroubleToggle loclist<cr>",               desc = "Location List (Trouble)" },
-      { "<leader>xQ", "<cmd>TroubleToggle quickfix<cr>",              desc = "Quickfix List (Trouble)" },
+      { "<leader>xL", "<cmd>TroubleToggle loclist<cr>", desc = "Location List (Trouble)" },
+      { "<leader>xQ", "<cmd>TroubleToggle quickfix<cr>", desc = "Quickfix List (Trouble)" },
       {
         "[q",
         function()
@@ -207,13 +199,13 @@ local plugins = {
     keys = function(gs)
       local gs = require "gitsigns"
       return {
-        { "<leader>gj", gs.next_hunk,       desc = "Next Hunk" },
-        { "<leader>gk", gs.prev_hunk,       desc = "Prev Hunk" },
-        { "<leader>gl", gs.blame_line,      desc = "Blame" },
-        { "<leader>gp", gs.preview_hunk,    desc = "Preview Hunk" },
-        { "<leader>gr", gs.reset_hunk,      desc = "Reset Hunk" },
-        { "<leader>gR", gs.reset_buffer,    desc = "Reset Buffer" },
-        { "<leader>gs", gs.stage_hunk,      desc = "Stage Hunk" },
+        { "<leader>gj", gs.next_hunk, desc = "Next Hunk" },
+        { "<leader>gk", gs.prev_hunk, desc = "Prev Hunk" },
+        { "<leader>gl", gs.blame_line, desc = "Blame" },
+        { "<leader>gp", gs.preview_hunk, desc = "Preview Hunk" },
+        { "<leader>gr", gs.reset_hunk, desc = "Reset Hunk" },
+        { "<leader>gR", gs.reset_buffer, desc = "Reset Buffer" },
+        { "<leader>gs", gs.stage_hunk, desc = "Stage Hunk" },
         { "<leader>gu", gs.undo_stage_hunk, desc = "Undo Stage Hunk" },
         {
           "<leader>gd",
@@ -234,21 +226,39 @@ local plugins = {
     },
     cmd = { "LazyGit", "LazyGitConfig" },
   },
+  ["echasnovski/mini.bufremove"] = {
+    keys = {
+      {
+        "<leader>bc",
+        function()
+          require("mini.bufremove").delete(0, false)
+        end,
+        desc = "Delete Buffer",
+      },
+      {
+        "<leader>bC",
+        function()
+          require("mini.bufremove").delete(0, true)
+        end,
+        desc = "Delete Buffer (Force)",
+      },
+    },
+  },
   --buffer management
   ["akinsho/bufferline.nvim"] = {
     event = "VeryLazy",
     dependencies = "nvim-web-devicons",
     keys = {
-      { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>",            desc = "Toggle pin" },
+      { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle pin" },
       { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete non-pinned buffers" },
-      { "<leader>bj", "<cmd>BufferLinePick<cr>",                 desc = "Jump" },
-      { "<leader>bp", "<cmd>BufferLineCyclePrev<cr>",            desc = "Prev buffer" },
-      { "<leader>bn", "<cmd>BufferLineCycleNext<cr>",            desc = "Next buffer" },
-      { "<leader>be", "<cmd>BufferLinePickClose<cr>",            desc = "Pick which buffer to close" },
-      { "<leader>bH", "<cmd>BufferLineCloseLeft<cr>",            desc = "Close all to the left" },
-      { "<leader>bL", "<cmd>BufferLineCloseRight<cr>",           desc = "Close all to the right" },
-      { "<leader>bD", "<cmd>BufferLineSortByDirectory<cr>",      desc = "Sort by directory" },
-      { "<leader>bE", "<cmd>BufferLineSortByExtension<cr>",      desc = "Sort by language" },
+      { "<leader>bj", "<cmd>BufferLinePick<cr>", desc = "Jump" },
+      { "<leader>bp", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev buffer" },
+      { "<leader>bn", "<cmd>BufferLineCycleNext<cr>", desc = "Next buffer" },
+      { "<leader>be", "<cmd>BufferLinePickClose<cr>", desc = "Pick which buffer to close" },
+      { "<leader>bH", "<cmd>BufferLineCloseLeft<cr>", desc = "Close all to the left" },
+      { "<leader>bL", "<cmd>BufferLineCloseRight<cr>", desc = "Close all to the right" },
+      { "<leader>bD", "<cmd>BufferLineSortByDirectory<cr>", desc = "Sort by directory" },
+      { "<leader>bE", "<cmd>BufferLineSortByExtension<cr>", desc = "Sort by language" },
     },
     opts = {
       options = {

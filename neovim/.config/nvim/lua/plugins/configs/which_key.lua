@@ -3,13 +3,13 @@ local M = {}
 local config = {
   plugins = {
     presets = {
-      operators = false,    -- adds help for operators like d, y, ...
-      motions = false,      -- adds help for motions
+      operators = false, -- adds help for operators like d, y, ...
+      motions = false, -- adds help for motions
       text_objects = false, -- help for text objects triggered after entering an operator
-      windows = true,       -- default bindings on <c-w>
-      nav = true,           -- misc bindings to work with windows
-      z = true,             -- bindings for folds, spelling and others prefixed with z
-      g = true,             -- bindings for prefixed with g
+      windows = true, -- default bindings on <c-w>
+      nav = true, -- misc bindings to work with windows
+      z = true, -- bindings for folds, spelling and others prefixed with z
+      g = true, -- bindings for prefixed with g
     },
   },
   window = {
@@ -20,20 +20,20 @@ local config = {
     align = "center",
   },
   opts = {
-    mode = "n",     -- NORMAL mode
+    mode = "n", -- NORMAL mode
     prefix = "<leader>",
-    buffer = nil,   -- Global mappings. Specify a buffer number for buffer local mappings
-    silent = true,  -- use `silent` when creating keymaps
+    buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+    silent = true, -- use `silent` when creating keymaps
     noremap = true, -- use `noremap` when creating keymaps
-    nowait = true,  -- use `nowait` when creating keymaps
+    nowait = true, -- use `nowait` when creating keymaps
   },
   vopts = {
-    mode = "v",     -- VISUAL mode
+    mode = "v", -- VISUAL mode
     prefix = "<leader>",
-    buffer = nil,   -- Global mappings. Specify a buffer number for buffer local mappings
-    silent = true,  -- use `silent` when creating keymaps
+    buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+    silent = true, -- use `silent` when creating keymaps
     noremap = true, -- use `noremap` when creating keymaps
-    nowait = true,  -- use `nowait` when creating keymaps
+    nowait = true, -- use `nowait` when creating keymaps
   },
   vmappings = {
     f = {
@@ -86,17 +86,19 @@ local config = {
     },
     s = {
       name = "Search",
-      f = { "<cmd>lua require'plugins.configs.telescope'.project_files()<cr>", "Find File" },
-      h = { "<cmd>lua require'telescope.builtin'.help_tags()<cr>", "Find Help" },
-      M = { "<cmd>lua require'telescope.builtin'.man_pages()<cr>", "Man Pages" },
-      r = { "<cmd>lua require'telescope.builtin'.oldfiles()<cr>", "Open Recent File" },
-      R = { "<cmd>lua require'telescope.builtin'.registers()<cr>", "Registers" },
-      t = { "<cmd>lua require'telescope.builtin'.live_grep()<cr>", "Text" },
-      k = { "<cmd>lua require'telescope.builtin'.keymaps()<cr>", "Keymaps" },
-      C = { "<cmd>lua require'telescope.builtin'.commands()<cr>", "Commands" },
-      b = { "<cmd>lua require 'telescope.builtin'.buffers()<cr>", "Find buffer" },
+      f = { require("plugins.configs.telescope").project_files, "Find File" },
+      h = { require("telescope.builtin").help_tags, "Find Help" },
+      M = { require("telescope.builtin").man_pages, "Man Pages" },
+      r = { require("telescope.builtin").oldfiles, "Open Recent File" },
+      R = { require("telescope.builtin").registers, "Registers" },
+      t = { require("telescope.builtin").live_grep, "Text" },
+      k = { require("telescope.builtin").keymaps, "Keymaps" },
+      C = { require("telescope.builtin").commands, "Commands" },
+      b = { require("telescope.builtin").buffers, "Find buffer" },
       c = {
-        "<cmd>lua require'telescope.builtin.internal'.colorscheme({enable_preview = true})<cr>",
+        function()
+          require("telescope.builtin.internal").colorscheme { enable_preview = true }
+        end,
         "Colorscheme with Preview",
       },
       --Git
