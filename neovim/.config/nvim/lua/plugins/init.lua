@@ -197,7 +197,10 @@ local plugins = {
     ft = "gitcommit",
     event = { "BufReadPre", "BufNewFile" },
     keys = function(gs)
-      local gs = require "gitsigns"
+      local ok, gs = pcall(require,"gitsigns")
+      if not ok then
+        return {}
+      end
       return {
         { "<leader>gj", gs.next_hunk, desc = "Next Hunk" },
         { "<leader>gk", gs.prev_hunk, desc = "Prev Hunk" },
