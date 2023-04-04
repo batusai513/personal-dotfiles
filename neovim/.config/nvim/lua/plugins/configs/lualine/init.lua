@@ -14,7 +14,7 @@ function M.setup()
   lualine.setup {
     options = {
       theme = "auto",
-      disabled_filetypes = { "dashboard", "NvimTree", "Outline", "toggleterm", "lazygit" },
+      disabled_filetypes = { "dashboard", "neo-tree", "Outline", "toggleterm", "lazygit" },
       globalstatus = true,
     },
     extensions = {
