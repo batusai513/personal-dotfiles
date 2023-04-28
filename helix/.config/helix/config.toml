@@ -8,3 +8,10 @@ hidden = false
 
 [editor.indent-guides]
 render = true
+
+[editor.cursor-shape]
+insert = "bar"
+
+[editor.lsp]
+display-inlay-hints = true
+display-messages = true
