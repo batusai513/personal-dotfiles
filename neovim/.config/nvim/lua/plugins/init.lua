@@ -197,7 +197,7 @@ local plugins = {
     ft = "gitcommit",
     event = { "BufReadPre", "BufNewFile" },
     keys = function(gs)
-      local ok, gs = pcall(require,"gitsigns")
+      local ok, gs = pcall(require, "gitsigns")
       if not ok then
         return {}
       end
@@ -433,6 +433,21 @@ local plugins = {
     },
     config = function()
       require("plugins.configs.lualine").setup()
+    end,
+  },
+  ["stevearc/dressing.nvim"] = {
+    lazy = true,
+    init = function()
+      ---@diagnostic disable-next-line: duplicate-set-field
+      vim.ui.select = function(...)
+        require("lazy").load { plugins = { "dressing.nvim" } }
+        return vim.ui.select(...)
+      end
+      ---@diagnostic disable-next-line: duplicate-set-field
+      vim.ui.input = function(...)
+        require("lazy").load { plugins = { "dressing.nvim" } }
+        return vim.ui.input(...)
+      end
     end,
   },
   --base colorscheme
