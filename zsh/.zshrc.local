@@ -1,0 +1,40 @@
+
+eval "$(starship init zsh)"
+eval "$(rbenv init - zsh)"
+
+alias nvim-lazy="NVIM_APPNAME=LazyVim nvim"
+alias nvim-kick="NVIM_APPNAME=kickstart nvim"
+alias nvim-chad="NVIM_APPNAME=NvChad nvim"
+alias nvim-astro="NVIM_APPNAME=AstroNv nvim"
+
+function nvims() {
+  items=("default" "kickstart" "LazyVim" "NvChad" "AstroNv")
+  config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
+  if [[ -z $config ]]; then
+    echo "Nothing selected"
+    return 0
+  elif [[ $config == "default" ]]; then
+    config=""
+  fi
+  NVIM_APPNAME=$config nvim $@
+}
+
+bindkey -s ^a "nvims\n"
+
+# bun completions
+[ -s "/Users/richard.roncancio/.bun/_bun" ] && source "/Users/richard.roncancio/.bun/_bun"
+
+# Bun
+export BUN_INSTALL="/Users/richard.roncancio/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# proto
+export PROTO_ROOT="$HOME/.proto"
+export PATH="$PROTO_ROOT/bin:$PATH"
+
+path+=("$HOME/.local/share/nvim/mason/bin")
+path+=("$HOME/projects/personal-dotfiles/bin/bin/")
+
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
+export PATH="/usr/local/sbin:$PATH"
