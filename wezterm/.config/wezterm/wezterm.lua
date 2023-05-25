@@ -17,6 +17,12 @@ config.use_cap_height_to_scale_fallback_fonts = true
 config.font_size = 16
 config.color_scheme = "tokyonight_moon"
 config.hide_tab_bar_if_only_one_tab = true
+config.window_padding = {
+  left = 0,
+  right = 0,
+  top = 0,
+  bottom = 0,
+}
 -- config.window_decorations = "RESIZE"
 
 -- and finally, return the configuration to wezterm

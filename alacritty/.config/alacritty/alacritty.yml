@@ -1,6 +1,5 @@
-
 import:
- - ~/.config/alacritty/tokio-night-dark.yml
+  - ~/.config/alacritty/tokio-night-dark.yml
 
 window:
   padding:
@@ -16,26 +15,26 @@ scrolling:
 
 font:
   normal:
-    family: 'JetBrainsMono Nerd Font'
+    family: "JetBrainsMono Nerd Font"
     style: Regular
   italic:
-    family: 'JetBrainsMono Nerd Font'
+    family: "JetBrainsMono Nerd Font"
     style: Italic
   medium:
-    family: 'JetBrainsMono Nerd Font'
+    family: "JetBrainsMono Nerd Font"
     style: Medium
   bold:
-    family: 'JetBrainsMono Nerd Font'
+    family: "JetBrainsMono Nerd Font"
     style: Bold
 
   size: 16
   draw_bold_text_with_bright_colors: true
 
 key_bindings:
-   - { key: Right, mods: Alt, chars: "\x1BF" }
-   - { key: Left,  mods: Alt, chars: "\x1BB" }
-   - { key: Return, mods: Super|Shift, action: SpawnNewInstance }
-
+  - { key: Right, mods: Alt, chars: "\x1BF" }
+  - { key: Left, mods: Alt, chars: "\x1BB" }
+  - { key: Return, mods: Super|Shift, action: SpawnNewInstance }
+  - { key: J, mods: Command, chars: "\x01\x54" }
 #ubuntu WSL
 # shell:
-  # program: "C:\\Windows\\System32\\wsl.exe ~"
+# program: "C:\\Windows\\System32\\wsl.exe ~"
