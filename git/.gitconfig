@@ -17,12 +17,15 @@
 [core]
 	editor = vim
 	excludesfile = ~/.gitignore_global
+  pager = delta
 [help]
 	autocorrect = 10
 [interactive]
 	singlekey = true
+  diffFilter = delta --color-only
 [merge]
 	summary = true
+  conflictstyle = diff3
 [push]
 	default = simple
 	autoSetupRemote = true
@@ -40,3 +43,11 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[diff]
+  colorMoved = default
+[delta]
+  navigate = true
+  light = false
+[diff "lockb"]
+    textconv = bun
+    binary = true
