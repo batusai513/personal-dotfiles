@@ -24,3 +24,5 @@ source $HOME/.aliases
 source $ZSH/oh-my-zsh.sh
 
 eval "$(zoxide init zsh)"
+
+
