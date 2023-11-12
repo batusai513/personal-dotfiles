@@ -1,7 +1,4 @@
 
-eval "$(starship init zsh)"
-eval "$(rbenv init - zsh)"
-
 alias nvim-lazy="NVIM_APPNAME=LazyVim nvim"
 alias nvim-kick="NVIM_APPNAME=kickstart nvim"
 alias nvim-chad="NVIM_APPNAME=NvChad nvim"
@@ -49,4 +46,5 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 export PROTO_HOME="$HOME/.proto"
 export PATH="$PROTO_HOME/shims:$PROTO_HOME/bin:$PATH"
 
+eval "$(starship init zsh)"
 eval "$(rbenv init - zsh)"

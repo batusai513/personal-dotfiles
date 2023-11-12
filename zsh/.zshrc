@@ -2,6 +2,12 @@
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
+if [[ $OSTYPE == 'darwin'* ]]; then
+	eval "$(/opt/homebrew/bin/brew shellenv)"
+else
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
+
 # Set name of the theme to load.
 # ZSH_THEME="spaceship"
 

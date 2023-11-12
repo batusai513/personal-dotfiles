@@ -1,0 +1,53 @@
+import = ["/home/wardrakus/.config/alacritty/tokio-night-dark.toml"]
+
+[font]
+# draw_bold_text_with_bright_colors = true
+size = 16
+
+[font.bold]
+family = "JetBrainsMono Nerd Font"
+style = "Bold"
+
+[font.italic]
+family = "JetBrainsMono Nerd Font"
+style = "Italic"
+
+# [font.medium]
+# family = "JetBrainsMono Nerd Font"
+# style = "Medium"
+
+[font.normal]
+family = "JetBrainsMono Nerd Font"
+style = "Regular"
+
+[[keyboard.bindings]]
+chars = "\u001BF"
+key = "Right"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u001BB"
+key = "Left"
+mods = "Alt"
+
+[[keyboard.bindings]]
+action = "SpawnNewInstance"
+key = "Return"
+mods = "Super|Shift"
+
+[[keyboard.bindings]]
+chars = "\u0001T"
+key = "J"
+mods = "Command"
+
+[scrolling]
+history = 10000
+multiplier = 3
+
+[window.class]
+general = "Alacritty"
+instance = "Alacritty"
+
+[window.padding]
+x = 2
+y = 2
