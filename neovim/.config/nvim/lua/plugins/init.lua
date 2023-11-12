@@ -30,9 +30,6 @@ local plugins = {
       },
       {
         "hrsh7th/cmp-nvim-lsp",
-        cond = function()
-          return require("core.utils").has "nvim-cmp"
-        end,
       },
       {
         "ray-x/lsp_signature.nvim",
@@ -185,6 +182,7 @@ local plugins = {
   },
   ["lukas-reineke/indent-blankline.nvim"] = {
     event = "BufWinEnter",
+    main = "ibl",
     config = function()
       require "plugins.configs.indent-blankline"
     end,

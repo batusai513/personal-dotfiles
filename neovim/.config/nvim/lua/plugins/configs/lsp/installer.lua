@@ -30,10 +30,8 @@ function M.setup(lspconfig)
       local opts = {
         capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities()),
       }
-      local has_custom_config, server_custom_config = pcall(
-        require,
-        "plugins.configs.lsp.server_settings." .. server_name
-      )
+      local has_custom_config, server_custom_config =
+        pcall(require, "plugins.configs.lsp.server_settings." .. server_name)
       if has_custom_config then
         if type(server_custom_config) == "function" then
           return server_custom_config(lspconfig[server_name], opts)
