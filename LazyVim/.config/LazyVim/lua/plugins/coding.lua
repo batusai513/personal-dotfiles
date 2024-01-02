@@ -1,5 +1,14 @@
 return {
   {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    opts = {}, -- this is equalent to setup({}) function
+  },
+  {
+    "echasnovski/mini.pairs",
+    enabled = false,
+  },
+  {
     "hrsh7th/nvim-cmp",
     keys = { ":", "/", "?" },
     dependencies = {
@@ -25,9 +34,10 @@ return {
     end,
     config = function(_, opts)
       local cmp = require("cmp")
+      local cmp_autopairs = require("nvim-autopairs.completion.cmp")
       -- run cmp setup
       cmp.setup(opts)
-
+      cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
       -- configure `cmp-cmdline` as described in their repo: https://github.com/hrsh7th/cmp-cmdline#setup
       cmp.setup.cmdline("/", {
         mapping = cmp.mapping.preset.cmdline(),
