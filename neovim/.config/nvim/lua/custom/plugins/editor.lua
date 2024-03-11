@@ -5,9 +5,6 @@ return {
       logger = {
         level = vim.log.levels.WARN,
       },
-      -- notification = {
-      --   override_vim_notify = true,
-      -- },
     },
   },
   {

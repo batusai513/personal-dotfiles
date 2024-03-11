@@ -22,9 +22,9 @@ return {
         --  You could remove this setup call if you don't like it,
         --  and try some other statusline plugin
         local statusline = require 'mini.statusline'
-        statusline.setup({
+        statusline.setup {
           set_vim_settings = false,
-        })
+        }
 
         -- You can configure sections in the statusline by overriding their
         -- default behavior. For example, here we set the section for
@@ -41,12 +41,18 @@ return {
   },
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
+  {
+    'numToStr/Comment.nvim',
+    event = 'VeryLazy',
+    opts = {},
+  },
 
   -- Highlight todo, notes, etc in comments
   {
     'folke/todo-comments.nvim',
-    event = 'VimEnter',
+    cmd = { 'TodoTrouble', 'TodoTelescope' },
+    event = 'VeryLazy',
+    config = true,
     dependencies = { 'nvim-lua/plenary.nvim' },
     opts = { signs = false },
   },

@@ -1,8 +1,16 @@
 return { -- LSP Configuration & Plugins
   'neovim/nvim-lspconfig',
   dependencies = {
-    { 'folke/neoconf.nvim', cmd = 'Neoconf', config = false, dependencies = { 'nvim-lspconfig' } },
-    { 'folke/neodev.nvim', opts = {} },
+    {
+      'folke/neoconf.nvim',
+      cmd = 'Neoconf',
+      config = false,
+      dependencies = { 'nvim-lspconfig' },
+    },
+    {
+      'folke/neodev.nvim',
+      opts = {},
+    },
     -- Automatically install LSPs and related tools to stdpath for neovim
     'williamboman/mason.nvim',
     'williamboman/mason-lspconfig.nvim',

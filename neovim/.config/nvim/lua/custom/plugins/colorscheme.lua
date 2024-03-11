@@ -28,18 +28,19 @@ return {
         cmp = true,
         gitsigns = true,
         treesitter = true,
-        neotree= true,
+        neotree = true,
+        notify = true,
         mini = {
-            enabled = true,
-            indentscope_color = "",
+          enabled = true,
+          indentscope_color = '',
         },
       },
     },
-    init = function ()
+    init = function()
       vim.cmd.colorscheme 'catppuccin-macchiato'
     end,
     config = function(_, opts)
-      require("catppuccin").setup(opts)
+      require('catppuccin').setup(opts)
     end,
   },
 }
