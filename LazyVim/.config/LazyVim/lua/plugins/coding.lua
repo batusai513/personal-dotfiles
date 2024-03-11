@@ -23,21 +23,22 @@ return {
         winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None",
       }
       opts.completion.completeopt = "menu,menuone,noselect"
-      opts.confirm_opts = {
-        behavior = cmp.ConfirmBehavior.Replace,
-        select = false,
-      }
+      -- opts.confirm_opts = {
+      --   behavior = cmp.ConfirmBehavior.Replace,
+      --   select = false,
+      -- }
       opts.window = {
         completion = cmp.config.window.bordered(border_opts),
         documentation = cmp.config.window.bordered(border_opts),
       }
+      opts.sources = cmp.config.sources(vim.list_extend(opts.sources, { { name = "emoji" } }))
     end,
     config = function(_, opts)
       local cmp = require("cmp")
-      local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+      -- local cmp_autopairs = require("nvim-autopairs.completion.cmp")
       -- run cmp setup
       cmp.setup(opts)
-      cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+      -- cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
       -- configure `cmp-cmdline` as described in their repo: https://github.com/hrsh7th/cmp-cmdline#setup
       cmp.setup.cmdline("/", {
         mapping = cmp.mapping.preset.cmdline(),
