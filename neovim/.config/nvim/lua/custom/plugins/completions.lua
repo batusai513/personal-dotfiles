@@ -12,11 +12,17 @@ return { -- Autocompletion
     },
     opts = function()
       local cmp = require 'cmp'
-      -- local luasnip = require 'luasnip'
       local defaults = require 'cmp.config.default'()
+      local wincfg = vim.tbl_extend('force', cmp.config.window.bordered(), {
+        winhighlight = 'Normal:CmpNormal,FloatBorder:CmpBorder,CursorLine:CmpSel,Search:None',
+      })
       return {
         completion = {
           completeopt = 'menu,menuone,noselect',
+        },
+        window = {
+          completion = wincfg,
+          documentation = wincfg,
         },
         sources = {
           { name = 'nvim_lsp' },
@@ -26,7 +32,6 @@ return { -- Autocompletion
           { name = 'buffer' },
         },
         sorting = defaults.sorting,
-
         -- For an understanding of why these mappings were
         -- chosen, you will need to read `:help ins-completion`
         --

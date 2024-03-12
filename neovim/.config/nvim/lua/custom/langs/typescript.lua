@@ -8,48 +8,37 @@ return {
     end,
   },
   {
-    "neovim/nvim-lspconfig",
+    'pmizio/typescript-tools.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
+    ft = { 'typescript', 'typescriptreact', 'javascript', 'javascriptreact' },
+    opts = {},
+  },
+  {
+    'neovim/nvim-lspconfig',
+    -- other settings removed for brevity
     opts = {
-      -- make sure mason installs the server
+      ---@type lspconfig.options
       servers = {
-        ---@type lspconfig.options.tsserver
-        tsserver = {
+        eslint = {
           keys = {
             {
-              "<leader>co",
+              '<leader>cL',
               function()
-                vim.lsp.buf.code_action({
-                  apply = true,
-                  context = {
-                    only = { "source.organizeImports.ts" },
-                    diagnostics = {},
-                  },
-                })
+                vim.cmd 'EslintFixAll'
               end,
-              desc = "Organize Imports",
-            },
-            {
-              "<leader>cR",
-              function()
-                vim.lsp.buf.code_action({
-                  apply = true,
-                  context = {
-                    only = { "source.removeUnused.ts" },
-                    diagnostics = {},
-                  },
-                })
-              end,
-              desc = "Remove Unused Imports",
+              desc = 'Eslint Fix All',
+              mode = { 'n' },
             },
           },
-          ---@diagnostic disable-next-line: missing-fields
           settings = {
-            completions = {
-              completeFunctionCalls = true,
+            format = false,
+            -- helps eslint find the eslintrc when it's placed in a subfolder instead of the cwd root
+            workingDirectories = {
+              mode = 'auto',
             },
           },
         },
       },
     },
-  }
+  },
 }
