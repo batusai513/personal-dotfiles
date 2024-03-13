@@ -7,7 +7,7 @@ return {
     keys = {
       {
         -- Customize or remove this keymap to your liking
-        '<leader>f',
+        '<leader>cf',
         function()
           require('conform').format { async = true, lsp_fallback = true }
         end,
@@ -20,7 +20,9 @@ return {
       -- Define your formatters
       formatters_by_ft = {
         lua = { 'stylua' },
-        javascript = { { 'prettierd', 'prettier' } },
+        javascript = {
+          { 'prettierd', 'prettier' },
+        },
       },
       -- Set up format-on-save
       format_on_save = { timeout_ms = 500, lsp_fallback = true },

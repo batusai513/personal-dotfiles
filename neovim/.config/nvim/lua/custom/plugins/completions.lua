@@ -13,9 +13,9 @@ return { -- Autocompletion
     opts = function()
       local cmp = require 'cmp'
       local defaults = require 'cmp.config.default'()
-      local wincfg = vim.tbl_extend('force', cmp.config.window.bordered(), {
-        winhighlight = 'Normal:CmpNormal,FloatBorder:CmpBorder,CursorLine:CmpSel,Search:None',
-      })
+      local wincfg = cmp.config.window.bordered {
+        winhighlight = 'Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None',
+      }
       return {
         completion = {
           completeopt = 'menu,menuone,noselect',
