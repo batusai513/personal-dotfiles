@@ -1,5 +1,5 @@
 return {
-  { -- Autoformat
+  {
     'stevearc/conform.nvim',
     dependencies = { 'mason.nvim' },
     event = { 'BufWritePre' },
