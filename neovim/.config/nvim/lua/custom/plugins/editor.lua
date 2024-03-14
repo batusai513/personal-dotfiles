@@ -1,6 +1,7 @@
 return {
   {
     'j-hui/fidget.nvim',
+    event = 'VeryLazy',
     opts = {
       logger = {
         level = vim.log.levels.WARN,
@@ -29,7 +30,7 @@ return {
 
   { -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
-    event = 'VimEnter', -- Sets the loading event to 'VimEnter'
+    event = 'VeryLazy', -- Sets the loading event to 'VimEnter'
     config = function() -- This is the function that runs, AFTER loading
       require('which-key').setup()
 
@@ -45,6 +46,7 @@ return {
   },
   { -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
+    event = 'VeryLazy',
     opts = {
       signs = {
         add = { text = '▎' },
