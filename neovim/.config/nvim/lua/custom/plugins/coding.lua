@@ -21,9 +21,8 @@ return {
       --  You could remove this setup call if you don't like it,
       --  and try some other statusline plugin
       local statusline = require 'mini.statusline'
-      statusline.setup {
-        set_vim_settings = false,
-      }
+      -- set use_icons to true if you have a Nerd Font
+      statusline.setup { use_icons = vim.g.have_nerd_font }
 
       -- You can configure sections in the statusline by overriding their
       -- default behavior. For example, here we set the section for
@@ -37,20 +36,16 @@ return {
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,
   },
-
-  -- "gc" to comment visual regions/lines
   {
     'numToStr/Comment.nvim',
     event = 'VeryLazy',
     opts = {},
   },
-
   -- Highlight todo, notes, etc in comments
   {
     'folke/todo-comments.nvim',
     cmd = { 'TodoTrouble', 'TodoTelescope' },
     event = 'VeryLazy',
-    config = true,
     dependencies = { 'nvim-lua/plenary.nvim' },
     opts = { signs = false },
   },

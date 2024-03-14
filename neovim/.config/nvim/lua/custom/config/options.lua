@@ -5,22 +5,24 @@ local opt = vim.opt
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+vim.g.have_nerd_font = true
+
 -- Enable LazyVim auto format
 vim.g.autoformat = true
 
 opt.completeopt = 'menu,menuone,noselect'
-opt.confirm = true -- Confirm to save changes before exiting modified buffer
-opt.list = true -- Show some invisible characters (tabs...
-opt.pumblend = 10 -- Popup blend
-opt.pumheight = 10 -- Maximum number of entries in a popup
-opt.shiftround = true -- Round indent
-opt.shiftwidth = 2 -- Size of an indent
+opt.confirm = true                 -- Confirm to save changes before exiting modified buffer
+opt.list = true                    -- Show some invisible characters (tabs...
+opt.pumblend = 10                  -- Popup blend
+opt.pumheight = 10                 -- Maximum number of entries in a popup
+opt.shiftround = true              -- Round indent
+opt.shiftwidth = 2                 -- Size of an indent
 opt.shortmess:append { W = true, I = true, c = true, C = true }
-opt.smartindent = true -- Insert indents automatically
-opt.tabstop = 2 -- Number of spaces tabs count for
-opt.termguicolors = true -- True color support
+opt.smartindent = true             -- Insert indents automatically
+opt.tabstop = 2                    -- Number of spaces tabs count for
+opt.termguicolors = true           -- True color support
 opt.wildmode = 'longest:full,full' -- Command-line completion mode
-opt.winminwidth = 5 -- Minimum window width
+opt.winminwidth = 5                -- Minimum window width
 
 -- Make line numbers default
 opt.number = true

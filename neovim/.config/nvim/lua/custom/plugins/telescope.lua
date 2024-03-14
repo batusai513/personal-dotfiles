@@ -1,10 +1,10 @@
 return {
   {
     'nvim-telescope/telescope.nvim',
-    version = false,
     cmd = 'Telescope',
+    version = false,
     dependencies = {
-      { 'nvim-lua/plenary.nvim' },
+      'nvim-lua/plenary.nvim',
       {
         'nvim-telescope/telescope-fzf-native.nvim',
         build = 'make',
@@ -13,7 +13,11 @@ return {
         end,
       },
       { 'nvim-telescope/telescope-ui-select.nvim' },
-      { 'nvim-tree/nvim-web-devicons' },
+
+      {
+        'nvim-tree/nvim-web-devicons',
+        enabled = vim.g.have_nerd_font,
+      },
     },
     keys = {
       -- stylua: ignore start
@@ -46,9 +50,10 @@ return {
           },
         },
       }
+
       -- Enable telescope extensions, if they are installed
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
     end,
-  }
+  },
 }
