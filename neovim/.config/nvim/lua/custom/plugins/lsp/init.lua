@@ -23,6 +23,7 @@ local config = {
 
 return { -- LSP Configuration & Plugins
   'neovim/nvim-lspconfig',
+  event = 'LazyFile',
   dependencies = {
     {
       'folke/neoconf.nvim',

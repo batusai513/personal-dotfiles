@@ -97,6 +97,8 @@ if not vim.loop.fs_stat(lazypath) then
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
+require('custom.config.plugins').setup()
+
 require('custom.utils').on_very_lazy(function()
   require 'custom.config.autocmds'
 end)
