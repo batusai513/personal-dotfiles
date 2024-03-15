@@ -1,3 +1,6 @@
+local Util = require 'custom.utils'
+local map = vim.keymap.set
+
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
@@ -28,3 +31,17 @@ vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left wind
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+
+-- lazygit
+map('n', '<leader>gg', function()
+  Util.terminal({ 'lazygit' }, { cwd = Util.root(), esc_esc = false, ctrl_hjkl = false })
+end, { desc = 'Lazygit (root dir)' })
+
+map('n', '<leader>gG', function()
+  Util.terminal({ 'lazygit' }, { esc_esc = false, ctrl_hjkl = false })
+end, { desc = 'Lazygit (cwd)' })
+
+map('n', '<leader>gf', function()
+  local git_path = vim.fn.system('git ls-files --full-name ' .. vim.api.nvim_buf_get_name(0))
+  Util.terminal({ 'lazygit', '-f', vim.trim(git_path) }, { esc_esc = false, ctrl_hjkl = false })
+end, { desc = 'Lazygit current file history' })
