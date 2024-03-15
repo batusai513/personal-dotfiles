@@ -1,4 +1,27 @@
+local LazyUtil = require 'lazy.core.util'
+
+---@class custom.utils: LazyUtilCore
+---@field lsp custom.utils.lsp
+---@field terminal custom.utils.terminal
+---@field root custom.utils.root
 local M = {}
+
+-- Dynamically load other modules in LazyUtil or other modules
+-- in this folder
+setmetatable(M, {
+  __index = function(t, k)
+    if LazyUtil[k] then
+      return LazyUtil[k]
+    end
+    ---@diagnostic disable-next-line: no-unknown
+    t[k] = require('custom.utils.' .. k)
+    return t[k]
+  end,
+})
+
+function M.is_win()
+  return vim.loop.os_uname().sysname:find 'Windows' ~= nil
+end
 
 ---Run the callback fn on VeryLazy event
 ---@param fn function

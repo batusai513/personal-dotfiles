@@ -46,9 +46,9 @@ return {
       },
     },
     config = function(_, opts)
-      local Util = require 'custom.utils.lsp'
+      local Util = require 'custom.utils'
       local function on_move(data)
-        Util.on_rename(data.source, data.destination)
+        Util.lsp.on_rename(data.source, data.destination)
       end
 
       local events = require 'neo-tree.events'

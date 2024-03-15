@@ -43,7 +43,9 @@ return {
       },
     },
     config = function(_, opts)
-      require('custom.utils.lsp').on_attach(function(client, buffer)
+      local Utils = require 'custom.utils'
+      Utils.lsp.on_attach(function(client, buffer)
+        vim.api.nvim_buf_set_option(buffer, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
         require('custom.plugins.lsp.keymaps').on_attach(client, buffer)
         if client and client.server_capabilities.documentHighlightProvider then
           vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
@@ -135,5 +137,5 @@ return {
         },
       }
     end,
-  }
+  },
 }

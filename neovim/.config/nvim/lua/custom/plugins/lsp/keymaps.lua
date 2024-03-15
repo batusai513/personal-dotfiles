@@ -76,9 +76,10 @@ function M.resolve(buffer)
     return {}
   end
   local spec = M.get()
+  local Utils = require 'custom.utils'
   -- needed to get each server keys object if available
-  local opts = require('custom.utils').get_plugin_options 'nvim-lspconfig'
-  local clients = require('custom.utils.lsp').get_clients { bufnr = buffer }
+  local opts = Utils.get_plugin_options 'nvim-lspconfig'
+  local clients = Utils.lsp.get_clients { bufnr = buffer }
 
   for _, client in ipairs(clients) do
     local maps = opts.servers[client.name] and opts.servers[client.name].keys or {}
