@@ -1,4 +1,5 @@
 return {
+  { 'j-hui/fidget.nvim', event = 'LspAttach', dependencies = { 'neovim/nvim-lspconfig' }, opts = {} },
   {
     'neovim/nvim-lspconfig',
     event = 'VeryLazy',
