@@ -26,6 +26,7 @@ export BUN_INSTALL="/Users/richard.roncancio/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
 path+=("$HOME/.local/share/nvim/mason/bin")
+path+=("$HOME/.local/share/bob/nvim-bin")
 path+=("$HOME/projects/personal-dotfiles/bin/bin/")
 
 # ~/.config/tmux/plugins
