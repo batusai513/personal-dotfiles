@@ -21,6 +21,62 @@ return {
       'j-hui/fidget.nvim',
     },
     opts = {
+      lsp_handlers = {
+        ['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'rounded', silent = true }),
+        ['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = 'rounded', silent = true }),
+      },
+      -- options for vim.diagnostic.config()
+      diagnostics = {
+        update_in_insert = true,
+        underline = true,
+        float = {
+          focused = false,
+          style = 'minimal',
+          border = 'rounded',
+          source = 'always',
+          header = '',
+          prefix = '',
+        },
+        -- virtual_text = {
+        --   spacing = 4,
+        --   source = 'if_many',
+        --   prefix = '●',
+        --   -- this will set set the prefix to a function that returns the diagnostics icon based on the severity
+        --   -- this only works on a recent 0.10.0 build. Will be set to "●" when not supported
+        --   -- prefix = "icons",
+        -- },
+        virtual_text = false,
+        severity_sort = true,
+        -- signs = {
+        --   text = {
+        --     [vim.diagnostic.severity.ERROR] = require("lazyvim.config").icons.diagnostics.Error,
+        --     [vim.diagnostic.severity.WARN] = require("lazyvim.config").icons.diagnostics.Warn,
+        --     [vim.diagnostic.severity.HINT] = require("lazyvim.config").icons.diagnostics.Hint,
+        --     [vim.diagnostic.severity.INFO] = require("lazyvim.config").icons.diagnostics.Info,
+        --   },
+        -- },
+      },
+      -- Enable this to enable the builtin LSP inlay hints on Neovim >= 0.10.0
+      -- Be aware that you also will need to properly configure your LSP server to
+      -- provide the inlay hints.
+      inlay_hints = {
+        enabled = false,
+      },
+      -- Enable this to enable the builtin LSP code lenses on Neovim >= 0.10.0
+      -- Be aware that you also will need to properly configure your LSP server to
+      -- provide the code lenses.
+      codelens = {
+        enabled = false,
+      },
+      -- add any global capabilities here
+      capabilities = {},
+      -- options for vim.lsp.buf.format
+      -- `bufnr` and `filter` is handled by the LazyVim formatter,
+      -- but can be also overridden when specified
+      format = {
+        formatting_options = nil,
+        timeout_ms = nil,
+      },
       ----@type lspconfig.options
       servers = {
         lua_ls = {
@@ -44,21 +100,18 @@ return {
     },
     config = function(_, opts)
       local Utils = require 'custom.utils'
-      Utils.lsp.on_attach(function(client, buffer)
-        vim.api.nvim_buf_set_option(buffer, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-        require('custom.plugins.lsp.keymaps').on_attach(client, buffer)
-        if client and client.server_capabilities.documentHighlightProvider then
-          vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-            buffer = buffer,
-            callback = vim.lsp.buf.document_highlight,
-          })
 
-          vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
-            buffer = buffer,
-            callback = vim.lsp.buf.clear_references,
-          })
-        end
+      Utils.lsp.on_attach(function(client, buffer)
+        vim.api.nvim_set_option_value('omnifunc', 'v:lua.vim.lsp.omnifunc', { buf = buffer })
+        require('custom.plugins.lsp.keymaps').on_attach(client, buffer)
+        require('custom.plugins.lsp.on_attach').on_attach(client, buffer, opts)
       end)
+
+      for method, handler in pairs(opts.lsp_handlers or {}) do
+        if handler then
+          vim.lsp.handlers[method] = handler
+        end
+      end
 
       local register_capability = vim.lsp.handlers['client/registerCapability']
 
@@ -69,17 +122,7 @@ return {
         local client = vim.lsp.get_client_by_id(client_id)
         local buffer = vim.api.nvim_get_current_buf()
         require('custom.plugins.lsp.keymaps').on_attach(client, buffer)
-        if client and client.server_capabilities.documentHighlightProvider then
-          vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-            buffer = buffer,
-            callback = vim.lsp.buf.document_highlight,
-          })
-
-          vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
-            buffer = buffer,
-            callback = vim.lsp.buf.clear_references,
-          })
-        end
+        require('custom.plugins.lsp.on_attach').on_attach(client, buffer, opts)
         return ret
       end
 
@@ -89,6 +132,20 @@ return {
       --  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+
+      if type(opts.diagnostics.virtual_text) == 'table' and opts.diagnostics.virtual_text.prefix == 'icons' then
+        opts.diagnostics.virtual_text.prefix = vim.fn.has 'nvim-0.10.0' == 0 and '●'
+        -- or function(diagnostic)
+        --   local icons = require("lazyvim.config").icons.diagnostics
+        --   for d, icon in pairs(icons) do
+        --     if diagnostic.severity == vim.diagnostic.severity[d:upper()] then
+        --       return icon
+        --     end
+        --   end
+        -- end
+      end
+
+      vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
 
       -- Enable the following language servers
       --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.

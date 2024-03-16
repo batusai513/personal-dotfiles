@@ -4,6 +4,7 @@ local LazyUtil = require 'lazy.core.util'
 ---@field lsp custom.utils.lsp
 ---@field terminal custom.utils.terminal
 ---@field root custom.utils.root
+---@field toggle custom.utils.toggle
 local M = {}
 
 -- Dynamically load other modules in LazyUtil or other modules
