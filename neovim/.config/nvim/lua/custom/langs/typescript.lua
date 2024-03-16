@@ -8,6 +8,15 @@ return {
     end,
   },
   {
+    'folke/which-key.nvim',
+    optional = true,
+    opts = {
+      defaults = {
+        ['<leader>ct'] = { name = '+Typescript refactors', _ = 'which_key_ignore' },
+      },
+    },
+  },
+  {
     'pmizio/typescript-tools.nvim',
     dependencies = {
       'nvim-lua/plenary.nvim',
@@ -19,35 +28,35 @@ return {
       'javascript',
       'javascriptreact',
     },
-    opts = {},
-    keys = {
-      {
-        '<leader>co',
-        function()
-          vim.lsp.buf.code_action {
-            apply = true,
-            context = {
-              only = { 'source.organizeImports.ts' },
-              diagnostics = {},
-            },
-          }
-        end,
-        desc = 'Organize Imports',
-      },
-      {
-        '<leader>cR',
-        function()
-          vim.lsp.buf.code_action {
-            apply = true,
-            context = {
-              only = { 'source.removeUnused.ts' },
-              diagnostics = {},
-            },
-          }
-        end,
-        desc = 'Remove Unused Imports',
+    opts = {
+      on_attach = function(_, buffer)
+        local set = vim.keymap.set
+
+        set('n', '<leader>cto', '<cmd>TSToolsSortImports<cr>', { desc = 'Sort file imports', buffer = buffer })
+        set('n', '<leader>ctR', '<cmd>TSToolsRemoveUnusedImports<cr>', { desc = 'Remove unused imports', buffer = buffer })
+        set('n', '<leader>ctr', '<cmd>TSToolsRemoveUnused<cr>', { desc = 'Remove all unused statements', buffer = buffer })
+        set('n', '<leader>ctF', '<cmd>TSToolsFixAll<cr>', { desc = 'Fix all fixable errors', buffer = buffer })
+        set('n', '<leader>ctM', '<cmd>TSToolsAddMissingImports<cr>', { desc = 'Add all missing imports', buffer = buffer })
+      end,
+      settings = {
+        expose_as_code_action = 'all',
+        code_lens = 'all',
+        tsserver_file_preferences = {
+          includeInlayEnumMemberValueHints = true,
+          includeInlayFunctionLikeReturnTypeHints = true,
+          includeInlayFunctionParameterTypeHints = true,
+          includeInlayParameterNameHints = 'all', -- 'none' | 'literals' | 'all';
+          includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+          includeInlayPropertyDeclarationTypeHints = true,
+          includeInlayVariableTypeHints = false,
+        },
+        tsserver_format_options = {
+          allowIncompleteCompletions = false,
+          allowRenameOfImportPath = false,
+        },
       },
     },
+    keys = {},
   },
   {
     'neovim/nvim-lspconfig',

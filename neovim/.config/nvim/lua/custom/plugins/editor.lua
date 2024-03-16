@@ -29,10 +29,11 @@ return {
         [']'] = { name = '+next' },
         ['['] = { name = '+prev' },
         -- ['<leader><tab>'] = { name = '+tabs' },
-        -- ['<leader>b'] = { name = '+buffer' },
+        ['<leader>b'] = { name = '+buffer' },
         -- ['<leader>f'] = { name = '+file/find' },
         ['<leader>g'] = { name = '+git' },
         ['<leader>gh'] = { name = '+hunks' },
+        ['<leader>u'] = { name = '+ui' },
 
         ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
         ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
