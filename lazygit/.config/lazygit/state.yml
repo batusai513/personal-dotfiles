@@ -1,7 +1,16 @@
 lastupdatecheck: 0
 recentrepos:
 - /home/wardrakus/code/personal-dotfiles
+- /home/wardrakus/code/dotnet-learn
+- /home/wardrakus/code/discount-calculator
+- /home/wardrakus/code/betbox-web
 startuppopupversion: 5
+lastversion: 0.41.0
 customcommandshistory: []
 hidecommandlog: false
 ignorewhitespaceindiffview: false
+diffcontextsize: 3
+localbranchsortorder: recency
+remotebranchsortorder: alphabetical
+gitlogorder: topo-order
+gitlogshowgraph: always
