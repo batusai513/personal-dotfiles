@@ -79,6 +79,7 @@ return {
       {
         'Saecki/crates.nvim',
         event = { 'BufRead Cargo.toml' },
+        enabled = false,
         opts = {
           src = {
             cmp = { enabled = true },

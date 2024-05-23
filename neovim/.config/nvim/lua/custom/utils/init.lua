@@ -5,6 +5,7 @@ local LazyUtil = require 'lazy.core.util'
 ---@field terminal custom.utils.terminal
 ---@field root custom.utils.root
 ---@field toggle custom.utils.toggle
+---@field ui custom.util.ui
 local M = {}
 
 -- Dynamically load other modules in LazyUtil or other modules
