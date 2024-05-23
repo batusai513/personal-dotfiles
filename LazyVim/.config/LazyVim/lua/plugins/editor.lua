@@ -28,12 +28,6 @@ return {
     },
   },
   {
-    "willothy/flatten.nvim",
-    config = true,
-    lazy = false,
-    priority = 1001,
-  },
-  {
     "folke/which-key.nvim",
     opts = {
       defaults = {
