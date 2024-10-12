@@ -1,12 +1,14 @@
 lastupdatecheck: 0
 recentrepos:
-- /home/wardrakus/code/personal-dotfiles
+    - /home/wardrakus/code/personal-dotfiles
+    - /home/wardrakus/code/dotnet-learn
 startuppopupversion: 5
-lastversion: 0.41.0
+lastversion: 0.44.1
 customcommandshistory: []
 hidecommandlog: false
 ignorewhitespaceindiffview: false
 diffcontextsize: 3
+renamesimilaritythreshold: 50
 localbranchsortorder: recency
 remotebranchsortorder: alphabetical
 gitlogorder: topo-order
