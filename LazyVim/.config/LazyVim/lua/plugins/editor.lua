@@ -27,17 +27,4 @@ return {
       },
     },
   },
-  {
-    "folke/which-key.nvim",
-    opts = {
-      defaults = {
-        ["<leader>\\"] = { name = "+terminal" },
-        ["\\"] = {
-          h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "ToggleTerm horizontal split" },
-          v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "ToggleTerm vertical split" },
-        },
-      },
-      mappings = {},
-    },
-  },
 }
