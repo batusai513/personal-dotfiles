@@ -20,15 +20,11 @@ font:
   italic:
     family: "JetBrainsMono Nerd Font"
     style: Italic
-  medium:
-    family: "JetBrainsMono Nerd Font"
-    style: Medium
   bold:
     family: "JetBrainsMono Nerd Font"
     style: Bold
 
   size: 16
-  draw_bold_text_with_bright_colors: true
 
 key_bindings:
   - { key: Right, mods: Alt, chars: "\x1BF" }
