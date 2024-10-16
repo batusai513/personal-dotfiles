@@ -28,37 +28,37 @@ return {
   --     }
   --   end,
   -- },
-  {
-    "folke/noice.nvim",
-    opts = {
-      popupmenu = {
-        backend = "nui",
-      },
-      presets = {
-        lsp_doc_border = true,
-      },
-      ---@type NoiceConfigViews
-      views = {
-        hover = {
-          border = {
-            style = "single",
-          },
-          position = { row = 2, col = 2 },
-        },
-      },
-      cmdline = {
-        view = "cmdline",
-        format = {
-          search_down = {
-            view = "cmdline",
-          },
-          search_up = {
-            view = "cmdline",
-          },
-        },
-      },
-    },
-  },
+  -- {
+  --   "folke/noice.nvim",
+  --   opts = {
+  --     popupmenu = {
+  --       backend = "nui",
+  --     },
+  --     presets = {
+  --       lsp_doc_border = true,
+  --     },
+  --     ---@type NoiceConfigViews
+  --     views = {
+  --       hover = {
+  --         border = {
+  --           style = "single",
+  --         },
+  --         position = { row = 2, col = 2 },
+  --       },
+  --     },
+  --     cmdline = {
+  --       view = "cmdline",
+  --       format = {
+  --         search_down = {
+  --           view = "cmdline",
+  --         },
+  --         search_up = {
+  --           view = "cmdline",
+  --         },
+  --       },
+  --     },
+  --   },
+  -- },
   {
     "rcarriga/nvim-notify",
     opts = {
