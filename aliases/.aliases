@@ -1,9 +1,11 @@
 # Shell
+alias ls="eza --icons=always"
 alias ll="ls -l"
 alias la="ls -a"
 alias lll="la -l"
 alias md='mkdir -p'
 alias rd='rmdir'
+alias cd="z"
 alias cd..='cd ..'
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -11,8 +13,8 @@ alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias psg='ps aux | grep'
 alias h='history'
-alias vi='nvim'
-alias e='nvim'
+alias vi='nvim-lazy'
+alias e='nvim-lazy'
 
 # Tmux
 alias tml='tmux ls'

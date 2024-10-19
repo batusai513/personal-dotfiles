@@ -1,5 +1,6 @@
 
 # Path to your oh-my-zsh configuration.
+source $HOME/.aliases
 ZSH=$HOME/.oh-my-zsh
 
 if [[ $OSTYPE == 'darwin'* ]]; then
@@ -12,7 +13,7 @@ fi
 # ZSH_THEME="spaceship"
 
 # Note: fast-syntax-highlighting needs to be the last element of the array
-plugins=(git ruby rails autojump history-substring-search zsh-autosuggestions fast-syntax-highlighting)
+plugins=(git ruby rails history-substring-search zsh-autosuggestions fast-syntax-highlighting)
 
 # Allow [, ],or ?
 unsetopt nomatch
@@ -26,7 +27,6 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 zrcl="$HOME/.zshrc.local"
 [[ ! -a $zrcl ]] || source $zrcl
 
-source $HOME/.aliases
 source $ZSH/oh-my-zsh.sh
 
 eval "$(zoxide init zsh)"
