@@ -44,6 +44,7 @@ alias gri='git rebase --interactive'
 alias gra='git rebase --abort'
 alias gcp='git cherry-pick'
 alias reset-authors='git commit --amend --reset-author -C HEAD'
+alias lg='lazygit'
 
 # Docker
 alias dc='docker-compose'

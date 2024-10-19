@@ -1,6 +1,4 @@
-
 # Path to your oh-my-zsh configuration.
-source $HOME/.aliases
 ZSH=$HOME/.oh-my-zsh
 
 if [[ $OSTYPE == 'darwin'* ]]; then
@@ -30,5 +28,4 @@ zrcl="$HOME/.zshrc.local"
 source $ZSH/oh-my-zsh.sh
 
 eval "$(zoxide init zsh)"
-
-
+source $HOME/.aliases

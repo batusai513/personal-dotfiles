@@ -1,4 +1,3 @@
-
 alias nvim-lazy="NVIM_APPNAME=LazyVim nvim"
 alias nvim_lazy="NVIM_APPNAME=LazyVim nvim"
 alias nvim-kick="NVIM_APPNAME=kickstart nvim"
