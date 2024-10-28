@@ -25,5 +25,7 @@ config.keys = {
   { key = 'RightArrow', mods = 'OPT', action = wezterm.action { SendString = '\x1bf' } },
 }
 
+config.enable_wayland = false
+
 -- and finally, return the configuration to wezterm
 return config
