@@ -2,6 +2,7 @@ keybinding:
   universal:
     return: "<esc>"
 gui:
+  nerdFontsVersion: "3"
   theme:
     activeBorderColor:
       - "#f5bde6"
