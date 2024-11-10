@@ -23,7 +23,7 @@ config.font = wezterm.font_with_fallback {
   { family = 'Symbols Nerd Font' },
 }
 config.use_cap_height_to_scale_fallback_fonts = true
-config.font_size = 16
+config.font_size = 15
 config.color_scheme = 'Catppuccin Macchiato'
 config.hide_tab_bar_if_only_one_tab = true
 config.window_decorations = 'RESIZE'
@@ -106,6 +106,7 @@ config.key_tables = {
 }
 
 config.enable_wayland = false
+config.enable_kitty_keyboard = true
 
 -- and finally, return the configuration to wezterm
 return config
