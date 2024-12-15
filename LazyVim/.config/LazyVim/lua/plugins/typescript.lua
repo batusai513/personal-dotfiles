@@ -1,10 +1,10 @@
 return {
-  -- {
-  --   "vuki656/package-info.nvim",
-  --   requires = "MunifTanjim/nui.nvim",
-  --   config = true,
-  --   event = "BufRead package.json",
-  -- },
+  {
+    "vuki656/package-info.nvim",
+    requires = "MunifTanjim/nui.nvim",
+    config = true,
+    event = "BufRead package.json",
+  },
   {
     "nvim-neotest/neotest",
     dependencies = {
