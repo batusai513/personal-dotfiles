@@ -67,31 +67,4 @@ return {
       },
     },
   },
-  -- {
-  --   "rcarriga/nvim-notify",
-  --   opts = {
-  --     timeout = 1500,
-  --     fps = 60,
-  --     top_down = false,
-  --   },
-  -- },
-  -- {
-  --   "akinsho/toggleterm.nvim",
-  --   cmd = { "ToggleTerm", "TermExec" },
-  --   keys = {
-  --     { [[<c-\>]], desc = "Toggle terminal" },
-  --     { "<leader>\\h", "<cmd>ToggleTerm size=10 direction=horizontal<cr>", desc = "ToggleTerm horizontal split" },
-  --     { "<leader>\\v", "<cmd>ToggleTerm size=80 direction=vertical<cr>", desc = "ToggleTerm vertical split" },
-  --   },
-  --   opts = {
-  --     size = 10,
-  --     open_mapping = [[<c-\>]],
-  --     shading_factor = 2,
-  --     direction = "float",
-  --     float_opts = {
-  --       border = "curved",
-  --       highlights = { border = "Normal", background = "Normal" },
-  --     },
-  --   },
-  -- },
 }
