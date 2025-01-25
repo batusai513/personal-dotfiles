@@ -1,7 +1,13 @@
-theme = "onedark"
+theme = "catppuccin_macchiato"
 
 [editor]
 line-number = "relative"
+end-of-line-diagnostics = "hint"
+popup-border = "all"
+
+[editor.inline-diagnostics]
+cursor-line = "warning"
+other-lines = "error"
 
 [editor.file-picker]
 hidden = false
@@ -15,3 +21,6 @@ insert = "bar"
 [editor.lsp]
 display-inlay-hints = true
 display-messages = true
+
+[keys.normal.space]
+"H" = ":toggle lsp.display-inlay-hints"

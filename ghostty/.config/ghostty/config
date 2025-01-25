@@ -1,0 +1,6 @@
+term = xterm-256color
+theme=catppuccin-macchiato
+
+font-size = 16
+
+keybind = global:cmd+shift+/=toggle_quick_terminal
