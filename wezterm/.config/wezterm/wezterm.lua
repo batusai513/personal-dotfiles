@@ -22,6 +22,12 @@ config.font = wezterm.font_with_fallback {
   { family = 'JetBrainsMono Nerd Font' },
   { family = 'Symbols Nerd Font' },
 }
+-- rendering
+config.front_end = 'WebGpu'
+config.max_fps = 120
+-- TODO: change this when unplugged?
+config.webgpu_power_preference = 'HighPerformance'
+
 config.use_cap_height_to_scale_fallback_fonts = true
 config.font_size = 15
 config.color_scheme = 'Catppuccin Macchiato'

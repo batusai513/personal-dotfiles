@@ -1,15 +1,19 @@
+[env]
+TERM = "xterm-256color"
 
 [font]
 size = 16
 
 [font.normal]
 family = "JetBrainsMono Nerd Font"
-style = "Regular"
+style = "Light"
 
 [font.bold]
+family = "JetBrainsMono Nerd Font"
 style = "Bold"
 
 [font.italic]
+family = "JetBrainsMono Nerd Font"
 style = "Italic"
 
 [[keyboard.bindings]]
@@ -36,18 +40,22 @@ mods = "Command"
 history = 10000
 multiplier = 3
 
+[window]
+decorations = "buttonless"
+dynamic_padding = false
+opacity = 1
+
+[window.padding]
+x = 10
+y = 5
+
 [window.class]
 general = "Alacritty"
 instance = "Alacritty"
 
-[window.padding]
-x = 2
-y = 2
-
 [general]
 import = [
   # "~/.config/alacritty/tokio-night-dark.toml",
-  # uncomment the flavour you want below:
   # "~/.config/alacritty/catppuccin-mocha.toml",
   "~/.config/alacritty/catppuccin-macchiato.toml",
   # "~/.config/alacritty/catppuccin-frappe.toml",
