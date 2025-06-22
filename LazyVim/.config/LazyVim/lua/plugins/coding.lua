@@ -2,6 +2,14 @@ return {
   {
     "saghen/blink.cmp",
     opts = {
+      fuzzy = {
+        sorts = {
+          "exact",
+          -- defaults
+          "score",
+          "sort_text",
+        },
+      },
       cmdline = {
         enabled = false,
         completion = {
