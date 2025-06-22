@@ -6,7 +6,7 @@ return {
     priority = 1000,
     opts = {
       integrations = {
-        cmp = true,
+        blink_cmp = true,
         gitsigns = true,
         treesitter = true,
         neotree = true,

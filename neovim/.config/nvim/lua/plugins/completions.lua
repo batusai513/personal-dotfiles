@@ -3,7 +3,7 @@ return {
     'saghen/blink.cmp',
     event = 'InsertEnter',
     keys = { ':', '/', '?' },
-    version = '^1.*',
+    version = '1.*',
     dependencies = {
       -- { 'L3MON4D3/LuaSnip', version = 'v2.*' },
       { 'rafamadriz/friendly-snippets' },
@@ -12,17 +12,27 @@ return {
       snippets = { preset = 'default' },
       -- snippets = { preset = 'luasnip' },
       -- ensure you have the `snippets` source (enabled by default)
-      fuzzy = { implementation = 'prefer_rust' },
+      fuzzy = {
+        implementation = 'prefer_rust_with_warning',
+        sorts = {
+          'exact',
+          -- defaults
+          'score',
+          'sort_text',
+        },
+      },
       sources = {
         default = { 'lsp', 'path', 'snippets', 'buffer' },
       },
       completion = {
-        menu = { border = 'single' },
-        documentation = { window = { border = 'single' } },
+        menu = {},
+        documentation = {
+          window = {},
+        },
       },
       signature = {
         enabled = true,
-        window = { border = 'single' },
+        window = {},
       },
       keymap = {
         preset = 'enter',
