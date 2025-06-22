@@ -20,9 +20,6 @@ bindkey -s ^a "nvims\n"
 # bun completions
 [ -s "/Users/richard.roncancio/.bun/_bun" ] && source "/Users/richard.roncancio/.bun/_bun"
 
-# Bun
-export BUN_INSTALL="/Users/richard.roncancio/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
 path+=("$HOME/.local/share/LazyVim/mason/bin")
 path+=("$HOME/.local/share/bob/nvim-bin")
 path+=("$HOME/projects/personal-dotfiles/bin/bin/")
@@ -37,13 +34,10 @@ export PATH="/opt/homebrew/opt/curl/bin:$PATH"
 [ -s "/Users/richardroncancio/.bun/_bun" ] && source "/Users/richardroncancio/.bun/_bun"
 
 
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-
 # proto
 export PROTO_HOME="$HOME/.proto"
 export PATH="$PROTO_HOME/shims:$PROTO_HOME/bin:$PATH"
+eval "$(proto activate zsh --config-mode all)"
 
 
 source "$HOME/.sdkman/bin/sdkman-init.sh"
