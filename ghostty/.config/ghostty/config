@@ -1,6 +1,9 @@
 term = xterm-256color
 theme=catppuccin-macchiato
 
-font-size = 16
+font-family = JetBrainsMono Nerd Font
+font-style = Regular
+font-size = 14
+font-thicken = false
 
 keybind = global:cmd+shift+/=toggle_quick_terminal
