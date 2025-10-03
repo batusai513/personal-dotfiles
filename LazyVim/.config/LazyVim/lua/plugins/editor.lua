@@ -17,6 +17,15 @@ return {
       },
     },
   },
+  {
+    "catppuccin",
+    optional = true,
+    opts = function()
+      return {
+        highlights = require("catppuccin.special.bufferline").get_theme()
+      }
+    end,
+  },
   -- {
   --   "nvim-telescope/telescope.nvim",
   --   opts = {
