@@ -11,7 +11,8 @@ fi
 # ZSH_THEME="spaceship"
 
 # Note: fast-syntax-highlighting needs to be the last element of the array
-plugins=(git ruby rails history-substring-search zsh-autosuggestions fast-syntax-highlighting)
+# plugins=(git ruby rails history-substring-search zsh-autosuggestions fast-syntax-highlighting)
+plugins=(git ruby history-substring-search zsh-autosuggestions fast-syntax-highlighting)
 
 # Allow [, ],or ?
 unsetopt nomatch
