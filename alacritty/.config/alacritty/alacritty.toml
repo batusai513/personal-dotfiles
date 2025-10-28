@@ -53,6 +53,10 @@ y = 2
 general = "Alacritty"
 instance = "Alacritty"
 
+[window.dimensions]
+columns = 140
+lines = 45
+
 [general]
 
 live_config_reload = true
