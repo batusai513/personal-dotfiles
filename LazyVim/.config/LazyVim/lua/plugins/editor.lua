@@ -1,14 +1,14 @@
 return {
   {
     "nvim-neo-tree/neo-tree.nvim",
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+    },
     opts = {
       window = {
         position = "right",
       },
       filesystem = {
-        -- bind_to_cwd = false,
-        follow_current_file = { enabled = true },
-        use_libuv_file_watcher = true,
         filtered_items = {
           visible = false,
           hide_gitignored = true,
@@ -22,7 +22,7 @@ return {
     optional = true,
     opts = function()
       return {
-        highlights = require("catppuccin.special.bufferline").get_theme()
+        highlights = require("catppuccin.special.bufferline").get_theme(),
       }
     end,
   },
