@@ -32,7 +32,7 @@ key = "Return"
 mods = "Super|Shift"
 
 [[keyboard.bindings]]
-chars = "\u0001T"
+chars = "\u0002T"
 key = "J"
 mods = "Command"
 
@@ -47,7 +47,7 @@ opacity = 1
 
 [window.padding]
 x = 3
-y = 2
+y = 3
 
 [window.class]
 general = "Alacritty"
@@ -61,9 +61,14 @@ lines = 45
 
 live_config_reload = true
 import = [
-  "~/.config/alacritty/catppuccin-macchiato.toml",
+  # "~/.config/alacritty/catppuccin-macchiato.toml",
   # "~/.config/alacritty/tokio-night-dark.toml",
-  # "~/.config/alacritty/catppuccin-mocha.toml",
+  "~/.config/alacritty/catppuccin-mocha.toml",
   # "~/.config/alacritty/catppuccin-frappe.toml",
   # "~/.config/alacritty/catppuccin-latte.toml",
 ]
+
+[[keyboard.bindings]]
+key = "Return"
+mods = "Shift"
+chars = "\u001B\r"
