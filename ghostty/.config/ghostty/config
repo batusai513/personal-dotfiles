@@ -7,3 +7,4 @@ font-size = 14
 font-thicken = false
 
 keybind = global:cmd+shift+/=toggle_quick_terminal
+keybind = shift+enter=text:\x1b\r
