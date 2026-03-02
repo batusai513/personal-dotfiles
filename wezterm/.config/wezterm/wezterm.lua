@@ -19,13 +19,13 @@ end
 local config = wezterm.config_builder()
 
 config.font = wezterm.font_with_fallback {
-  { family = 'JetBrainsMono Nerd Font' },
+  { family = 'JetBrainsMono Nerd Font', weight = 'DemiBold', stretch = 'Normal' },
   { family = 'Symbols Nerd Font' },
 }
 -- rendering
 -- config.front_end = 'WebGpu'
--- config.max_fps = 120
--- config.webgpu_power_preference = 'HighPerformance'
+config.max_fps = 120
+config.webgpu_power_preference = 'HighPerformance'
 
 config.use_cap_height_to_scale_fallback_fonts = true
 config.font_size = 14
@@ -93,6 +93,16 @@ config.keys = {
       one_shot = false,
       timeout_milliseconds = 350,
     },
+  },
+  {
+    key = 'Enter',
+    mods = 'SHIFT',
+    action = wezterm.action { SendString = '\x1b\r' },
+  },
+  {
+    key = 'f',
+    mods = 'SHIFT|CTRL',
+    action = wezterm.action.DisableDefaultAssignment,
   },
 
   move_pane('j', 'Down'),
