@@ -2,7 +2,7 @@
 ZSH=$HOME/.oh-my-zsh
 
 if [[ $OSTYPE == 'darwin'* ]]; then
-	eval "$(/opt/homebrew/bin/brew shellenv)"
+  eval "$(/opt/homebrew/bin/brew shellenv)"
 else
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
@@ -23,8 +23,14 @@ export LC_ALL=en_US.UTF-8
 
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_STATE_HOME="$HOME/.local/state"
+export XDG_RUNTIME_DIR="$TMPDIR/runtime-$UID"
+
 zrcl="$HOME/.zshrc.local"
-[[ ! -a $zrcl ]] || source $zrcl
+[[ ! -e $zrcl ]] || source $zrcl
 
 source $ZSH/oh-my-zsh.sh
 
