@@ -40,36 +40,30 @@ return {
 
   { -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
-    event = 'VeryLazy', -- Sets the loading event to 'VimEnter'
+    event = 'VeryLazy',
     opts = {
       plugins = { spelling = true },
-      defaults = {
-        mode = { 'n', 'v' },
-        ['g'] = { name = '+goto' },
-        ['gs'] = { name = '+surround' },
-        -- ['z'] = { name = '+fold' },
-        [']'] = { name = '+next' },
-        ['['] = { name = '+prev' },
-        -- ['<leader><tab>'] = { name = '+tabs' },
-        ['<leader>b'] = { name = '+buffer' },
-        -- ['<leader>f'] = { name = '+file/find' },
-        ['<leader>g'] = { name = '+git' },
-        ['<leader>gh'] = { name = '+hunks' },
-        ['<leader>u'] = { name = '+ui' },
-
-        ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
-        ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
-        ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
-        ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
-        ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
-      },
     },
-    config = function(_, opts) -- This is the function that runs, AFTER loading
+    config = function(_, opts)
       local wk = require 'which-key'
       wk.setup(opts)
 
-      -- Document existing key chains
-      wk.register(opts.defaults)
+      -- Document existing key chains (which-key v3 API)
+      wk.add {
+        { 'g',          group = '+goto',      mode = { 'n', 'v' } },
+        { 'gs',         group = '+surround',  mode = { 'n', 'v' } },
+        { ']',          group = '+next',      mode = { 'n', 'v' } },
+        { '[',          group = '+prev',      mode = { 'n', 'v' } },
+        { '<leader>b',  group = '+buffer',    mode = { 'n', 'v' } },
+        { '<leader>g',  group = '+git',       mode = { 'n', 'v' } },
+        { '<leader>gh', group = '+hunks',     mode = { 'n', 'v' } },
+        { '<leader>u',  group = '+ui',        mode = { 'n', 'v' } },
+        { '<leader>c',  group = '[C]ode',     mode = { 'n', 'v' } },
+        { '<leader>d',  group = '[D]ocument', mode = { 'n', 'v' } },
+        { '<leader>r',  group = '[R]ename',   mode = { 'n', 'v' } },
+        { '<leader>s',  group = '[S]earch',   mode = { 'n', 'v' } },
+        { '<leader>w',  group = '[W]orkspace',mode = { 'n', 'v' } },
+      }
     end,
   },
   { -- Adds git related signs to the gutter, as well as utilities for managing changes
