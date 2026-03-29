@@ -133,23 +133,60 @@ keybinds clear-defaults=true {
         }
     }
     shared_among "normal" "locked" {
-        bind "Shift Ctrl left" { MoveFocusOrTab "left"; }
-        bind "Shift Ctrl down" { MoveFocus "down"; }
-        bind "Shift Ctrl up" { MoveFocus "up"; }
-        bind "Shift Ctrl right" { MoveFocusOrTab "right"; }
-        bind "Shift Ctrl +" { Resize "Increase"; }
-        bind "Shift Ctrl -" { Resize "Decrease"; }
-        bind "Shift Ctrl =" { Resize "Increase"; }
-        bind "Shift Ctrl [" { PreviousSwapLayout; }
-        bind "Shift Ctrl ]" { NextSwapLayout; }
-        bind "Shift Ctrl f" { ToggleFloatingPanes; }
-        bind "Shift Ctrl h" { MoveFocusOrTab "left"; }
-        bind "Shift Ctrl i" { MoveTab "left"; }
-        bind "Shift Ctrl j" { MoveFocus "down"; }
-        bind "Shift Ctrl k" { MoveFocus "up"; }
-        bind "Shift Ctrl l" { MoveFocusOrTab "right"; }
-        bind "Shift Ctrl n" { NewPane; }
-        bind "Shift Ctrl o" { MoveTab "right"; }
+        // Ctrl+Alt+arrows removed — intercepted by kitty (ctrl+alt+arrows = window resize)
+        // Ctrl+Alt+- already bound to NewPane "down", Resize Decrease removed (use modal resize)
+        bind "Ctrl Alt +" { Resize "Increase"; }
+        bind "Ctrl Alt =" { Resize "Increase"; }
+        bind "Ctrl Alt [" { PreviousSwapLayout; }
+        bind "Ctrl Alt ]" { NextSwapLayout; }
+        bind "Ctrl Alt f" { ToggleFloatingPanes; }
+        bind "Ctrl Alt i" { MoveTab "left"; }
+        bind "Ctrl Alt n" { NewPane; }
+        bind "Ctrl Alt o" { MoveTab "right"; }
+
+        // Unified shortcuts: Ctrl+Alt mirrors Ctrl+Super in terminals
+        // Pane navigation (+ tab switch at edges, mirrors MoveFocusOrTab)
+        bind "Ctrl Alt h" { MoveFocusOrTab "left"; }
+        bind "Ctrl Alt l" { MoveFocusOrTab "right"; }
+        bind "Ctrl Alt j" { MoveFocus "down"; }
+        bind "Ctrl Alt k" { MoveFocus "up"; }
+
+        // Splits: mirrors Ctrl+Super+\ and Ctrl+Super+- in terminals
+        bind "Ctrl Alt \\" { NewPane "right"; SwitchToMode "locked"; }
+        bind "Ctrl Alt -"  { NewPane "down";  SwitchToMode "locked"; }
+
+        // New tab: mirrors Ctrl+Shift+T in terminals
+        bind "Ctrl Alt t" { NewTab; SwitchToMode "locked"; }
+
+        // Close pane: mirrors Ctrl+Shift+W in terminals
+        bind "Ctrl Alt w" { CloseFocus; SwitchToMode "locked"; }
+
+        // Close tab: mirrors Ctrl+Shift+Q in terminals
+        bind "Ctrl Alt q" { CloseTab; SwitchToMode "locked"; }
+
+        // Zoom pane: mirrors Ctrl+Shift+Z in terminals
+        bind "Ctrl Alt z" { ToggleFocusFullscreen; SwitchToMode "locked"; }
+
+        // Tab by index: mirrors Alt+1-9 in terminals (Ctrl+Alt avoids terminal interception)
+        bind "Ctrl Alt 1" { GoToTab 1; SwitchToMode "locked"; }
+        bind "Ctrl Alt 2" { GoToTab 2; SwitchToMode "locked"; }
+        bind "Ctrl Alt 3" { GoToTab 3; SwitchToMode "locked"; }
+        bind "Ctrl Alt 4" { GoToTab 4; SwitchToMode "locked"; }
+        bind "Ctrl Alt 5" { GoToTab 5; SwitchToMode "locked"; }
+        bind "Ctrl Alt 6" { GoToTab 6; SwitchToMode "locked"; }
+        bind "Ctrl Alt 7" { GoToTab 7; SwitchToMode "locked"; }
+        bind "Ctrl Alt 8" { GoToTab 8; SwitchToMode "locked"; }
+        bind "Ctrl Alt 9" { GoToTab 9; SwitchToMode "locked"; }
+
+        // Session manager: fuzzy search/switch/create/kill sessions in a floating pane
+        // Note: do NOT SwitchToMode "locked" here — locked mode prevents Delete/Esc
+        // from reaching the plugin correctly
+        bind "Ctrl Alt s" {
+            LaunchOrFocusPlugin "session-manager" {
+                floating true
+                move_to_focused_tab true
+            }
+        }
     }
     shared {
       bind "F1" {
@@ -226,105 +263,20 @@ keybinds clear-defaults=true {
 // Plugin aliases - can be used to change the implementation of Zellij
 // changing these requires a restart to take effect
 plugins {
-    about location="zellij:about"
-    compact-bar location="zellij:compact-bar" {
-        tooltip "F1"
-    }
-    configuration location="zellij:configuration"
-    filepicker location="zellij:strider" {
-        cwd "/"
-    }
-    plugin-manager location="zellij:plugin-manager"
-    session-manager location="zellij:session-manager"
+    tab-bar location="zellij:tab-bar"
     status-bar location="zellij:status-bar"
     strider location="zellij:strider"
-    tab-bar location="zellij:tab-bar"
+    compact-bar location="zellij:compact-bar"
+    session-manager location="zellij:session-manager"
     welcome-screen location="zellij:session-manager" {
         welcome_screen true
     }
-    zjframes location="file:~/.local/share/zellij/plugins/zjframes.wasm" {
-        hide_frame_except_for_fullscreen true
-        hide_frame_except_for_search true
-        hide_frame_for_single_pane true
+    filepicker location="zellij:strider" {
+        cwd "/"
     }
-    zjstatus location="file:~/.local/share/zellij/plugins/zjstatus.wasm" {
-        border_char "─"
-        border_enabled false
-        border_format "#[bg=$surface0]{char}"
-        border_position "top"
-        color_base "#1e1e2e"
-        color_blue "#89b4fa"
-        color_crust "#11111b"
-        color_flamingo "#f2cdcd"
-        color_green "#a6e3a1"
-        color_lavender "#b4befe"
-        color_mantle "#181825"
-        color_maroon "#eba0ac"
-        color_mauve "#cba6f7"
-        color_overlay0 "#6c7086"
-        color_overlay1 "#7f849c"
-        color_overlay2 "#9399b2"
-        color_peach "#fab387"
-        color_pink "#f5c2e7"
-        color_red "#f38ba8"
-        color_rosewater "#f5e0dc"
-        color_sapphire "#74c7ec"
-        color_sky "#89dceb"
-        color_subtext0 "#a6adc8"
-        color_subtext1 "#bac2de"
-        color_surface0 "#313244"
-        color_surface1 "#45475a"
-        color_surface2 "#585b70"
-        color_teal "#94e2d5"
-        color_text "#cdd6f4"
-        color_yellow "#f9e2af"
-        command_host_command "uname -n"
-        command_host_format "{stdout}"
-        command_host_interval "0"
-        command_host_rendermode "static"
-        command_user_command "whoami"
-        command_user_format "{stdout}"
-        command_user_interval "10"
-        command_user_rendermode "static"
-        datetime "{format}"
-        datetime_format "%d.%m.%Y 󰅐 %H:%M"
-        datetime_timezone "Europe/Berlin"
-        format_center "{notifications}"
-        format_hide_on_overlength true
-        format_left "#[bg=$surface0,fg=$sapphire]#[bg=$sapphire,fg=$crust,bold] {session} #[bg=$surface0] {mode}#[bg=$surface0] {tabs}"
-        format_precedence "lrc"
-        format_right "#[bg=$surface0,fg=$flamingo]#[fg=$crust,bg=$flamingo] #[bg=$surface1,fg=$flamingo,bold] {command_user}@{command_host}#[bg=$surface0,fg=$surface1]#[bg=$surface0,fg=$maroon]#[bg=$maroon,fg=$crust]󰃭 #[bg=$surface1,fg=$maroon,bold] {datetime}#[bg=$surface0,fg=$surface1]"
-        format_space "#[bg=$surface0]"
-        hide_frame_except_for_fullscreen true
-        hide_frame_for_single_pane true
-        mode_enter_search "#[bg=$flamingo,fg=$crust,bold] ENT-SEARCH#[bg=$surfaco,fg=$flamingo]"
-        mode_locked "#[bg=$red,fg=$crust,bold] LOCKED#[bg=$surface0,fg=$red]"
-        mode_move "#[bg=$yellow,fg=$crust,bold] MOVE#[bg=$surface0,fg=$yellow]"
-        mode_normal "#[bg=$green,fg=$crust,bold] NORMAL#[bg=$surface0,fg=$green]"
-        mode_pane "#[bg=$teal,fg=$crust,bold] PANE#[bg=$surface0,fg=teal]"
-        mode_prompt "#[bg=$pink,fg=$crust,bold] PROMPT#[bg=$surface0,fg=$pink]"
-        mode_rename_pane "#[bg=$yellow,fg=$crust,bold] RENAME-PANE#[bg=$surface0,fg=$yellow]"
-        mode_rename_tab "#[bg=$yellow,fg=$crust,bold] RENAME-TAB#[bg=$surface0,fg=$yellow]"
-        mode_resize "#[bg=$yellow,fg=$crust,bold] RESIZE#[bg=$surfac0,fg=$yellow]"
-        mode_scroll "#[bg=$flamingo,fg=$crust,bold] SCROLL#[bg=$surface0,fg=$flamingo]"
-        mode_search "#[bg=$flamingo,fg=$crust,bold] SEARCHARCH#[bg=$surfac0,fg=$flamingo]"
-        mode_session "#[bg=$pink,fg=$crust,bold] SESSION#[bg=$surface0,fg=$pink]"
-        mode_tab "#[bg=$teal,fg=$crust,bold] TAB#[bg=$surface0,fg=$teal]"
-        mode_tmux "#[bg=$mauve,fg=$crust,bold] TMUX#[bg=$surface0,fg=$mauve]"
-        notification_format_no_notifications ""
-        notification_format_unread "#[bg=surface0,fg=$yellow]#[bg=$yellow,fg=$crust] #[bg=$surface1,fg=$yellow] {message}#[bg=$surface0,fg=$yellow]"
-        notification_show_interval "10"
-        tab_active "#[bg=$surface0,fg=$peach]#[bg=$peach,fg=$crust,bold]{index} #[bg=$surface1,fg=$peach,bold] {name}{floating_indicator}#[bg=$surface0,fg=$surface1]"
-        tab_active_fullscreen "#[bg=$surface0,fg=$peach]#[bg=$peach,fg=$crust,bold]{index} #[bg=$surface1,fg=$peach,bold] {name}{fullscreen_indicator}#[bg=$surface0,fg=$surface1]"
-        tab_active_sync "#[bg=$surface0,fg=$peach]#[bg=$peach,fg=$crust,bold]{index} #[bg=$surface1,fg=$peach,bold] {name}{sync_indicator}#[bg=$surface0,fg=$surface1]"
-        tab_floating_indicator " 󰹙"
-        tab_fullscreen_indicator " 󰊓"
-        tab_normal "#[bg=$surface0,fg=$blue]#[bg=$blue,fg=$crust,bold]{index} #[bg=$surface1,fg=$blue,bold] {name}{floating_indicator}#[bg=$surface0,fg=$surface1]"
-        tab_normal_fullscreen "#[bg=$surface0,fg=$blue]#[bg=$blue,fg=$crust,bold]{index} #[bg=$surface1,fg=$blue,bold] {name}{fullscreen_indicator}#[bg=$surface0,fg=$surface1]"
-        tab_normal_sync "#[bg=$surface0,fg=$blue]#[bg=$blue,fg=$crust,bold]{index} #[bg=$surface1,fg=$blue,bold] {name}{sync_indicator}#[bg=$surface0,fg=$surface1]"
-        tab_separator "#[bg=$surface0] "
-        tab_sync_indicator " "
-    }
+    configuration location="zellij:configuration"
+    plugin-manager location="zellij:plugin-manager"
+    about location="zellij:about"
 }
 
 // Plugins to load in the background when a new session starts
@@ -365,7 +317,7 @@ default_mode "locked"
 // The name of the default layout to load on startup
 // Default: "default"
 // 
-default_layout "compact"
+default_layout "default"
  
 // The folder in which Zellij will look for layouts
 // (Requires restart)
