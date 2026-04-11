@@ -33,7 +33,4 @@ zrcl="$HOME/.zshrc.local"
 [[ ! -e $zrcl ]] || source $zrcl
 
 source $ZSH/oh-my-zsh.sh
-
-eval "$(zoxide init zsh)"
 source $HOME/.aliases
-

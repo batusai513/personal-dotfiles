@@ -37,10 +37,14 @@ export PATH="$PROTO_HOME/shims:$PROTO_HOME/bin:$PATH";
 # eval "$(proto activate zsh)"
 eval "$(proto activate zsh --config-mode all)"
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+export PATH="$HOME/.local/bin:$PATH"
+# opencode
+export PATH=/Users/richardroncancio/.opencode/bin:$PATH
 
 eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
 eval "$(rbenv init - zsh)"
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
