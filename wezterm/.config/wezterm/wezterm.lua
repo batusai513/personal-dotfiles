@@ -186,19 +186,34 @@ config.keys = {
   -- Pass CTRL+A through when pressing LEADER+CTRL+A
   { key = 'a', mods = 'LEADER|CTRL', action = wezterm.action.SendKey { key = 'a', mods = 'CTRL' } },
 
-  -- Pane navigation: Ctrl+Super+hjkl (cross-platform, GNOME-safe)
-  { key = 'h', mods = 'CTRL|SUPER', action = wezterm.action.ActivatePaneDirection 'Left' },
-  { key = 'l', mods = 'CTRL|SUPER', action = wezterm.action.ActivatePaneDirection 'Right' },
-  { key = 'k', mods = 'CTRL|SUPER', action = wezterm.action.ActivatePaneDirection 'Up' },
-  { key = 'j', mods = 'CTRL|SUPER', action = wezterm.action.ActivatePaneDirection 'Down' },
+  -- Pane navigation: ctrl+shift+hjkl (vim-style, cross-platform)
+  { key = 'h', mods = 'CTRL|SHIFT', action = wezterm.action.ActivatePaneDirection 'Left' },
+  { key = 'j', mods = 'CTRL|SHIFT', action = wezterm.action.ActivatePaneDirection 'Down' },
+  { key = 'k', mods = 'CTRL|SHIFT', action = wezterm.action.ActivatePaneDirection 'Up' },
+  { key = 'l', mods = 'CTRL|SHIFT', action = wezterm.action.ActivatePaneDirection 'Right' },
 
-  -- Tab navigation: Shift+Super+h/l (cross-platform)
-  { key = 'h', mods = 'SHIFT|SUPER', action = wezterm.action.ActivateTabRelative(-1) },
-  { key = 'l', mods = 'SHIFT|SUPER', action = wezterm.action.ActivateTabRelative(1) },
+  -- Tab navigation: cross-platform + macOS aliases
+  -- WezTerm sees the shifted character: SHIFT+[ = {, SHIFT+] = }
+  { key = '{', mods = 'CTRL|SHIFT',  action = wezterm.action.ActivateTabRelative(-1) },
+  { key = '}', mods = 'CTRL|SHIFT',  action = wezterm.action.ActivateTabRelative(1) },
+  { key = '{', mods = 'SHIFT|SUPER', action = wezterm.action.ActivateTabRelative(-1) },
+  { key = '}', mods = 'SHIFT|SUPER', action = wezterm.action.ActivateTabRelative(1) },
 
-  -- Splits: Ctrl+Super+\ (right) and Ctrl+Super+- (down) — cross-platform
-  { key = '\\', mods = 'CTRL|SUPER', action = wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' } },
-  { key = '-',  mods = 'CTRL|SUPER', action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' } },
+  -- Splits: ctrl+shift+\ (vertical) and ctrl+shift+- (horizontal) — cross-platform
+  -- WezTerm sees the shifted character: SHIFT+\ = |, SHIFT+- = _
+  { key = '|', mods = 'CTRL|SHIFT', action = wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' } },
+  { key = '_', mods = 'CTRL|SHIFT', action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' } },
+
+  -- Resize step: ctrl+shift+alt+arrows (matches kitty/ghostty)
+  { key = 'RightArrow', mods = 'CTRL|SHIFT|ALT', action = wezterm.action.AdjustPaneSize { 'Right', 3 } },
+  { key = 'LeftArrow',  mods = 'CTRL|SHIFT|ALT', action = wezterm.action.AdjustPaneSize { 'Left',  3 } },
+  { key = 'UpArrow',    mods = 'CTRL|SHIFT|ALT', action = wezterm.action.AdjustPaneSize { 'Up',    3 } },
+  { key = 'DownArrow',  mods = 'CTRL|SHIFT|ALT', action = wezterm.action.AdjustPaneSize { 'Down',  3 } },
+
+  -- Tab reorder: ctrl+shift+,/. (matches kitty/ghostty)
+  -- WezTerm sees the shifted character: SHIFT+, = <, SHIFT+. = >
+  { key = '<', mods = 'CTRL|SHIFT', action = wezterm.action.MoveTabRelative(-1) },
+  { key = '>', mods = 'CTRL|SHIFT', action = wezterm.action.MoveTabRelative(1) },
 
   -- New tab: Ctrl+Shift+T cross-platform (Cmd+T already default)
   { key = 't', mods = 'CTRL|SHIFT', action = wezterm.action.SpawnTab 'CurrentPaneDomain' },
@@ -272,7 +287,7 @@ config.key_tables = {
     resize_pane('j', 'Down'),
     resize_pane('k', 'Up'),
     resize_pane('l', 'Right'),
-    -- Arrow keys also work (cross-platform, matches kitty ctrl+alt+arrows)
+    -- Arrow keys also work in modal mode
     resize_pane('LeftArrow',  'Left'),
     resize_pane('DownArrow',  'Down'),
     resize_pane('UpArrow',    'Up'),
