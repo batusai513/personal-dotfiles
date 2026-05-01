@@ -46,6 +46,13 @@ keybind = ctrl+shift+j=goto_split:down
 keybind = ctrl+shift+k=goto_split:up
 keybind = ctrl+shift+l=goto_split:right
 
+# Pane navigation: super+shift+hjkl macOS aliases (mirrors tab nav)
+# Note: super+shift+j overrides default write_screen_file:paste,plain
+keybind = super+shift+h=goto_split:left
+keybind = super+shift+j=goto_split:down
+keybind = super+shift+k=goto_split:up
+keybind = super+shift+l=goto_split:right
+
 # Tab navigation: cross-platform + macOS aliases
 keybind = ctrl+shift+bracket_left=previous_tab
 keybind = ctrl+shift+bracket_right=next_tab
@@ -69,12 +76,12 @@ keybind = super+d=unbind
 keybind = ctrl+shift+backslash=new_split:right
 keybind = ctrl+shift+minus=new_split:down
 
-# Resize split: ctrl+shift+alt+arrows (step) + equalize
-keybind = ctrl+shift+alt+right=resize_split:right,20
-keybind = ctrl+shift+alt+left=resize_split:left,20
-keybind = ctrl+shift+alt+up=resize_split:up,20
-keybind = ctrl+shift+alt+down=resize_split:down,20
-keybind = ctrl+shift+alt+zero=equalize_splits
+# Resize split: ctrl+shift+arrows (step) + equalize
+keybind = ctrl+shift+right=resize_split:right,20
+keybind = ctrl+shift+left=resize_split:left,20
+keybind = ctrl+shift+up=resize_split:up,20
+keybind = ctrl+shift+down=resize_split:down,20
+keybind = ctrl+shift+zero=equalize_splits
 
 # Tab reorder
 keybind = ctrl+shift+comma=move_tab:-1
