@@ -1,14 +1,10 @@
 return {
   {
     'nvim-treesitter/nvim-treesitter',
-    version = false,
+    branch = 'main',
+    lazy = false,
     build = ':TSUpdate',
-    event = { 'VeryLazy' },
-    cmd = { 'TSUpdateSync', 'TSUpdate', 'TSInstall' },
-    init = function(plugin)
-      require('lazy.core.loader').add_to_rtp(plugin)
-      require 'nvim-treesitter.query_predicates'
-    end,
+    cmd = { 'TSUpdate', 'TSInstall' },
     opts = {
       ensure_installed = {
         'bash',
@@ -19,25 +15,19 @@ return {
         'vim',
         'vimdoc',
       },
-      -- Autoinstall languages that are not installed
-      auto_install = true,
-      highlight = { enable = true },
-      indent = { enable = true },
     },
-    ---@param opts TSConfig
     config = function(_, opts)
-      if type(opts.ensure_installed) == 'table' then
-        ---@type table<string, boolean>
-        local added = {}
-        opts.ensure_installed = vim.tbl_filter(function(lang)
-          if added[lang] then
-            return false
-          end
-          added[lang] = true
-          return true
-        end, opts.ensure_installed)
-      end
-      require('nvim-treesitter.configs').setup(opts)
+      require('nvim-treesitter').setup()
+      require('nvim-treesitter').install(opts.ensure_installed)
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = { '*' },
+        callback = function()
+          pcall(vim.treesitter.start)
+          -- vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+          -- vim.wo[0][0].foldmethod = 'expr'
+          vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        end,
+      })
     end,
-  }
+  },
 }
