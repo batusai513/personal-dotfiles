@@ -192,6 +192,12 @@ config.keys = {
   { key = 'k', mods = 'CTRL|SHIFT', action = wezterm.action.ActivatePaneDirection 'Up' },
   { key = 'l', mods = 'CTRL|SHIFT', action = wezterm.action.ActivatePaneDirection 'Right' },
 
+  -- Pane navigation: super+shift+hjkl macOS aliases (mirrors tab nav)
+  { key = 'h', mods = 'SHIFT|SUPER', action = wezterm.action.ActivatePaneDirection 'Left' },
+  { key = 'j', mods = 'SHIFT|SUPER', action = wezterm.action.ActivatePaneDirection 'Down' },
+  { key = 'k', mods = 'SHIFT|SUPER', action = wezterm.action.ActivatePaneDirection 'Up' },
+  { key = 'l', mods = 'SHIFT|SUPER', action = wezterm.action.ActivatePaneDirection 'Right' },
+
   -- Tab navigation: cross-platform + macOS aliases
   -- WezTerm sees the shifted character: SHIFT+[ = {, SHIFT+] = }
   { key = '{', mods = 'CTRL|SHIFT',  action = wezterm.action.ActivateTabRelative(-1) },
@@ -204,11 +210,11 @@ config.keys = {
   { key = '|', mods = 'CTRL|SHIFT', action = wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' } },
   { key = '_', mods = 'CTRL|SHIFT', action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' } },
 
-  -- Resize step: ctrl+shift+alt+arrows (matches kitty/ghostty)
-  { key = 'RightArrow', mods = 'CTRL|SHIFT|ALT', action = wezterm.action.AdjustPaneSize { 'Right', 3 } },
-  { key = 'LeftArrow',  mods = 'CTRL|SHIFT|ALT', action = wezterm.action.AdjustPaneSize { 'Left',  3 } },
-  { key = 'UpArrow',    mods = 'CTRL|SHIFT|ALT', action = wezterm.action.AdjustPaneSize { 'Up',    3 } },
-  { key = 'DownArrow',  mods = 'CTRL|SHIFT|ALT', action = wezterm.action.AdjustPaneSize { 'Down',  3 } },
+  -- Resize step: ctrl+shift+arrows (matches kitty/ghostty)
+  { key = 'RightArrow', mods = 'CTRL|SHIFT', action = wezterm.action.AdjustPaneSize { 'Right', 3 } },
+  { key = 'LeftArrow',  mods = 'CTRL|SHIFT', action = wezterm.action.AdjustPaneSize { 'Left',  3 } },
+  { key = 'UpArrow',    mods = 'CTRL|SHIFT', action = wezterm.action.AdjustPaneSize { 'Up',    3 } },
+  { key = 'DownArrow',  mods = 'CTRL|SHIFT', action = wezterm.action.AdjustPaneSize { 'Down',  3 } },
 
   -- Tab reorder: ctrl+shift+,/. (matches kitty/ghostty)
   -- WezTerm sees the shifted character: SHIFT+, = <, SHIFT+. = >
