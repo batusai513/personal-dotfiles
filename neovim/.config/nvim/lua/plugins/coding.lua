@@ -44,7 +44,7 @@ return {
   -- Highlight todo, notes, etc in comments
   {
     'folke/todo-comments.nvim',
-    cmd = { 'TodoTrouble', 'TodoTelescope' },
+    cmd = { 'TodoTrouble', 'TodoQuickFix' },
     event = 'VeryLazy',
     dependencies = { 'nvim-lua/plenary.nvim' },
     opts = { signs = false },

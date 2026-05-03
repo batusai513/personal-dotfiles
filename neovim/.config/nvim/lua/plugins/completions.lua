@@ -13,7 +13,7 @@ return {
       -- snippets = { preset = 'luasnip' },
       -- ensure you have the `snippets` source (enabled by default)
       fuzzy = {
-        implementation = 'prefer_rust_with_warning',
+        implementation = 'rust',
         sorts = {
           'exact',
           -- defaults
