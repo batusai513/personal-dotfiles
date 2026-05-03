@@ -1,5 +1,13 @@
 return {
   {
+    "MagicDuck/grug-far.nvim",
+    opts = {
+      prefills = {
+        flags = "--hidden",
+      },
+    },
+  },
+  {
     "nvim-neo-tree/neo-tree.nvim",
     dependencies = {
       "nvim-tree/nvim-web-devicons",
