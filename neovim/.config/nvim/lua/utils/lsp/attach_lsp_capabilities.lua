@@ -30,13 +30,9 @@ function M.attach_lsp_capabilities(init_client, init_buffer, opts)
   if opts.codelens.enabled and vim.lsp.codelens then
     ---@param client vim.lsp.Client LSP client details
     ---@param buffer integer, The buffer that the lsp client attachs to
-    Util.lsp.on_attach(function(client, buffer)
+    Util.lsp.on_attach(function(client)
       if client:supports_method 'textDocument/codeLens' then
-        vim.lsp.codelens.refresh()
-        vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'InsertLeave' }, {
-          buffer = buffer,
-          callback = vim.lsp.codelens.refresh,
-        })
+        vim.lsp.codelens.enable(true)
       end
     end)
   end
