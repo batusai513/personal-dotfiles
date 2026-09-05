@@ -34,3 +34,15 @@ zrcl="$HOME/.zshrc.local"
 
 source $ZSH/oh-my-zsh.sh
 source $HOME/.aliases
+
+# pnpm
+export PNPM_HOME="/Users/richardroncancio/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME/bin:"*) ;;
+  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
+esac
+# pnpm end
+
+# Added by GitButler installer
+export PATH="$HOME/.local/bin:$PATH"
+eval "$(but completions zsh)"
