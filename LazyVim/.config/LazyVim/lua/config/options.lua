@@ -3,7 +3,7 @@
 -- Add any additional options here
 local opt = vim.opt
 vim.g.lazygit_config = false
-
+vim.g.lazyvim_ts_lsp = "vtsls"
 opt.cmdheight = 0
 opt.foldcolumn = "1"
 opt.diffopt:append("linematch:60")
